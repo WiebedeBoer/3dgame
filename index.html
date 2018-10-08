@@ -72,16 +72,9 @@ var light        = new THREE.HemisphereLight( 0xfffff0, 0x101020, 1.25 );
 light.position.set( 0.75, 1, 0.25 );
 scene.add( light );
 
-//plane base size = 3630 + 2000
-var material        = new THREE.MeshBasicMaterial({ color:0x808080 })
-var geometry        = new THREE.PlaneGeometry( 7430, 7430 )
-var plane        = new THREE.Mesh( geometry, material );
-plane.rotation.x= - 90 * Math.PI / 180;
-scene.add( plane );
-
 //plane                
-//var plane = new Plane();
-//scene.add(plane);
+var plane = new Plane();
+scene.add(plane);
 
 //skybox
 var skyBox = new Skybox();
