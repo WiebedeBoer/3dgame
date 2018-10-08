@@ -9,32 +9,32 @@
 <!--open xml-->
 <script src="openxml.js"></script>
 <!--buildings tenements, commercials, factories-->
-<script src="Buildings/tenements.js"></script>
-<script src="Buildings/commercials.js"></script>
-<script src="Buildings/factories.js"></script>
+<script src="tenements.js"></script>
+<script src="commercials.js"></script>
+<script src="factories.js"></script>
 <!--buildings-->
-<script src="Buildings/dpstore.js"></script>
-<script src="Buildings/lbanks.js"></script>
-<script src="Buildings/lhotels.js"></script>
-<script src="Buildings/npapers.js"></script>
-<script src="Buildings/radios.js"></script>
-<script src="Buildings/stations.js"></script>
-<script src="Buildings/movtheatres.js"></script>
-<script src="Buildings/museums.js"></script>
-<script src="Buildings/schools.js"></script>
-<script src="Buildings/university.js"></script>
-<script src="Buildings/orphanage.js"></script>
-<script src="Buildings/churches.js"></script>
-<script src="Buildings/synagogue.js"></script>
-<script src="Buildings/policedep.js"></script>
-<script src="Buildings/firedep.js"></script>
-<script src="Buildings/fbi.js"></script>
-<script src="Buildings/jail.js"></script>
-<script src="Buildings/hospitals.js"></script>
-<script src="Buildings/court.js"></script>
-<script src="Buildings/cityhall.js"></script>
-<script src="Buildings/postoffices.js"></script>
-<script src="Buildings/warehouses.js"></script>
+<script src="dpstore.js"></script>
+<script src="lbanks.js"></script>
+<script src="lhotels.js"></script>
+<script src="npapers.js"></script>
+<script src="radios.js"></script>
+<script src="stations.js"></script>
+<script src="movtheatres.js"></script>
+<script src="museums.js"></script>
+<script src="schools.js"></script>
+<script src="university.js"></script>
+<script src="orphanage.js"></script>
+<script src="churches.js"></script>
+<script src="synagogue.js"></script>
+<script src="policedep.js"></script>
+<script src="firedep.js"></script>
+<script src="fbi.js"></script>
+<script src="jail.js"></script>
+<script src="hospitals.js"></script>
+<script src="court.js"></script>
+<script src="cityhall.js"></script>
+<script src="postoffices.js"></script>
+<script src="warehouses.js"></script>
 <!--plane-->
 <script src="Plane.js"></script>
 <!--skybox-->
@@ -83,6 +83,12 @@ scene.add( light );
 
 //plane                
 var plane = new Plane();
+//var mPlane = this;
+//var material        = new THREE.MeshBasicMaterial({ color:0x008080 })
+//var geometry        = new THREE.PlaneGeometry( 7430, 7430 )
+//var plane        = new THREE.Mesh( geometry, material );
+//plane.rotation.x= - 90 * Math.PI / 180;
+//mPlane.add(plane);
 scene.add(plane);
 
 //skybox
@@ -117,12 +123,14 @@ updateFcts.push(function(delta, now){
 //scene.add(factories)
 
 //scene 2, 8
-var dpstore = new THREEx.ProceduralDepStore()
-scene.add(dpstore)
+//var dpstore = new THREEx.ProceduralDepStore()
+//scene.add(dpstore)
+//var dpstore = new DepartmentStore();
+//scene.add(dpstore);
         
 //scene 3, 4
-var largbanks = new THREEx.ProceduralLarBanks()
-scene.add(largbanks)
+//var largbanks = new THREEx.ProceduralLarBanks()
+//scene.add(largbanks)
         
 //scene 4, 16
 //var larghotels = new THREEx.ProceduralLarHotels()
