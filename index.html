@@ -74,16 +74,18 @@ var scene        = new THREE.Scene();
 scene.fog        = new THREE.FogExp2( 0xd0e0f0, 0.0025 );
 //renderer
 var renderer        = new THREE.WebGLRenderer( { antialias: false } );
+  renderer.autoClear = false;
+  document.body.appendChild(renderer.domElement);
 //window
-canvasWidth = 800;
-canvasHeight = 400;
-renderer.setSize( canvasWidth, canvasHeight );
+width = 800;
+height = 400;
+renderer.setSize( width, height );
         
 //append object to it
 document.getElementById("customcanvas").appendChild(renderer.domElement);
 
 //camera
-var camera                = new THREE.PerspectiveCamera(45, canvasWidth / canvasHeight, 0.01, 8000);
+var camera                = new THREE.PerspectiveCamera(45, width / height, 0.01, 8000);
 camera.position.y        = 12;
 camera.position.z        = 15;
 camera.position.x        = 15;
@@ -238,10 +240,32 @@ collidableMeshList.push(dpstore);
 //var warehouses = new THREEx.ProceduralWarehouses()
 //scene.add(warehouses)
 
+var hudCanvas = document.createElement('canvas');
+var hudBitmap = hudCanvas.getContext('2d');
+hudBitmap.font = "Normal 100px Arial";
+hudBitmap.textAlign = 'center';
+hudBitmap.fillStyle = "rgba(245,245,245,0.75)";
+hudBitmap.fillText('Initializing...', width, height);
+
+var cameraHUD = new THREE.OrthographicCamera(-width/2, width/2, height/2, -height/2, 0, 50 );
+
+sceneHUD = new THREE.Scene();
+var hudTexture = new THREE.Texture(hudCanvas) 
+hudTexture.needsUpdate = true;
+var material = new THREE.MeshBasicMaterial( {map: hudTexture} );
+material.transparent = true;
+var planeGeometry = new THREE.PlaneGeometry( width, height );
+var plane = new THREE.Mesh( planeGeometry, material );
+sceneHUD.add( plane );
+
         //update function
         updateFcts.push(function(){
                 //render the scene
-                renderer.render( scene, camera ); 
+                hudBitmap.clearRect(0, 0, width, height);
+                hudBitmap.fillText("SScore: 0 " , width / 2, height / 2);
+                hudTexture.needsUpdate = true;
+                renderer.render(scene, camera);
+                renderer.render(sceneHUD, cameraHUD);  
 
                 var mcdelta = clock.getDelta(); // seconds.
 	        var moveDistance = 200 * mcdelta; // 200 pixels per second
