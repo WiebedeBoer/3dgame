@@ -4,6 +4,11 @@ class DepartmentStore extends THREE.Group {
 
       var mDepartment = this;
 
+      //generate material
+      var material3 = new THREE.MeshLambertMaterial({
+        color: 0xd7dadf
+      });
+
       //city mesh
       var townGeometry = new THREE.Geometry();
 
@@ -18,7 +23,7 @@ class DepartmentStore extends THREE.Group {
           ];
       var depMaterial = new THREE.MeshFaceMaterial(depMaterials);
       var meshDep = new THREE.Mesh(depgeometry, depMaterial);
-      mDepartment.add(meshDep);
+      //mDepartment.add(meshDep);
 
       //loop
 var dp = 1;
@@ -91,7 +96,11 @@ meshDep.rotation.y = 0.5*Math.PI*2;
 //add geometry
 var depgeometry = meshDep.depgeometry;
 
-THREE.GeometryUtils.merge( townGeometry, meshDep );
+townGeometry.mergeMesh(meshDep);
+//meshDep.merge(townGeometry);
+
+//THREE.GeometryUtils.merge( depgeometry, meshDep );
+//THREE.GeometryUtils.merge( townGeometry, meshDep );
 //THREE.Geometry.merge( townGeometry, meshDep );
 
 //increment loop
@@ -99,14 +108,12 @@ dp ++;
 
    }
 
-//generate material
-var material3 = new THREE.MeshLambertMaterial({
-  color: 0xd7dadf
-  });
+
 
 //return mesh
 var mesh2 = new THREE.Mesh(townGeometry, material3);
-return mesh2;
+mDepartment.add(mesh2);
+//return mesh2;
       
   }
           
