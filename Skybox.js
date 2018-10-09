@@ -1,10 +1,10 @@
 class Skybox extends THREE.Group {
 	init(){
 				var mskyBox = this;
-				var imagePrefix = "images/skybox";
+				var imagePrefix = "Skybox/skybox";
 	            var directions  = ["xpos", "xneg", "ypos", "yneg", "zpos", "zneg"];
 	            var imageSuffix = ".png";
-	            var skyGeometry = new THREE.CubeGeometry( 7430, 7430, 7430 );	
+	            var skyGeometry = new THREE.CubeGeometry( 430, 430, 430 );	
 	
 	            var materialArray = [];
 	            for (var i = 0; i < 6; i++)
