@@ -128,10 +128,24 @@ updateFcts.push(function(delta, now){
 // collision detection:
 //
 //
+var wallGeometry = new THREE.CubeGeometry( 100, 100, 20, 1, 1, 1 );
+var wallMaterial = new THREE.MeshBasicMaterial( {color: 0x8888ff} );
+//var wireMaterial = new THREE.MeshBasicMaterial( { color: 0x000000, wireframe:true } );
+	
+	var wall = new THREE.Mesh(wallGeometry, wallMaterial);
+	wall.position.set(100, 50, -100);
+	scene.add(wall);
+	collidableMeshList.push(wall);
+	//var wall = new THREE.Mesh(wallGeometry, wireMaterial);
+	//wall.position.set(100, 50, -100);
+	//scene.add(wall);
+
 
 //test depot
 var ndepot = new Depot();
 scene.add(ndepot);
+
+collidableMeshList.push(ndepot);
 
 //buildings to scene
 //scene 1, max 1600 tenements
@@ -238,13 +252,19 @@ collidableMeshList.push(dpstore);
 //var warehouses = new THREEx.ProceduralWarehouses()
 //scene.add(warehouses)
 
+function clearText()
+{   document.getElementById('message').innerHTML = '..........';   }
+
+function appendText(txt)
+{   document.getElementById('message').innerHTML += txt;   }
+
         //update function
         updateFcts.push(function(){
                 //render the scene
                 renderer.render( scene, camera ); 
 
                 var mcdelta = clock.getDelta(); // seconds.
-	        var moveDistance = 200 * mcdelta; // 200 pixels per second
+	        var moveDistance = 100 * mcdelta; // 200 pixels per second
                 var mcrotateAngle = Math.PI / 2 * mcdelta;   // pi/2 radians (90 degrees) per second
                 
                 
@@ -266,6 +286,8 @@ collidableMeshList.push(dpstore);
                 
                 
                 var originPoint = MovingCube.position.clone();
+
+                clearText();
                 
                 //collision
                 for (var vertexIndex = 0; vertexIndex < MovingCube.geometry.vertices.length; vertexIndex++)
@@ -277,9 +299,10 @@ collidableMeshList.push(dpstore);
                 var ray = new THREE.Raycaster( originPoint, directionVector.clone().normalize() );
                 var collisionResults = ray.intersectObjects( collidableMeshList );
                 if ( collisionResults.length > 0 && collisionResults[0].distance < directionVector.length() ){
-                //appendText(" Hit ");
+                appendText(" Hit ");
                 console.log("hit");
-                //controls.movementSpeed = -80;
+                controls.movementSpeed = -80;
+                moveDistance = -80;
                 }
         }
 
@@ -304,6 +327,7 @@ collidableMeshList.push(dpstore);
         })
 </script>
 </div>
+<div id="message"></div>
 <p class="ce">Use Q, E keys to rotate the camera</p>
 <p class="ce">Use the W, A, S, D keys to move around</p>
 <p class="ce">WebGL renderer is supported in Firefox 4+, Chrome 9+, and Safari 6+</p>
