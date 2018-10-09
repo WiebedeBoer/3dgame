@@ -16,15 +16,15 @@ class Depot extends THREE.Group {
         ddepot.position.x = 47;
         ddepot.position.y = 0;
         ddepot.position.z = 47;
-        mdepot.add(ddepot);   
+        mdepot.add(ddepot);
     }
 
-    
+
     constructor(){
         super();
         //this._LoadState = LoadStates.NOT_LOADING;
         this.init();
     }
-    
-    
+
+
 }

@@ -57,55 +57,53 @@ p.ce {text-align: center;}
 <body style="margin: 0px; background-color: #d8e7ff; overflow: hidden;">
 <div height="400" width="800" class="customcanvas" id="customcanvas">
 <script>
-       
+
 //updater
-var updateFcts        = [];
+var updateFcts = [];
 //scene
-var scene        = new THREE.Scene();
+var scene = new THREE.Scene();
 //fog
-scene.fog        = new THREE.FogExp2( 0xd0e0f0, 0.0025 );
+scene.fog = new THREE.FogExp2( 0xd0e0f0, 0.0025 );
 //renderer
-var renderer        = new THREE.WebGLRenderer( { antialias: false } );
+var renderer = new THREE.WebGLRenderer( { antialias: false } );
 //window
 canvasWidth = 800;
 canvasHeight = 400;
 renderer.setSize( canvasWidth, canvasHeight );
-        
+
 //append object to it
 document.getElementById("customcanvas").appendChild(renderer.domElement);
 
 //camera
-var camera                = new THREE.PerspectiveCamera(45, canvasWidth / canvasHeight, 0.01, 8000);
+var camera               = new THREE.PerspectiveCamera(45, canvasWidth / canvasHeight, 0.01, 8000);
 camera.position.y        = 12;
 camera.position.z        = 15;
 camera.position.x        = 15;
 
 //lighting
-var light        = new THREE.HemisphereLight( 0xfffff0, 0x101020, 1.25 );
+var light = new THREE.HemisphereLight( 0xfffff0, 0x101020, 1.25 );
 light.position.set( 0.75, 1, 0.25 );
 scene.add( light );
 
-//plane                
+// Enemy
+// var enemy = new Enemy();
+// scene.add(enemy);
+
+//plane
 var plane = new Plane();
-//var mPlane = this;
-//var material        = new THREE.MeshBasicMaterial({ color:0x008080 })
-//var geometry        = new THREE.PlaneGeometry( 7430, 7430 )
-//var plane        = new THREE.Mesh( geometry, material );
-//plane.rotation.x= - 90 * Math.PI / 180;
-//mPlane.add(plane);
 scene.add(plane);
 
 //skybox
 var skyBox = new Skybox();
 scene.add( skyBox );
-        
+
 //Camera Controls
-var controls        = new THREE.FirstPersonControls( camera );
-controls.movementSpeed        = 80;
-controls.lookSpeed            = 0.05;
-controls.lookVertical         = false; //if true vertical look on mousemovement
+var controls = new THREE.FirstPersonControls( camera );
+controls.movementSpeed = 80;
+controls.lookSpeed = 0.05;
+controls.lookVertical = false; //if true vertical look on mousemovement
 updateFcts.push(function(delta, now){
-                controls.update( delta );                
+                controls.update( delta );
         })
 
 // collision detection:
@@ -134,31 +132,31 @@ scene.add(ndepot);
 //scene.add(dpstore)
 var dpstore = new DepartmentStore();
 scene.add(dpstore);
-        
+
 //scene 3, 4
 //var largbanks = new THREEx.ProceduralLarBanks()
 //scene.add(largbanks)
-        
+
 //scene 4, 16
 //var larghotels = new THREEx.ProceduralLarHotels()
 //scene.add(larghotels)
-        
+
 //scene 5, 6 newspapers
 //var npapers = new THREEx.ProceduralNewspapers()
 //scene.add(npapers)
-        
+
 //scene 6, 2 radios
 //var radios = new THREEx.ProceduralRadios()
 //scene.add(radios)
-        
+
 //scene 7, 2 railway stations
 //var railstations = new THREEx.ProceduralRailStations()
 //scene.add(railstations)
-        
+
 //scene 8, 4 movie theatres
 //var movtheatres = new THREEx.ProceduralMovTheatres()
 //scene.add(movtheatres)
-        
+
 //scene 9, 4 museums, 2 orchestra halls, 1 opera hall, 3 theatres, 4 libraries, 1 public bath
 //var museums = new THREEx.ProceduralMuseums()
 //scene.add(museums)
@@ -223,18 +221,18 @@ scene.add(dpstore);
 //render the scene
 
         updateFcts.push(function(){
-                renderer.render( scene, camera );                
+                renderer.render( scene, camera );
         })
-        
+
         //loop runner
         var lastTimeMsec= null
         requestAnimationFrame(function animate(nowMsec){
                 // keep looping
                 requestAnimationFrame( animate );
                 // measure time
-                lastTimeMsec        = lastTimeMsec || nowMsec-1000/60
-                var deltaMsec        = Math.min(200, nowMsec - lastTimeMsec)
-                lastTimeMsec        = nowMsec
+                lastTimeMsec = lastTimeMsec || nowMsec-1000/60
+                var deltaMsec = Math.min(200, nowMsec - lastTimeMsec)
+                lastTimeMsec = nowMsec
                 // call each update function
                 updateFcts.forEach(function(updateFn){
                         updateFn(deltaMsec/1000, nowMsec/1000)

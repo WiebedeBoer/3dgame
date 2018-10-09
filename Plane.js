@@ -7,7 +7,6 @@ class Plane extends THREE.Group {
 				texture.wrapS = texture.wrapT = THREE.RepeatWrapping;
 				texture.repeat.set( 200, 200 );
 				material = new THREE.MeshBasicMaterial( { map: texture} );
-        //material = new THREE.MeshBasicMaterial({ color:0x008000 });
         geometry = new THREE.PlaneGeometry( 7430, 7430 );
         plane = new THREE.Mesh( geometry, material );
         plane.rotation.x= - 90 * Math.PI / 180;
