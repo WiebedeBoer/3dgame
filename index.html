@@ -35,6 +35,8 @@
 <script src="Buildings/cityhall.js"></script>
 <script src="Buildings/postoffices.js"></script>
 <script src="Buildings/warehouses.js"></script>
+<!--Enemy-->
+<script src="Enemy/enemy.js"></script>
 <!--test depot-->
 <script src="Depot.js"></script>
 <!--plane-->
@@ -49,12 +51,12 @@
 <!--collission detection-->
 <script src="Collision.js"></script>
 <style>
-.customcanvas {margin-left: auto; margin-right: auto; margin-top: 20px; width: 800px; height: 400px; display: block;
-border-style: solid; border-width: 1px; border-color: #000000;}
-p.ce {text-align: center;}
+    .customcanvas {margin-left: auto; margin-right: auto; margin-top: 20px; width: 1200px; height: 600px; display: block;
+    border-style: solid; border-width: 3px; border-color: #000000;}
+    p.ce {text-align: center;}
 </style>
 </head>
-<body style="margin: 0px; background-color: #d8e7ff; overflow: hidden;">
+<body style="margin: 0px; background-color: #ffffff; overflow: hidden;">
 <div height="400" width="800" class="customcanvas" id="customcanvas">
 <script>
 
@@ -67,8 +69,8 @@ scene.fog = new THREE.FogExp2( 0xd0e0f0, 0.0025 );
 //renderer
 var renderer = new THREE.WebGLRenderer( { antialias: false } );
 //window
-canvasWidth = 800;
-canvasHeight = 400;
+canvasWidth = 1200;
+canvasHeight = 600;
 renderer.setSize( canvasWidth, canvasHeight );
 
 //append object to it
@@ -84,10 +86,6 @@ camera.position.x        = 15;
 var light = new THREE.HemisphereLight( 0xfffff0, 0x101020, 1.25 );
 light.position.set( 0.75, 1, 0.25 );
 scene.add( light );
-
-// Enemy
-// var enemy = new Enemy();
-// scene.add(enemy);
 
 //plane
 var plane = new Plane();
@@ -113,6 +111,10 @@ updateFcts.push(function(delta, now){
 //test depot
 var ndepot = new Depot();
 scene.add(ndepot);
+
+//enemy
+var enemy = new Enemy();
+scene.add(enemy);
 
 //buildings to scene
 //scene 1, max 1600 tenements
