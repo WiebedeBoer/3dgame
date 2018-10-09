@@ -253,14 +253,16 @@ collidableMeshList.push(dpstore);
 	        if ( keyboard.pressed("e") )
 		MovingCube.rotation.y -= rotateAngle; //rotate right
 			
-	        if ( keyboard.pressed("a") )
-		MovingCube.position.x -= moveDistance; //left
-	        if ( keyboard.pressed("w") )
-		MovingCube.position.x += moveDistance; //up
 	        if ( keyboard.pressed("d") )
+                MovingCube.position.z += moveDistance; //left
+                if ( keyboard.pressed("a") )
 		MovingCube.position.z -= moveDistance; //right
-	        if ( keyboard.pressed("s") )
-                MovingCube.position.z += moveDistance; //down
+	        if ( keyboard.pressed("w") )
+                MovingCube.position.x += moveDistance; //up
+                if ( keyboard.pressed("s") )
+                MovingCube.position.x -= moveDistance; //down
+
+
                 
                 
                 var originPoint = MovingCube.position.clone();
