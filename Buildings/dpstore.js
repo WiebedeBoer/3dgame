@@ -21,8 +21,10 @@ class DepartmentStore extends THREE.Group {
               new THREE.MeshBasicMaterial({ map: new THREE.TextureLoader().load("textures/bricks.jpg"), side: THREE.DoubleSide }), //FRONT
               new THREE.MeshBasicMaterial({ map: new THREE.TextureLoader().load("textures/bricks.jpg"), side: THREE.DoubleSide }), //BACK
           ];
+      //var depMaterial = new THREE.MeshFaceMaterial(depMaterials);
+      //var meshDep = new THREE.Mesh(depgeometry, depMaterial);
       var depMaterial = new THREE.MeshFaceMaterial(depMaterials);
-      var meshDep = new THREE.Mesh(depgeometry, depMaterial);
+      var meshDep = new THREE.Mesh(depgeometry, material3);
       //mDepartment.add(meshDep);
 
       //loop
@@ -111,7 +113,8 @@ dp ++;
 
 
 //return mesh
-var mesh2 = new THREE.Mesh(townGeometry, material3);
+//var mesh2 = new THREE.Mesh(townGeometry, material3);
+var mesh2 = new THREE.Mesh(townGeometry, depMaterial);
 mDepartment.add(mesh2);
 //return mesh2;
       
