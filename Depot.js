@@ -2,7 +2,7 @@ class Depot extends THREE.Group {
 
     init(){
         var mdepot = this;
-        var dgeometry = new THREE.BoxGeometry(3.9, 13.3, 5.9);
+        var dgeometry = new THREE.BoxGeometry(30, 60, 30);
         var dcubeMaterials = [
             new THREE.MeshPhongMaterial({ map: new THREE.TextureLoader().load("textures/robot_bottom.png"), side: THREE.DoubleSide }), //LEFT
             new THREE.MeshPhongMaterial({ map: new THREE.TextureLoader().load("textures/robot_bottom.png"), side: THREE.DoubleSide }), //RIGHT
