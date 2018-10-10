@@ -67,13 +67,13 @@ var MovingCube;
 var collidableMeshList = []; 
        
 //updater
-var updateFcts        = [];
+var updateFcts = [];
 //scene
-var scene        = new THREE.Scene();
+var scene = new THREE.Scene();
 //fog
-scene.fog        = new THREE.FogExp2( 0xd0e0f0, 0.0025 );
+scene.fog = new THREE.FogExp2( 0xd0e0f0, 0.0025 );
 //renderer
-var renderer        = new THREE.WebGLRenderer( { antialias: false } );
+var renderer = new THREE.WebGLRenderer( { antialias: false } );
 //window
 canvasWidth = 800;
 canvasHeight = 400;
@@ -83,10 +83,10 @@ renderer.setSize( canvasWidth, canvasHeight );
 document.getElementById("customcanvas").appendChild(renderer.domElement);
 
 //camera
-var camera                = new THREE.PerspectiveCamera(45, canvasWidth / canvasHeight, 0.01, 8000);
-camera.position.y        = 12;
-camera.position.z        = 15;
-camera.position.x        = 15;
+var camera = new THREE.PerspectiveCamera(45, canvasWidth / canvasHeight, 0.01, 8000);
+camera.position.y = 12;
+camera.position.z = 15;
+camera.position.x = 15;
 
 //lighting
 var light        = new THREE.HemisphereLight( 0xfffff0, 0x101020, 1.25 );
@@ -95,12 +95,6 @@ scene.add( light );
 
 //plane                
 var plane = new Plane();
-//var mPlane = this;
-//var material        = new THREE.MeshBasicMaterial({ color:0x008080 })
-//var geometry        = new THREE.PlaneGeometry( 7430, 7430 )
-//var plane        = new THREE.Mesh( geometry, material );
-//plane.rotation.x= - 90 * Math.PI / 180;
-//mPlane.add(plane);
 scene.add(plane);
 
 //skybox
@@ -111,34 +105,28 @@ scene.add( skyBox );
 var cubeGeometry = new THREE.CubeGeometry(50,50,50,1,1,1);
 var wireMaterial = new THREE.MeshBasicMaterial( { color: 0xff0000, wireframe:true } );
 MovingCube = new THREE.Mesh( cubeGeometry, wireMaterial );
-MovingCube.position.set(90, 30, 15);
+MovingCube.position.set(camera.position.x + 75, camera.position.y + 18, camera.position.z);
 scene.add( MovingCube );
-console.log(MovingCube);
-console.log( MovingCube.position.clone());
+//console.log(MovingCube);
+//console.log( MovingCube.position.clone());
         
 //Camera Controls
 var controls        = new THREE.FirstPersonControls( camera );
 controls.movementSpeed        = 80;
 controls.lookSpeed            = 0.05;
-controls.lookVertical         = false; //if true vertical look on mousemovement
+controls.lookVertical         = true; //if true vertical look on mousemovement
 updateFcts.push(function(delta, now){
                 controls.update( delta );                
         })
 
-// collision detection:
-//
-//
+// collision detection test
 var wallGeometry = new THREE.CubeGeometry( 100, 100, 20, 1, 1, 1 );
 var wallMaterial = new THREE.MeshBasicMaterial( {color: 0x8888ff} );
-//var wireMaterial = new THREE.MeshBasicMaterial( { color: 0x000000, wireframe:true } );
 	
 	var wall = new THREE.Mesh(wallGeometry, wallMaterial);
 	wall.position.set(100, 50, -100);
 	scene.add(wall);
 	collidableMeshList.push(wall);
-	//var wall = new THREE.Mesh(wallGeometry, wireMaterial);
-	//wall.position.set(100, 50, -100);
-	//scene.add(wall);
 
 
 //test depot
@@ -167,105 +155,14 @@ collidableMeshList.push(ddepot);
 //var city = new THREEx.ProceduralCity()
 //scene.add(city)
 
-//scene 25, commercials
-//var commercials = new THREEx.ProceduralCommercials()
-//scene.add(commercials)
-
-//scene 23, factories
-//var factories = new THREEx.ProceduralFactories()
-//scene.add(factories)
-
 //scene 2, 8
 //var dpstore = new THREEx.ProceduralDepStore()
 //scene.add(dpstore)
 var dpstore = new DepartmentStore();
 scene.add(dpstore);
 
-collidableMeshList.push(dpstore);
-        
-//scene 3, 4
-//var largbanks = new THREEx.ProceduralLarBanks()
-//scene.add(largbanks)
-        
-//scene 4, 16
-//var larghotels = new THREEx.ProceduralLarHotels()
-//scene.add(larghotels)
-        
-//scene 5, 6 newspapers
-//var npapers = new THREEx.ProceduralNewspapers()
-//scene.add(npapers)
-        
-//scene 6, 2 radios
-//var radios = new THREEx.ProceduralRadios()
-//scene.add(radios)
-        
-//scene 7, 2 railway stations
-//var railstations = new THREEx.ProceduralRailStations()
-//scene.add(railstations)
-        
-//scene 8, 4 movie theatres
-//var movtheatres = new THREEx.ProceduralMovTheatres()
-//scene.add(movtheatres)
-        
-//scene 9, 4 museums, 2 orchestra halls, 1 opera hall, 3 theatres, 4 libraries, 1 public bath
-//var museums = new THREEx.ProceduralMuseums()
-//scene.add(museums)
-
-//scene 10, 6 schools
-//var schools = new THREEx.ProceduralSchools()
-//scene.add(schools)
-
-//scene 11, 1 university
-//var universities = new THREEx.ProceduralUniversity()
-//scene.add(universities)
-
-//scene 12, 2 orphanages
-//var orphanages = new THREEx.ProceduralOrphanages()
-//scene.add(orphanages)
-
-//scene 13, 6 churches
-//var churches = new THREEx.ProceduralChurches()
-//scene.add(churches)
-
-//scene 14, 1 synagogue
-//var synagogues = new THREEx.ProceduralSynagogues()
-//scene.add(synagogues)
-
-//scene 15, 1 police department, 4 police precincts
-//var policedeps = new THREEx.ProceduralPolice()
-//scene.add(policedeps)
-
-//scene 16, 2 fire departments
-//var firedeps = new THREEx.ProceduralFire()
-//scene.add(firedeps)
-
-//scene 17, 1 fbi
-//var fbihq = new THREEx.ProceduralFBI()
-//scene.add(fbihq)
-
-//scene 18, 1 jail
-//var jails = new THREEx.ProceduralJails()
-//scene.add(jails)
-
-//scene 19, 3 hospitals
-//var hospitals = new THREEx.ProceduralHospitals()
-//scene.add(hospitals)
-
-//scene 20, 1 court
-//var legcourt = new THREEx.ProceduralCourt()
-//scene.add(legcourt)
-
-//scene 21, 1 city hall
-//var cityhall = new THREEx.ProceduralCityHall()
-//scene.add(cityhall)
-
-//scene 22, 5 post offices, 1 telegraph office, 1 stock exchange, 1 labor exchange
-//var postoffices = new THREEx.ProceduralPostOffice()
-//scene.add(postoffices)
-
-//scene 24, 10 warehouses
-//var warehouses = new THREEx.ProceduralWarehouses()
-//scene.add(warehouses)
+collidableMeshList.push(dpstore);  
+    
 
 function clearText()
 {   document.getElementById('message').innerHTML = '..........';   }
@@ -279,15 +176,17 @@ function appendText(txt)
                 renderer.render( scene, camera ); 
 
                 var mcdelta = clock.getDelta(); // seconds.
-	        var moveDistance = 100 * mcdelta; // 200 pixels per second
+                var moveDistance = 100 * mcdelta; // 200 pixels per second
+                //var moveDistance = controls.movementSpeed;
                 var mcrotateAngle = Math.PI / 2 * mcdelta;   // pi/2 radians (90 degrees) per second
                 
                 
                 if ( keyboard.pressed("q") )
-		MovingCube.rotation.y += rotateAngle; //rotate left
+		MovingCube.rotation.y += mcrotateAngle; //rotate left
 	        if ( keyboard.pressed("e") )
-		MovingCube.rotation.y -= rotateAngle; //rotate right
-			
+		MovingCube.rotation.y -= mcrotateAngle; //rotate right
+                
+                /*
 	        if ( keyboard.pressed("d") )
                 MovingCube.position.z += moveDistance; //left
                 if ( keyboard.pressed("a") )
@@ -296,9 +195,11 @@ function appendText(txt)
                 MovingCube.position.x += moveDistance; //up
                 if ( keyboard.pressed("s") )
                 MovingCube.position.x -= moveDistance; //down
+                */
 
-
-                
+                MovingCube.position.x = camera.position.x + 75;
+                MovingCube.position.y = camera.position.y + 18;
+                MovingCube.position.z = camera.position.z;
                 
                 var originPoint = MovingCube.position.clone();
 
@@ -313,13 +214,26 @@ function appendText(txt)
 
                 var ray = new THREE.Raycaster( originPoint, directionVector.clone().normalize() );
                 var collisionResults = ray.intersectObjects( collidableMeshList );
+                //if ( collisionResults.length > 0 && collisionResults[0].distance < directionVector.length() ){
                 if ( collisionResults.length > 0 && collisionResults[0].distance < directionVector.length() ){
+                //if ( collisionResults.length > 0 && collisionResults[0].distance < 0.5){
                 appendText(" Hit ");
                 console.log("hit");
                 controls.movementSpeed -= controls.movementSpeed + controls.movementSpeed; //80
+                //controls.movementSpeed -= controls.movementSpeed;
+                //controls.movementSpeed = -100;
+                //controls.movementSpeed = 0;
                 console.log(controls.movementSpeed);
-                moveDistance -=moveDistance + moveDistance; //80
+                //moveDistance -=moveDistance + moveDistance; //80
+                moveDistance -=controls.movementSpeed;
                 console.log(moveDistance);
+                //break;
+                }
+                else {
+                        //controls.movementSpeed = controls.movementSpeed + 1;
+                        controls.movementSpeed = 80;
+                        //controls.movementSpeed = 100;
+                        moveDistance = moveDistance; 
                 }
         }
 
