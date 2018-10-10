@@ -1,253 +1,154 @@
 <!DOCTYPE html>
 <html>
-<head>
-<meta http-equiv="content-type" content="text/html; charset=UTF-8">
-<!--three.js-->
-<script src="three.js"></script>
-<!--camera controls-->
-<script src="FPControls.js"></script>
-<!--open xml-->
-<script src="openxml.js"></script>
-<!--buildings tenements, commercials, factories-->
-<script src="Buildings/tenements.js"></script>
-<script src="Buildings/commercials.js"></script>
-<script src="Buildings/factories.js"></script>
-<!--buildings-->
-<script src="Buildings/dpstore.js"></script>
-<script src="Buildings/lbanks.js"></script>
-<script src="Buildings/lhotels.js"></script>
-<script src="Buildings/npapers.js"></script>
-<script src="Buildings/radios.js"></script>
-<script src="Buildings/stations.js"></script>
-<script src="Buildings/movtheatres.js"></script>
-<script src="Buildings/museums.js"></script>
-<script src="Buildings/schools.js"></script>
-<script src="Buildings/university.js"></script>
-<script src="Buildings/orphanage.js"></script>
-<script src="Buildings/churches.js"></script>
-<script src="Buildings/synagogue.js"></script>
-<script src="Buildings/policedep.js"></script>
-<script src="Buildings/firedep.js"></script>
-<script src="Buildings/fbi.js"></script>
-<script src="Buildings/jail.js"></script>
-<script src="Buildings/hospitals.js"></script>
-<script src="Buildings/court.js"></script>
-<script src="Buildings/cityhall.js"></script>
-<script src="Buildings/postoffices.js"></script>
-<script src="Buildings/warehouses.js"></script>
-<!--Enemy-->
-<script src="Enemy/enemy.js"></script>
-<!--Graph-->
-<script src="Graph.js"></script>
-<!--test depot-->
-<script src="Depot.js"></script>
-<!--plane-->
-<script src="Plane.js"></script>
-<!--skybox-->
-<script src="Skybox.js"></script>
-<!--loaders-->
-<script src="OBJLoader.js"></script>
-<script src="MTLLoader.js"></script>
-<script src="DDSLoader.js"></script>
-<script src="ModelLoader.js"></script>
-<!--collission detection-->
-<script src="Collision.js"></script>
-<style>
-    .customcanvas {margin-left: auto; margin-right: auto; margin-top: 20px; width: 1200px; height: 600px; display: block;
-    border-style: solid; border-width: 3px; border-color: #000000;}
-    p.ce {text-align: center;}
-</style>
-</head>
-<body style="margin: 0px; background-color: #ffffff; overflow: hidden;">
-<div height="400" width="800" class="customcanvas" id="customcanvas">
-<script>
+    <head>
+        <!--Meta-->
+        <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+        <!--three.js-->
+        <script src="three.js"></script>
+        <!--camera controls-->
+        <script src="FPControls.js"></script>
+        <!--open xml-->
+        <script src="openxml.js"></script>
+        <!--buildings tenements, commercials, factories-->
+        <script src="Buildings/tenements.js"></script>
+        <script src="Buildings/commercials.js"></script>
+        <script src="Buildings/factories.js"></script>
+        <!--buildings-->
+        <script src="Buildings/dpstore.js"></script>
+        <script src="Buildings/lbanks.js"></script>
+        <script src="Buildings/lhotels.js"></script>
+        <script src="Buildings/npapers.js"></script>
+        <script src="Buildings/radios.js"></script>
+        <script src="Buildings/stations.js"></script>
+        <script src="Buildings/movtheatres.js"></script>
+        <script src="Buildings/museums.js"></script>
+        <script src="Buildings/schools.js"></script>
+        <script src="Buildings/university.js"></script>
+        <script src="Buildings/orphanage.js"></script>
+        <script src="Buildings/churches.js"></script>
+        <script src="Buildings/synagogue.js"></script>
+        <script src="Buildings/policedep.js"></script>
+        <script src="Buildings/firedep.js"></script>
+        <script src="Buildings/fbi.js"></script>
+        <script src="Buildings/jail.js"></script>
+        <script src="Buildings/hospitals.js"></script>
+        <script src="Buildings/court.js"></script>
+        <script src="Buildings/cityhall.js"></script>
+        <script src="Buildings/postoffices.js"></script>
+        <script src="Buildings/warehouses.js"></script>
+        <!--Enemy-->
+        <script src="Enemy/enemy.js"></script>
+        <!--Graph-->
+        <script src="Graph.js"></script>
+        <!--test depot-->
+        <script src="Depot.js"></script>
+        <!--plane-->
+        <script src="Plane.js"></script>
+        <!--skybox-->
+        <script src="Skybox.js"></script>
+        <!--loaders-->
+        <script src="OBJLoader.js"></script>
+        <script src="MTLLoader.js"></script>
+        <script src="DDSLoader.js"></script>
+        <script src="ModelLoader.js"></script>
+        <!--collission detection-->
+        <script src="Collision.js"></script>
+        <style>
+            .customcanvas {margin-left: auto; margin-right: auto; margin-top: 20px; width: 1200px; height: 600px; display: block;
+            border-style: solid; border-width: 3px; border-color: #000000;}
+            p.ce {text-align: center;}
+        </style>
+    </head>
+    <body style="margin: 0px; background-color: #ffffff; overflow: hidden;">
+        <div height="400" width="800" class="customcanvas" id="customcanvas">
+        <script>
 
-//updater
-var updateFcts = [];
-//scene
-var scene = new THREE.Scene();
-//fog
-scene.fog = new THREE.FogExp2( 0xd0e0f0, 0.0025 );
-//renderer
-var renderer = new THREE.WebGLRenderer( { antialias: false } );
-//window
-canvasWidth = 1200;
-canvasHeight = 600;
-renderer.setSize( canvasWidth, canvasHeight );
+            // Updater
+            var updateFcts = [];
 
-//append object to it
-document.getElementById("customcanvas").appendChild(renderer.domElement);
+            // Scene
+            var scene = new THREE.Scene();
 
-//camera
-var camera               = new THREE.PerspectiveCamera(45, canvasWidth / canvasHeight, 0.01, 8000);
-camera.position.y        = 12;
-camera.position.z        = 15;
-camera.position.x        = 15;
+            // Fog
+            scene.fog = new THREE.FogExp2( 0xd0e0f0, 0.0025 );
 
-//lighting
-var light = new THREE.HemisphereLight( 0xfffff0, 0x101020, 1.25 );
-light.position.set( 0.75, 1, 0.25 );
-scene.add( light );
+            // Renderer
+            var renderer = new THREE.WebGLRenderer( { antialias: false } );
 
-//plane
-var plane = new Plane();
-scene.add(plane);
+            // Canvas
+            canvasWidth = 1200;
+            canvasHeight = 600;
+            renderer.setSize( canvasWidth, canvasHeight );
 
-//skybox
-var skyBox = new Skybox();
-scene.add( skyBox );
+            // Append Object
+            document.getElementById("customcanvas").appendChild(renderer.domElement);
 
-//Camera Controls
-var controls = new THREE.FirstPersonControls( camera );
-controls.movementSpeed = 80;
-controls.lookSpeed = 0.05;
-controls.lookVertical = false; //if true vertical look on mousemovement
-updateFcts.push(function(delta, now){
-                controls.update( delta );
-        })
+            // Camera
+            var camera = new THREE.PerspectiveCamera(45, canvasWidth / canvasHeight, 0.01, 8000);
+            camera.position.y = 12;
+            camera.position.z = 15;
+            camera.position.x = 15;
 
-// collision detection:
-//
-//
+            // Lighting
+            var light = new THREE.HemisphereLight( 0xfffff0, 0x101020, 1.25 );
+            light.position.set( 0.75, 1, 0.25 );
+            scene.add( light );
 
-//test depot
-var ndepot = new Depot();
-scene.add(ndepot);
+            // Plane
+            var plane = new Plane();
+            scene.add(plane);
 
-//enemy
-var enemy = new Enemy();
-scene.add(enemy);
+            // Skybox
+            var skyBox = new Skybox();
+            scene.add( skyBox );
 
-//buildings to scene
-//scene 1, max 1600 tenements
-//var city = new THREEx.ProceduralCity()
-//scene.add(city)
+            // Camera Controls
+            var controls = new THREE.FirstPersonControls( camera );
+            controls.movementSpeed = 80;
+            controls.lookSpeed = 0.05;
+            controls.lookVertical = false;
+            updateFcts.push(function(delta, now){
+                            controls.update( delta );
+            })
 
-//scene 25, commercials
-//var commercials = new THREEx.ProceduralCommercials()
-//scene.add(commercials)
+            // Depot
+            var ndepot = new Depot();
+            scene.add(ndepot);
 
-//scene 23, factories
-//var factories = new THREEx.ProceduralFactories()
-//scene.add(factories)
+            // Enemy
+            var enemy = new Enemy();
+            scene.add(enemy);
+            function rotateEnemy() {
+                var SPEED = 0.01;
+                enemy.rotation.x -= SPEED * 2;
+                enemy.rotation.y -= SPEED;
+                enemy.rotation.z -= SPEED * 3;
+            }
 
-//scene 2, 8
-//var dpstore = new THREEx.ProceduralDepStore()
-//scene.add(dpstore)
-var dpstore = new DepartmentStore();
-scene.add(dpstore);
+            // DPStore
+            var dpstore = new DepartmentStore();
+            scene.add(dpstore);
 
-//scene 3, 4
-//var largbanks = new THREEx.ProceduralLarBanks()
-//scene.add(largbanks)
-
-//scene 4, 16
-//var larghotels = new THREEx.ProceduralLarHotels()
-//scene.add(larghotels)
-
-//scene 5, 6 newspapers
-//var npapers = new THREEx.ProceduralNewspapers()
-//scene.add(npapers)
-
-//scene 6, 2 radios
-//var radios = new THREEx.ProceduralRadios()
-//scene.add(radios)
-
-//scene 7, 2 railway stations
-//var railstations = new THREEx.ProceduralRailStations()
-//scene.add(railstations)
-
-//scene 8, 4 movie theatres
-//var movtheatres = new THREEx.ProceduralMovTheatres()
-//scene.add(movtheatres)
-
-//scene 9, 4 museums, 2 orchestra halls, 1 opera hall, 3 theatres, 4 libraries, 1 public bath
-//var museums = new THREEx.ProceduralMuseums()
-//scene.add(museums)
-
-//scene 10, 6 schools
-//var schools = new THREEx.ProceduralSchools()
-//scene.add(schools)
-
-//scene 11, 1 university
-//var universities = new THREEx.ProceduralUniversity()
-//scene.add(universities)
-
-//scene 12, 2 orphanages
-//var orphanages = new THREEx.ProceduralOrphanages()
-//scene.add(orphanages)
-
-//scene 13, 6 churches
-//var churches = new THREEx.ProceduralChurches()
-//scene.add(churches)
-
-//scene 14, 1 synagogue
-//var synagogues = new THREEx.ProceduralSynagogues()
-//scene.add(synagogues)
-
-//scene 15, 1 police department, 4 police precincts
-//var policedeps = new THREEx.ProceduralPolice()
-//scene.add(policedeps)
-
-//scene 16, 2 fire departments
-//var firedeps = new THREEx.ProceduralFire()
-//scene.add(firedeps)
-
-//scene 17, 1 fbi
-//var fbihq = new THREEx.ProceduralFBI()
-//scene.add(fbihq)
-
-//scene 18, 1 jail
-//var jails = new THREEx.ProceduralJails()
-//scene.add(jails)
-
-//scene 19, 3 hospitals
-//var hospitals = new THREEx.ProceduralHospitals()
-//scene.add(hospitals)
-
-//scene 20, 1 court
-//var legcourt = new THREEx.ProceduralCourt()
-//scene.add(legcourt)
-
-//scene 21, 1 city hall
-//var cityhall = new THREEx.ProceduralCityHall()
-//scene.add(cityhall)
-
-//scene 22, 5 post offices, 1 telegraph office, 1 stock exchange, 1 labor exchange
-//var postoffices = new THREEx.ProceduralPostOffice()
-//scene.add(postoffices)
-
-//scene 24, 10 warehouses
-//var warehouses = new THREEx.ProceduralWarehouses()
-//scene.add(warehouses)
-
-
-//render the scene
-
-        updateFcts.push(function(){
-                renderer.render( scene, camera );
-        })
-
-        //loop runner
-        var lastTimeMsec= null
-        requestAnimationFrame(function animate(nowMsec){
-                // keep looping
+            updateFcts.push(function(){
+                renderer.render(scene, camera);
+                rotateEnemy();
+            })
+            var lastTimeMsec= null
+            requestAnimationFrame(function animate(nowMsec){
                 requestAnimationFrame( animate );
-                // measure time
                 lastTimeMsec = lastTimeMsec || nowMsec-1000/60
                 var deltaMsec = Math.min(200, nowMsec - lastTimeMsec)
                 lastTimeMsec = nowMsec
-                // call each update function
                 updateFcts.forEach(function(updateFn){
-                        updateFn(deltaMsec/1000, nowMsec/1000)
+                    updateFn(deltaMsec/1000, nowMsec/1000)
                 })
-        })
-</script>
-</div>
-<p class="ce">Use Q, E keys to rotate the camera</p>
-<p class="ce">Use the W, A, S, D keys to move around</p>
-<p class="ce">WebGL renderer is supported in Firefox 4+, Chrome 9+, and Safari 6+</p>
-<!--external sounds-->
-<!--<audio autoplay loop><source src="gangsters2.mp3" type="audio/mp3"></audio>-->
-</body>
+            })
+        </script>
+        </div>
+        <div>
+            <p class="ce">Use Q, E keys to rotate the camera</p>
+            <p class="ce">Use the W, A, S, D keys to move around</p>
+            <p class="ce">WebGL renderer is supported in Firefox 4+, Chrome 9+, and Safari 6+</p>
+        </div>
+    </body>
 </html>

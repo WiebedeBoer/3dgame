@@ -3,13 +3,19 @@ class Enemy extends THREE.Group {
         var refEnemy, enemy, material, geometry;
 
         refEnemy = this;
+        enemy = new THREE.Group();
 
-        geometry = new THREE.SphereGeometry(3, 50, 50, 0, Math.PI * 2, 0, Math.PI * 2);
-        material = new THREE.MeshNormalMaterial();
-        enemy = new THREE.Mesh(geometry, material);
+        loadOBJModel("Models/Dummy/", "model.obj", "Models/Dummy/", "materials.mtl", (mesh) => {
+            mesh.scale.set(10, 10, 10);
+            enemy.add(mesh);
+        });
+
         enemy.position.x = 0;
         enemy.position.y = 10;
         enemy.position.z = 0;
+        enemy.rotation.x = 0;
+        enemy.rotation.y = 0;
+        enemy.rotation.z = 0;
         refEnemy.add(enemy);
     }
     constructor(){
