@@ -116,6 +116,7 @@ dp ++;
 //var mesh2 = new THREE.Mesh(townGeometry, material3);
 var mesh2 = new THREE.Mesh(townGeometry, depMaterial);
 mDepartment.add(mesh2);
+collidableMeshList.push(mesh2);
 //return mesh2;
       
   }
