@@ -3,6 +3,7 @@ class Enemy extends THREE.Group {
         var refEnemy, enemy, material, geometry;
 
         refEnemy = this;
+
         enemy = new THREE.Group();
 
         loadOBJModel("Models/Dummy/", "model.obj", "Models/Dummy/", "materials.mtl", (mesh) => {
@@ -13,9 +14,7 @@ class Enemy extends THREE.Group {
         enemy.position.x = 0;
         enemy.position.y = 10;
         enemy.position.z = 0;
-        enemy.rotation.x = 0;
-        enemy.rotation.y = 0;
-        enemy.rotation.z = 0;
+        enemy.rotation.y = 90 * Math.PI / 180;
         refEnemy.add(enemy);
     }
     constructor(){

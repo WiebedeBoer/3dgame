@@ -119,10 +119,7 @@
             var enemy = new Enemy();
             scene.add(enemy);
             function rotateEnemy() {
-                var SPEED = 0.01;
-                enemy.rotation.x -= SPEED * 2;
-                enemy.rotation.y -= SPEED;
-                enemy.rotation.z -= SPEED * 3;
+                enemy.lookAt(camera.position);
             }
 
             // DPStore
