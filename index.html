@@ -102,7 +102,7 @@ var skyBox = new Skybox();
 scene.add( skyBox );
 
 //moving cube
-var cubeGeometry = new THREE.CubeGeometry(50,50,50,1,1,1);
+var cubeGeometry = new THREE.CubeGeometry(30,50,30,1,1,1);
 var wireMaterial = new THREE.MeshBasicMaterial( { color: 0xff0000, wireframe:true } );
 MovingCube = new THREE.Mesh( cubeGeometry, wireMaterial );
 MovingCube.position.set(camera.position.x + 75, camera.position.y + 18, camera.position.z);
@@ -130,7 +130,8 @@ var wallMaterial = new THREE.MeshBasicMaterial( {color: 0x8888ff} );
 
 
 //test depot
-//var ndepot = new Depot();
+var ndepot = new Depot();
+/*
 var dgeometry = new THREE.CubeGeometry(30, 60, 30,1,1,1);
         var dcubeMaterials = [
             new THREE.MeshPhongMaterial({ map: new THREE.TextureLoader().load("textures/bricks.jpg"), side: THREE.DoubleSide }), //LEFT
@@ -145,10 +146,11 @@ var dgeometry = new THREE.CubeGeometry(30, 60, 30,1,1,1);
         ddepot.position.x = 47;
         ddepot.position.y = 0;
         ddepot.position.z = 47;
-//scene.add(ndepot);
-scene.add(ddepot);
+        */
+scene.add(ndepot);
+//scene.add(ddepot);
 //collidableMeshList.push(ndepot);
-collidableMeshList.push(ddepot);
+//collidableMeshList.push(ddepot);
 
 //buildings to scene
 //scene 1, max 1600 tenements
@@ -225,7 +227,7 @@ function appendText(txt)
                 //controls.movementSpeed = 0;
                 console.log(controls.movementSpeed);
                 //moveDistance -=moveDistance + moveDistance; //80
-                moveDistance -=controls.movementSpeed;
+                //moveDistance -=controls.movementSpeed;
                 console.log(moveDistance);
                 //break;
                 }
@@ -233,7 +235,7 @@ function appendText(txt)
                         //controls.movementSpeed = controls.movementSpeed + 1;
                         controls.movementSpeed = 80;
                         //controls.movementSpeed = 100;
-                        moveDistance = moveDistance; 
+                        //moveDistance = moveDistance; 
                 }
         }
 

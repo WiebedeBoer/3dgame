@@ -1,8 +1,10 @@
+
 class Depot extends THREE.Group {
 
     init(){
         var mdepot = this;
-        var dgeometry = new THREE.BoxGeometry(30, 60, 30);
+        //var dgeometry = new THREE.BoxGeometry(30, 60, 30);
+        var dgeometry = new THREE.CubeGeometry(30, 60, 30,1,1,1);
         var dcubeMaterials = [
             new THREE.MeshPhongMaterial({ map: new THREE.TextureLoader().load("textures/bricks.jpg"), side: THREE.DoubleSide }), //LEFT
             new THREE.MeshPhongMaterial({ map: new THREE.TextureLoader().load("textures/bricks.jpg"), side: THREE.DoubleSide }), //RIGHT
@@ -16,13 +18,13 @@ class Depot extends THREE.Group {
         ddepot.position.x = 47;
         ddepot.position.y = 0;
         ddepot.position.z = 47;
-        mdepot.add(ddepot);   
+        mdepot.add(ddepot); 
+        collidableMeshList.push(ddepot);
     }
 
     
     constructor(){
         super();
-        //this._LoadState = LoadStates.NOT_LOADING;
         this.init();
     }
     
