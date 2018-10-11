@@ -105,7 +105,7 @@ scene.add( skyBox );
 var cubeGeometry = new THREE.CubeGeometry(30,50,30,1,1,1);
 var wireMaterial = new THREE.MeshBasicMaterial( { color: 0xff0000, wireframe:true } );
 MovingCube = new THREE.Mesh( cubeGeometry, wireMaterial );
-MovingCube.position.set(camera.position.x + 75, camera.position.y + 18, camera.position.z);
+MovingCube.position.set(camera.position.x + 5, camera.position.y + 18, camera.position.z);
 scene.add( MovingCube );
 //console.log(MovingCube);
 //console.log( MovingCube.position.clone());
@@ -114,37 +114,42 @@ scene.add( MovingCube );
 var controls        = new THREE.FirstPersonControls( camera );
 controls.movementSpeed        = 80;
 controls.lookSpeed            = 0.05;
-controls.lookVertical         = true; //if true vertical look on mousemovement
+controls.lookVertical         = false; //if true vertical look on mousemovement
 updateFcts.push(function(delta, now){
                 controls.update( delta );                
         })
 
+/*
 // collision detection test
 var wallGeometry = new THREE.CubeGeometry( 100, 100, 20, 1, 1, 1 );
-var wallMaterial = new THREE.MeshBasicMaterial( {color: 0x8888ff} );
+var wallMaterial = new THREE.MeshBasicMaterial( {color: 0x8888ff, wireframe:true} );
 	
 	var wall = new THREE.Mesh(wallGeometry, wallMaterial);
 	wall.position.set(100, 50, -100);
 	scene.add(wall);
-	collidableMeshList.push(wall);
+        collidableMeshList.push(wall);
+*/
 
 
 //test depot
-var ndepot = new Depot();
-scene.add(ndepot);
+//var ndepot = new Depot();
+//scene.add(ndepot);
 
 //buildings to scene
 //scene 1, max 1600 tenements
 //var city = new THREEx.ProceduralCity()
 //scene.add(city)
 
-//scene 2, 8
-//var dpstore = new THREEx.ProceduralDepStore()
-//scene.add(dpstore)
+//scene 2 department stores
 var dpstore = new DepartmentStore();
 scene.add(dpstore);
 
-collidableMeshList.push(dpstore);  
+//scene 3 churches
+var nchurch = new Church();
+scene.add(nchurch);
+
+//scene 4 city hall
+
     
 
 function clearText()
@@ -205,7 +210,9 @@ function appendText(txt)
                 if ( keyboard.pressed("d") || keyboard.pressed("s") ){
                 controls.movementSpeed -= controls.movementSpeed + controls.movementSpeed;}
                 else if ( keyboard.pressed("a") || keyboard.pressed("w") ){
-                controls.movementSpeed -= controls.movementSpeed + controls.movementSpeed;}
+                //controls.movementSpeed += controls.movementSpeed - controls.movementSpeed - controls.movementSpeed;
+                controls.movementSpeed -= controls.movementSpeed + controls.movementSpeed;
+                }
                 //controls.movementSpeed -= controls.movementSpeed;
                 //controls.movementSpeed = -100;
                 //controls.movementSpeed = 0;
@@ -219,7 +226,7 @@ function appendText(txt)
                         //controls.movementSpeed = controls.movementSpeed + 1;
                         if ( keyboard.pressed("d") || keyboard.pressed("s") ){
                         controls.movementSpeed = 80;}
-                        if ( keyboard.pressed("a") || keyboard.pressed("w") ){
+                        else if ( keyboard.pressed("a") || keyboard.pressed("w") ){
                         controls.movementSpeed = 80;}
                         //controls.movementSpeed = 100;
                         //moveDistance = moveDistance; 
