@@ -118,10 +118,16 @@
             // Enemy
             var enemy = new Enemy();
             scene.add(enemy);
-            function AnimateEnemy() {
-                var distance = 5;
-                enemy.transform.position = enemy.transform.position + Camera.main.transform.forward * distance * Time.deltaTime;
+
+            // Move enemy camera towards player
+            function EnemyCamera() {
                 enemy.lookAt(camera.position);
+            }
+
+            // Move enemy towards player
+            function EnemyMovement() {
+                var distance = enemy.position - camera.position;
+                enemy.position = enemy.position + distance;
             }
 
             // DPStore
@@ -130,8 +136,10 @@
 
             updateFcts.push(function(){
                 renderer.render(scene, camera);
-                AnimateEnemy();
+                EnemyCamera();
+                EnemyMovement();
             })
+
             var lastTimeMsec= null
             requestAnimationFrame(function animate(nowMsec){
                 requestAnimationFrame( animate );
