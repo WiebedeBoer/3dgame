@@ -118,7 +118,9 @@
             // Enemy
             var enemy = new Enemy();
             scene.add(enemy);
-            function rotateEnemy() {
+            function AnimateEnemy() {
+                var distance = 5;
+                enemy.transform.position = enemy.transform.position + Camera.main.transform.forward * distance * Time.deltaTime;
                 enemy.lookAt(camera.position);
             }
 
@@ -128,7 +130,7 @@
 
             updateFcts.push(function(){
                 renderer.render(scene, camera);
-                rotateEnemy();
+                AnimateEnemy();
             })
             var lastTimeMsec= null
             requestAnimationFrame(function animate(nowMsec){

@@ -10,7 +10,6 @@ class Enemy extends THREE.Group {
             mesh.scale.set(10, 10, 10);
             enemy.add(mesh);
         });
-
         enemy.position.x = 0;
         enemy.position.y = 10;
         enemy.position.z = 0;
