@@ -148,9 +148,13 @@ scene.add(dpstore);
 var nchurch = new Church();
 scene.add(nchurch);
 
-//scene 4 city hall
+document.getElementById("customcanvas").addEventListener( 'click', function ( event ) {
+        lock();
+}, false );
 
-    
+function lock(rawr) {
+        document.getElementById("customcanvas").requestPointerLock();
+}    
 
 function clearText()
 {   document.getElementById('message').innerHTML = '..........';   }
