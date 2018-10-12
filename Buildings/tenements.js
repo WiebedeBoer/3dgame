@@ -7,13 +7,19 @@ class Tenement extends THREE.Group {
     //generate material
     var materials = new THREE.MeshLambertMaterial({
     //map: texture,
-    vertexColors : THREE.VertexColors
+    //vertexColors : THREE.VertexColors
+    color: 0x877c6d
     });
 
     //city mesh
-    var geometry = new THREE.Geometry();
+    var geometry = new THREE.CubeGeometry(60,80,60, 1, 1, 1 );
 
-    var cityGeometry = new THREE.BoxGeometry(60, 100, 60);
+    // translate the geometry to place the pivot point at the bottom instead of the center
+    geometry.applyMatrix( new THREE.Matrix4().makeTranslation( 0, 0.5, 0 ) );
+
+
+    //var cityGeometry = new THREE.BoxGeometry(60, 100, 60);
+    /*
     var cityMaterials = [
         new THREE.MeshPhongMaterial({ map: new THREE.TextureLoader().load("textures/ground/ground9.jpg"), side: THREE.DoubleSide }), //LEFT
         new THREE.MeshPhongMaterial({ map: new THREE.TextureLoader().load("textures/ground/ground9.jpg"), side: THREE.DoubleSide }), //RIGHT
@@ -22,8 +28,10 @@ class Tenement extends THREE.Group {
         new THREE.MeshPhongMaterial({ map: new THREE.TextureLoader().load("textures/ground/ground9.jpg"), side: THREE.DoubleSide }), //FRONT
         new THREE.MeshPhongMaterial({ map: new THREE.TextureLoader().load("textures/ground/ground9.jpg"), side: THREE.DoubleSide }), //BACK
       ];
-    var cityMaterial = new THREE.MeshFaceMaterial(cityMaterials);
-    var buildingMesh = new THREE.Mesh(cityGeometry, materials);
+      */
+    //var cityMaterial = new THREE.MeshFaceMaterial(cityMaterials);
+    //var buildingMesh = new THREE.Mesh(cityGeometry, materials);
+    var buildingMesh = new THREE.Mesh(geometry);
 
     /*
     //multiply colors
@@ -33,9 +41,12 @@ class Tenement extends THREE.Group {
     var darklight = new THREE.Color( 0xe7c08a );
     */
 
+    //city geometry
+    var cityGeometry= new THREE.Geometry();
+
   //no. buildings, max = 1600
   //var mxi = 3600;
-  var mxi = 15;
+  var mxi = 3600;
   //loop
   var i = 1;
   while (i < mxi)
@@ -55,6 +66,10 @@ class Tenement extends THREE.Group {
     buildingMesh.position.z = (2700 - 5400) + (jezi * 90) - 30;
     //put a rotation
     buildingMesh.rotation.y = 0.5*Math.PI*2;
+    //building scale
+    //buildingMesh.scale.x = 60;
+    //buildingMesh.scale.y = 80;
+    //buildingMesh.scale.z = buildingMesh.scale.x;
 
     /*
     //base color
@@ -97,16 +112,17 @@ class Tenement extends THREE.Group {
   }
 
   // merge it with cityGeometry - very important for performance
-  var cityGeometry = buildingMesh.cityGeometry;
+  var geometry = buildingMesh.geometry;
 
-  geometry.mergeMesh(buildingMesh);
+  cityGeometry.mergeMesh(buildingMesh);
 
   //increment loop
   i ++;
 
   }
 
-  var mesh1 = new THREE.Mesh(geometry, cityMaterial);
+  //var mesh1 = new THREE.Mesh(geometry, cityMaterial);
+  var mesh1 = new THREE.Mesh(cityGeometry, materials);
   mCity.add(mesh1);
   collidableMeshList.push(mesh1);
 
