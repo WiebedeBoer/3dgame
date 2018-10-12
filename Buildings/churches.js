@@ -1,35 +1,28 @@
-var THREEx = THREEx || {}
-THREEx.ProceduralChurches = function(){
+class Church extends THREE.Group {
 
-//generate material
-var material11 = new THREE.MeshLambertMaterial({
-color: 0xbbc7ba
-});
+  init (){
 
-//city mesh
-var churchGeometry = new THREE.Geometry();
+      var mChurch = this;
+     
+     //generate material
+     var material4 = new THREE.MeshLambertMaterial({
+      color: 0xd7dadf
+    });
 
-// build the base geometry for each building
-var geo11 = new THREE.CubeGeometry( 1, 1, 1 );
+    //city mesh
+    var townGeometry = new THREE.Geometry();
 
-// translate the geometry to place the pivot point at the bottom instead of the center
-geo11.applyMatrix( new THREE.Matrix4().makeTranslation( 0, 0.5, 0 ) );
-
-geo11.faceVertexUvs[0][0] = [ [0], [1], [3] ];
-geo11.faceVertexUvs[0][1] = [ [1], [2], [3] ];
-geo11.faceVertexUvs[0][2] = [ [0], [1], [3] ];
-geo11.faceVertexUvs[0][3] = [ [1], [2], [3] ];
-geo11.faceVertexUvs[0][4] = [ [0], [1], [3] ];
-geo11.faceVertexUvs[0][5] = [ [1], [2], [3] ];
-geo11.faceVertexUvs[0][6] = [ [0], [1], [3] ];
-geo11.faceVertexUvs[0][7] = [ [1], [2], [3] ];
-geo11.faceVertexUvs[0][8] = [ [0], [1], [3] ];
-geo11.faceVertexUvs[0][9] = [ [1], [2], [3] ];
-geo11.faceVertexUvs[0][10] = [ [0], [1], [3] ];
-geo11.faceVertexUvs[0][11] = [ [1], [2], [3] ];
-
-// buildMesh
-var buildMesh11 = new THREE.Mesh( geo11  );
+    var churchGeometry = new THREE.BoxGeometry(60, 80, 60);
+    var churchMaterials = [
+            new THREE.MeshPhongMaterial({ map: new THREE.TextureLoader().load("textures/ground/concrete.jpg"), side: THREE.DoubleSide }), //LEFT
+            new THREE.MeshPhongMaterial({ map: new THREE.TextureLoader().load("textures/ground/concrete.jpg"), side: THREE.DoubleSide }), //RIGHT
+            new THREE.MeshPhongMaterial({ map: new THREE.TextureLoader().load("textures/ground/ground11.jpg"), side: THREE.DoubleSide }), //TOP
+            new THREE.MeshPhongMaterial({ map: new THREE.TextureLoader().load("textures/ground/concrete.jpg"), side: THREE.DoubleSide }), //BOTTOM
+            new THREE.MeshPhongMaterial({ map: new THREE.TextureLoader().load("textures/ground/concrete.jpg"), side: THREE.DoubleSide }), //FRONT
+            new THREE.MeshPhongMaterial({ map: new THREE.TextureLoader().load("textures/ground/concrete.jpg"), side: THREE.DoubleSide }), //BACK
+        ];
+    var churchMaterial = new THREE.MeshFaceMaterial(churchMaterials);
+    var meshChurch = new THREE.Mesh(churchGeometry, material4);
 
 
 //loop
@@ -68,55 +61,36 @@ var churbrow =1;
 
 
 // put a position
-buildMesh11.position.x = (2700 - 5400) + (churbcol * 90) + 15;
-buildMesh11.position.z = (2700 - 5400) + (churbrow * 90) - 30;
+meshChurch.position.x = (2700 - 5400) + (churbcol * 90) + 15;
+meshChurch.position.z = (2700 - 5400) + (churbrow * 90) - 30;
 //put a rotation
-buildMesh11.rotation.y = 0.5*Math.PI*2;
-//building scale
-buildMesh11.scale.x = 150;
-buildMesh11.scale.y = 100;
-buildMesh11.scale.z = 60;
+meshChurch.rotation.y = 0.5*Math.PI*2;
 
 //add geometry
-var geo11 = buildMesh11.geo11;
+var churchGeometry = meshChurch.churchGeometry;
 
-THREE.GeometryUtils.merge( churchGeometry, buildMesh11 );
+townGeometry.mergeMesh(meshChurch);
 
 
 //increment loop
 churb ++;
 
-   }
-
-
-
-
-//return mesh
-var mesh9 = new THREE.Mesh(churchGeometry, material11);
-return mesh9;
-
-//new building end
-
-
-
-//window canvas
-function generateTextureChurch(){
-// build a small canvas 30x50 and paint it in white
-var tchu = document.createElement( 'canvas' );
-tchu.width = 60;
-tchu.height = 80;
-var context = tchu.getContext( '2d' );
-// plain it in white
-context.fillStyle = '#ffffff';
-context.fillRect( 0, 0, 60, 80 );
-
-// then draw the image
-context.drawImage( tchu, 0, 0, tchu.width, tchu.height );
-// return the just built canvas
-return tchu;
+  }
+  var mesh3 = new THREE.Mesh(townGeometry, churchMaterial);
+  mChurch.add(mesh3);
+  collidableMeshList.push(mesh3);
+         
+  }
+             
+  constructor(){
+    super();
+   
+    this.init();
+  }
+   
 }
 
 
-}
+
 
 

@@ -1,10 +1,10 @@
 class Skybox extends THREE.Group {
 	init(){
 				var mskyBox = this;
-				var imagePrefix = "Skybox/skybox";
+				var imagePrefix = "images/skybox";
 	            var directions  = ["xpos", "xneg", "ypos", "yneg", "zpos", "zneg"];
 	            var imageSuffix = ".png";
-	            var skyGeometry = new THREE.CubeGeometry( 430, 430, 430 );	
+	            var skyGeometry = new THREE.CubeGeometry( 7430, 7430, 7430 );	
 	
 	            var materialArray = [];
 	            for (var i = 0; i < 6; i++)
@@ -16,7 +16,7 @@ class Skybox extends THREE.Group {
 				var skyBox = new THREE.Mesh( skyGeometry, skyMaterial );
 				//skyBox.rotation.x= - 90 * Math.PI / 180;
 				mskyBox.add(skyBox);
-				
+				collidableMeshList.push(skyBox);
 			}
 
     
