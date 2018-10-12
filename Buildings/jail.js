@@ -1,78 +1,52 @@
-var THREEx = THREEx || {}
-THREEx.ProceduralJails = function(){
+class Jail extends THREE.Group{
+    
+    init (){
+        
+        var mJail = this;
 
-//generate material
-var material22 = new THREE.MeshLambertMaterial({
-color: 0x32344e
-});
+        //generate material
+        var material22 = new THREE.MeshLambertMaterial({
+            color: 0x32344e
+        });
 
-//city mesh
-var jailGeometry = new THREE.Geometry();
+        //city mesh
+        var townGeometry = new THREE.Geometry();
 
-// build the base geometry for each building
-var geo22 = new THREE.CubeGeometry( 1, 1, 1 );
+        var jailGeometry = new THREE.BoxGeometry(60, 50, 60);
+        var jailMaterials = [
+                new THREE.MeshPhongMaterial({ map: new THREE.TextureLoader().load("textures/ground/concrete.jpg"), side: THREE.DoubleSide }), //LEFT
+                new THREE.MeshPhongMaterial({ map: new THREE.TextureLoader().load("textures/ground/concrete.jpg"), side: THREE.DoubleSide }), //RIGHT
+                new THREE.MeshPhongMaterial({ map: new THREE.TextureLoader().load("textures/ground/ground11.jpg"), side: THREE.DoubleSide }), //TOP
+                new THREE.MeshPhongMaterial({ map: new THREE.TextureLoader().load("textures/ground/concrete.jpg"), side: THREE.DoubleSide }), //BOTTOM
+                new THREE.MeshPhongMaterial({ map: new THREE.TextureLoader().load("textures/ground/concrete.jpg"), side: THREE.DoubleSide }), //FRONT
+                new THREE.MeshPhongMaterial({ map: new THREE.TextureLoader().load("textures/ground/concrete.jpg"), side: THREE.DoubleSide }), //BACK
+            ];
+        var jailMaterial = new THREE.MeshFaceMaterial(jailMaterials);
+        var meshJail = new THREE.Mesh(jailGeometry, material22);
 
-// translate the geometry to place the pivot point at the bottom instead of the center
-geo22.applyMatrix( new THREE.Matrix4().makeTranslation( 0, 0.5, 0 ) );
+        var jailcol =1;
+        var jailrow =45;
 
-geo22.faceVertexUvs[0][0] = [ [0], [1], [3] ];
-geo22.faceVertexUvs[0][1] = [ [1], [2], [3] ];
-geo22.faceVertexUvs[0][2] = [ [0], [1], [3] ];
-geo22.faceVertexUvs[0][3] = [ [1], [2], [3] ];
-geo22.faceVertexUvs[0][4] = [ [0], [1], [3] ];
-geo22.faceVertexUvs[0][5] = [ [1], [2], [3] ];
-geo22.faceVertexUvs[0][6] = [ [0], [1], [3] ];
-geo22.faceVertexUvs[0][7] = [ [1], [2], [3] ];
-geo22.faceVertexUvs[0][8] = [ [0], [1], [3] ];
-geo22.faceVertexUvs[0][9] = [ [1], [2], [3] ];
-geo22.faceVertexUvs[0][10] = [ [0], [1], [3] ];
-geo22.faceVertexUvs[0][11] = [ [1], [2], [3] ];
+        // put a position
+        meshJail.position.x = (2700 - 5400) + (jailcol * 90) - 30;
+        meshJail.position.z = (2700 - 5400) + (jailrow * 90) - 30;
+        //put a rotation
+        meshJail.rotation.y = 0.5*Math.PI*2;
 
-// buildMesh
-var buildMesh22 = new THREE.Mesh( geo22  );
+        //add geometry
+        var jailGeometry = meshJail.jailGeometry;
 
-var jailcol =1;
-var jailrow =45;
+        townGeometry.mergeMesh(meshJail);
 
-// put a position
-buildMesh22.position.x = (2700 - 5400) + (jailcol * 90) - 30;
-buildMesh22.position.z = (2700 - 5400) + (jailrow * 90) - 30;
-//put a rotation
-buildMesh22.rotation.y = 0.5*Math.PI*2;
-//building scale
-buildMesh22.scale.x = 60;
-buildMesh22.scale.y = 80;
-buildMesh22.scale.z = buildMesh22.scale.x;
+        //return mesh
+        var mesh6 = new THREE.Mesh(townGeometry, jailMaterial);
+        mJail.add(mesh6);
+        collidableMeshList.push(mesh6);
+    }
 
-//add geometry
-var geo22 = buildMesh22.geo22;
+    constructor(){
+        super();
 
-THREE.GeometryUtils.merge( jailGeometry, buildMesh22 );
-
-//return mesh
-var mesh20 = new THREE.Mesh(jailGeometry, material22);
-return mesh20;
-
-//new building end
-
-//window canvas
-function generateTextureJail(){
-// build a small canvas 30x50 and paint it in white
-var tjail = document.createElement( 'canvas' );
-tjail.width = 60;
-tjail.height = 80;
-var context = tjail.getContext( '2d' );
-// plain it in white
-context.fillStyle = '#ffffff';
-context.fillRect( 0, 0, 60, 80 );
-
-// then draw the image
-context.drawImage( tjail, 0, 0, tjail.width, tjail.height );
-// return the just built canvas
-return tjail;
+        this.init();
+    }
 }
-
-
-}
-
-
