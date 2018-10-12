@@ -51,6 +51,7 @@
         <script src="MTLLoader.js"></script>
         <script src="DDSLoader.js"></script>
         <script src="ModelLoader.js"></script>
+        <script src="Tween.js"></script>
         <!--collission detection-->
         <script src="Collision.js"></script>
         <style>
@@ -120,14 +121,19 @@
             scene.add(enemy);
 
             // Move enemy camera towards player
-            function EnemyCamera() {
-                enemy.lookAt(camera.position);
-            }
-
-            // Move enemy towards player
             function EnemyMovement() {
-                var distance = enemy.position - camera.position;
-                enemy.position = enemy.position + distance;
+                var distance = camera.position.x - enemy.position.x;
+                if (distance <= 100) {
+                    enemy.lookAt(camera.position);
+                    new TWEEN.Tween(enemy.position)
+                        .to(camera.position, 100)
+                        .start();
+                        TWEEN.update();
+                }
+                else if (distance >= 101) {
+                    enemy.rotation.x += Math.random();
+                    enemy.position.x += Math.random();
+                }
             }
 
             // DPStore
@@ -136,7 +142,6 @@
 
             updateFcts.push(function(){
                 renderer.render(scene, camera);
-                EnemyCamera();
                 EnemyMovement();
             })
 
@@ -151,11 +156,6 @@
                 })
             })
         </script>
-        </div>
-        <div>
-            <p class="ce">Use Q, E keys to rotate the camera</p>
-            <p class="ce">Use the W, A, S, D keys to move around</p>
-            <p class="ce">WebGL renderer is supported in Firefox 4+, Chrome 9+, and Safari 6+</p>
         </div>
     </body>
 </html>

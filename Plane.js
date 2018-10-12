@@ -12,6 +12,7 @@ class Plane extends THREE.Group {
         plane.rotation.x= - 90 * Math.PI / 180;
         mPlane.add(plane);
     }
+
     constructor(){
     		super();
         this.init();

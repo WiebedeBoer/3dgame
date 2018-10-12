@@ -11,7 +11,7 @@ class Enemy extends THREE.Group {
             enemy.add(mesh);
         });
         enemy.position.x = 0;
-        enemy.position.y = 10;
+        enemy.position.y = 5;
         enemy.position.z = 0;
         enemy.rotation.y = 90 * Math.PI / 180;
         refEnemy.add(enemy);
