@@ -152,6 +152,10 @@ scene.add(nchurch);
 var ncityhall = new Cityhall();
 scene.add(ncityhall);
     
+//Locking the pointer to the game
+document.getElementById("customcanvas").addEventListener( 'click', function ( event ) {
+        document.getElementById("customcanvas").requestPointerLock();
+}, false );
 
 function clearText()
 {   document.getElementById('message').innerHTML = '..........';   }

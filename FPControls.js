@@ -61,6 +61,17 @@ THREE.FirstPersonControls = function ( object, domElement ) {
 
         };
 
+        this.onMouseMove = function ( event ) {
+
+
+		var movementX = event.movementX || event.mozMovementX || event.webkitMovementX || 0;
+		var movementY = event.movementY || event.mozMovementY || event.webkitMovementY || 0;
+
+		this.mouseX = movementX * 150;
+                this.mouseY = movementY * 150;
+
+	}
+
 
         this.onKeyDown = function ( event ) {
 
@@ -82,8 +93,8 @@ THREE.FirstPersonControls = function ( object, domElement ) {
                         case 103: this.mouseX = 1500 - 3000; break;
                         case 69: this.mouseX = 1500; break;  /*e rotate right*/
                         case 105: this.mouseX = 1500; break;
+                        
                 }
-
         };
 
         this.onKeyUp = function ( event ) {
@@ -127,7 +138,7 @@ THREE.FirstPersonControls = function ( object, domElement ) {
                         actualLookSpeed = 0;
 
                 }
-
+                
                 this.lon += this.mouseX * actualLookSpeed;
 
                 this.lat = Math.max( - 85, Math.min( 85, this.lat ) );
@@ -148,7 +159,7 @@ THREE.FirstPersonControls = function ( object, domElement ) {
 
 
         this.domElement.addEventListener( 'contextmenu', function ( event ) { event.preventDefault(); }, false );
-
+        this.domElement.addEventListener( 'mousemove', bind( this, this.onMouseMove ), false );
         this.domElement.addEventListener( 'keydown', bind( this, this.onKeyDown ), false );
         this.domElement.addEventListener( 'keyup', bind( this, this.onKeyUp ), false );
 
