@@ -42,10 +42,10 @@
 <!--skybox-->
 <script src="Skybox.js"></script>
 <!--loaders-->
-<script src="OBJLoader.js"></script>
-<script src="MTLLoader.js"></script>
-<script src="DDSLoader.js"></script>
-<script src="ModelLoader.js"></script>
+<script src="loaders/OBJLoader.js"></script>
+<script src="loaders/MTLLoader.js"></script>
+<script src="loaders/DDSLoader.js"></script>
+<script src="loaders/ModelLoader.js"></script>
 <!--collission detection-->
 <script src="KeyboardState.js"></script>
 <script src="Collision.js"></script>
@@ -148,6 +148,10 @@ scene.add(dpstore);
 var nchurch = new Church();
 scene.add(nchurch);
 
+//scene 4 city hall
+var ncityhall = new Cityhall();
+scene.add(ncityhall);
+    
 document.getElementById("customcanvas").addEventListener( 'click', function ( event ) {
         lock();
 }, false );
