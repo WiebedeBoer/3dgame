@@ -53,10 +53,88 @@
 .customcanvas {margin-left: auto; margin-right: auto; margin-top: 20px; width: 800px; height: 400px; display: block;
 border-style: solid; border-width: 1px; border-color: #000000;}
 p.ce {text-align: center;}
+
+#canvas-align {
+                position: relative;
+                width: 800px;
+                height: 400px;
+                margin: auto;
+            }
+
+            #hud {
+                position: absolute;
+                top: 0;
+                width: 800px;
+                height: 400px;
+                margin: auto;
+                z-index: 3;
+                display: none;
+            }
+
+            #hud.visible {
+                display: block;
+            }
+
+            #weapon, #ammo, #score {
+                position: absolute;
+                border: 3px solid #FFF;
+                border-radius: 5px;
+                color: #FFF;
+                font-family: arial;
+            }
+
+            #weapon {
+                bottom: 40px;
+                right: 10px;
+                background: #AA3333;
+                font-size: 10pt;
+                font-weight: bold;
+                padding: 5px;
+            }
+
+            #ammo {
+                bottom: 10px;
+                right: 10px;
+                background: #3333AA;
+                font-size: 10pt;
+                font-weight: bold;
+                padding: 5px;
+            }
+
+            #score {
+                top: 10px;
+                right: 10px;
+                background: #000000;
+                font-size: 10pt;
+                font-weight: bold;
+                padding: 5px;
+            }
+
+            #stats {
+                float: right;
+            }
+
 </style>
 </head>
-<body style="margin: 0px; background-color: #d8e7ff; overflow: hidden;">
-<div height="400" width="800" class="customcanvas" id="customcanvas">
+<body ng-app="" class="ng-scope" style="margin: 0px; background-color: #d8e7ff; overflow: hidden;">
+    <div id="content-frame" ng-controller="HudState" class="ng-scope">
+        <div id="canvas-container">
+            <div id="canvas-align">
+                <canvas id="webgl-canvas" width="800" height="400"></canvas>
+                <div id="hud" ng-class="{visible: style.visible, transparent: style.transparent, perspective: style.perspective, animated: style.animated}" class="visible">
+                    <div id="weapon" class="ng-binding">
+                        <b>Pistol</b>
+                    </div>
+                    <div id="ammo" class="ng-binding">
+                        <b>23/50</b>
+                    </div>
+                    <div id="score" class="ng-binding">
+                        <b>Score:</b> 0
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 <script>
 //keyboard
 var keyboard = new THREEx.KeyboardState();
@@ -240,32 +318,13 @@ collidableMeshList.push(dpstore);
 //var warehouses = new THREEx.ProceduralWarehouses()
 //scene.add(warehouses)
 
-var hudCanvas = document.createElement('canvas');
-var hudBitmap = hudCanvas.getContext('2d');
-hudBitmap.font = "Normal 100px Arial";
-hudBitmap.textAlign = 'center';
-hudBitmap.fillStyle = "rgba(245,245,245,0.75)";
-hudBitmap.fillText('Initializing...', width, height);
 
-var cameraHUD = new THREE.OrthographicCamera(-width/2, width/2, height/2, -height/2, 0, 50 );
-
-sceneHUD = new THREE.Scene();
-var hudTexture = new THREE.Texture(hudCanvas) 
-hudTexture.needsUpdate = true;
-var material = new THREE.MeshBasicMaterial( {map: hudTexture} );
-material.transparent = true;
-var planeGeometry = new THREE.PlaneGeometry( width, height );
-var plane = new THREE.Mesh( planeGeometry, material );
-sceneHUD.add( plane );
 
         //update function
         updateFcts.push(function(){
                 //render the scene
-                hudBitmap.clearRect(0, 0, width, height);
-                hudBitmap.fillText("SScore: 0 " , width / 2, height / 2);
-                hudTexture.needsUpdate = true;
+                
                 renderer.render(scene, camera);
-                renderer.render(sceneHUD, cameraHUD);  
 
                 var mcdelta = clock.getDelta(); // seconds.
 	        var moveDistance = 200 * mcdelta; // 200 pixels per second
