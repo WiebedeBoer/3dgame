@@ -120,17 +120,6 @@ updateFcts.push(function(delta, now){
                 controls.update( delta );                
         })
 
-/*
-// collision detection test
-var wallGeometry = new THREE.CubeGeometry( 100, 100, 20, 1, 1, 1 );
-var wallMaterial = new THREE.MeshBasicMaterial( {color: 0x8888ff, wireframe:true} );
-	
-	var wall = new THREE.Mesh(wallGeometry, wallMaterial);
-	wall.position.set(100, 50, -100);
-	scene.add(wall);
-        collidableMeshList.push(wall);
-*/
-
 
 //test depot
 //var ndepot = new Depot();
@@ -186,17 +175,6 @@ function appendText(txt)
 	        if ( keyboard.pressed("e") )
 		MovingCube.rotation.y -= mcrotateAngle; //rotate right
                 
-                /*
-	        if ( keyboard.pressed("d") )
-                MovingCube.position.z += moveDistance; //left
-                if ( keyboard.pressed("a") )
-		MovingCube.position.z -= moveDistance; //right
-	        if ( keyboard.pressed("w") )
-                MovingCube.position.x += moveDistance; //up
-                if ( keyboard.pressed("s") )
-                MovingCube.position.x -= moveDistance; //down
-                */
-
                 MovingCube.position.x = camera.position.x + 75;
                 MovingCube.position.y = camera.position.y + 18;
                 MovingCube.position.z = camera.position.z;
