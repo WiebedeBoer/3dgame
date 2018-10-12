@@ -10,6 +10,7 @@
 <script src="openxml.js"></script>
 <!--buildings tenements, commercials, factories-->
 <script src="Buildings/tenements.js"></script>
+<!--<script src="Buildings/oldtenement.js"></script>-->
 <script src="Buildings/commercials.js"></script>
 <script src="Buildings/factories.js"></script>
 <!--buildings-->
@@ -137,6 +138,8 @@ var wallMaterial = new THREE.MeshBasicMaterial( {color: 0x8888ff, wireframe:true
 
 //buildings to scene
 //scene 1, max 1600 tenements
+var city = new Tenement();
+scene.add(city);
 //var city = new THREEx.ProceduralCity()
 //scene.add(city)
 
@@ -151,11 +154,15 @@ scene.add(nchurch);
 //scene 4 city hall
 var ncityhall = new Cityhall();
 scene.add(ncityhall);
-    
+
 //Locking the pointer to the game
 document.getElementById("customcanvas").addEventListener( 'click', function ( event ) {
-        document.getElementById("customcanvas").requestPointerLock();
+        lock();
 }, false );
+function lock(rawr) {
+        document.getElementById("customcanvas").requestPointerLock();
+}    
+
 
 function clearText()
 {   document.getElementById('message').innerHTML = '..........';   }
