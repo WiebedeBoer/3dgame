@@ -43,7 +43,7 @@ class Cityhall extends THREE.Group {
     mCityhall.add(mesh4);
     //add to collision
     collidableMeshList.push(mesh4);
-
+    
     }
 
     constructor(frontTex,backTex,rightTex,leftTex,bHeight,crow,ccol){
@@ -56,6 +56,7 @@ class Cityhall extends THREE.Group {
     this.nrow = crow;
     this.ncol = ccol;
     this.init();
+    console.log(this.frontTex);
     }
 
 

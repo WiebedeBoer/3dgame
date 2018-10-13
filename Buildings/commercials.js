@@ -50,15 +50,11 @@ class Commercial extends THREE.Group {
       buildingMesh.scale.x = 60;
       buildingMesh.scale.y = this.height;
       buildingMesh.scale.z = buildingMesh.scale.x;
-      //add geometry
+      // merge it with cityGeometry - very important for performance
       var geometry = buildingMesh.geometry;
-
+      //merge
+      cityGeometry.mergeMesh(buildingMesh);
     }
-
-    // merge it with cityGeometry - very important for performance
-    var geometry = buildingMesh.geometry;
-
-    cityGeometry.mergeMesh(buildingMesh);
 
     //increment loop
     i ++;
