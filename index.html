@@ -32,6 +32,12 @@
 <!--collission detection-->
 <script src="KeyboardState.js"></script>
 <script src="Collision.js"></script>
+<!--Enemy-->
+<script src="Enemy/enemy.js"></script>
+<!--Tween-->
+<script src="Tween.js"></script>
+<!--Graph-->
+<script src="Graph.js"></script>
 <!--styling-->
 <link rel="stylesheet" type="text/css" href="Styling.css">
 </head>
@@ -127,6 +133,26 @@ updateFcts.push(function(delta, now){
 
 //city buildings
 BuildingMaker();
+
+// Enemy
+var enemy = new Enemy();
+scene.add(enemy);
+            
+// Move enemy camera towards player
+function EnemyMovement() {
+        var distance = camera.position.x - enemy.position.x;
+        if (distance <= 100) {
+                    enemy.lookAt(camera.position);
+                    new TWEEN.Tween(enemy.position)
+                        .to(camera.position, 100)
+                        .start();
+                        TWEEN.update();
+        }
+        else if (distance >= 101) {
+                    enemy.rotation.x += Math.random();
+                    enemy.position.x += Math.random();
+        }
+}
 
 //Locking the pointer to the game
 document.getElementById("customcanvas").addEventListener( 'click', function ( event ) {
