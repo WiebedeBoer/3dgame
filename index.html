@@ -40,6 +40,10 @@
 <script src="Graph.js"></script>
 <!--Pathfinding-->
 <script src="Dijkstra.js"></script>
+<!--economy-->
+<script src="Shooting.js"></script>
+<script src="Scoring.js"></script>
+<script src="Gathering.js"></script>
 <!--styling-->
 <link rel="stylesheet" type="text/css" href="Styling.css">
 </head>
@@ -173,13 +177,12 @@ var totalscore = 0;
 var eScore ="Score: "+totalscore;
 
 //show HUD economy functions
-function appendAmmo()
-{   document.getElementById('ammo').innerHTML = eAmmo;}
-function appendWeapon()
-{   document.getElementById('weapon').innerHTML = eWeapon;}
-function appendScore()
-{   document.getElementById('score').innerHTML = eScore;}
-
+function appendAmmo(){ 
+        document.getElementById('ammo').innerHTML = eAmmo;}
+function appendWeapon(){
+        document.getElementById('weapon').innerHTML = eWeapon;}
+function appendScore(){ 
+        document.getElementById('score').innerHTML = eScore;}
 
 //hit registration collision
 function clearText()
@@ -205,6 +208,8 @@ function appendText(txt)
                 propGathering();
                 //scoring
                 Scoring();
+                //enemy movement
+                EnemyMovement();
 
         })
         

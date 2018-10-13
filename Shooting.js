@@ -2,7 +2,9 @@
 function Shot(){
     //less ammo
     if ( keyboard.pressed("x")){
-    leftOverAmmo -= leftOverAmmo;}
+    leftOverAmmo -= leftOverAmmo;
+    //appendAmmo();
+    }
     //create ammo particle
 }
                
