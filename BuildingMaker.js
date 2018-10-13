@@ -4,19 +4,19 @@ function BuildingMaker(){
 //multiple buildings: building type, front texture, back texture, right texture, left texture, building height
 
 //scene 1, tenements
-var nCity = new Commercial("tenement","material_12","concrete","wall2","wall2",80);
+var nCity = new Commercial("tenement","material_12","material_12","wall2","wall2",80);
 scene.add(nCity);
 
 //scene 7 factories
-var nFactory = new Commercial("industrial","material_10","concrete","wall2","wall2",80);
+var nFactory = new Commercial("industrial","material_10","material_10","wall2","wall2",80);
 scene.add(nFactory);
 
 //scene 8 commercials
-var nCommerce = new Commercial("commercial","material_6","concrete","wall4","wall4",80);
+var nCommerce = new Commercial("commercial","material_6","material_6","wall4","wall4",80);
 scene.add(nCommerce);
 
 //scene 25 warehouses
-var nWarehouse = new Commercial("warehouse","material_13","concrete","wall2","wall2",80);
+var nWarehouse = new Commercial("warehouse","material_13","material_13","wall2","wall2",80);
 scene.add(nWarehouse);
 
 //scene 2 department stores
@@ -48,15 +48,15 @@ var nHotels = new Commercial("hotel","material_3","concrete","wall3","wall3",100
 scene.add(nHotels);
 
 //scene 14 movie theatres
-var nMovies = new Commercial("movie theatre","material_25","concrete","concrete","concrete",80);
+var nMovies = new Commercial("movie theatre","material_25","concrete","concrete","material_25",80);
 scene.add(nMovies);
 
 //scene 15 museums
-var nMuseum = new Commercial("museum","material_25","concrete","concrete","concrete",80);
+var nMuseum = new Commercial("museum","material_25","material_25","concrete","material_25",80);
 scene.add(nMuseum);
 
 //scene 16 newspapers
-var nPaper = new Commercial("newspaper","material_11","concrete","concrete","concrete",90);
+var nPaper = new Commercial("newspaper","material_11","material_11","concrete","concrete",90);
 scene.add(nPaper);
 
 //scene 19 post office
@@ -78,7 +78,7 @@ console.log(nStation);
 
 //single buildings: front texture, back texture, right texture, left texture, building height, row, col
 //scene 4 city hall
-var ncityhall = new Cityhall("material_18","concrete","material_20","ground9",100,22,21);
+var ncityhall = new Cityhall("material_18","material_18","material_20","ground9",100,22,21);
 scene.add(ncityhall);
 
 //scene 5 FBI
