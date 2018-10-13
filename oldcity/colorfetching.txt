@@ -1,0 +1,108 @@
+if ($rgb_cat =="255,0,255"){
+echo "<br>&lt;CATEGORY&gt;elite&lt;/CATEGORY&gt;";
+}
+elseif ($rgb_cat =="255,128,255"){
+echo "<br>&lt;CATEGORY&gt;gentry&lt;/CATEGORY&gt;";
+}
+elseif ($rgb_cat =="128,0,255"){
+echo "<br>&lt;CATEGORY&gt;bourgeois&lt;/CATEGORY&gt;";
+}
+elseif ($rgb_cat =="0,255,255"){
+echo "<br>&lt;CATEGORY&gt;blue collar&lt;/CATEGORY&gt;";
+}
+else {
+echo "<br>&lt;CATEGORY&gt;dilapidated&lt;/CATEGORY&gt;";
+}
+
+
+if ($rgb_cat =="128,0,0"){
+echo "<br>&lt;CATEGORY&gt;downtown&lt;/CATEGORY&gt;";
+elseif ($rgb_cat =="0,255,0"){
+echo "<br>&lt;CATEGORY&gt;financial&lt;/CATEGORY&gt;";
+elseif ($rgb_cat =="255,128,0"){
+echo "<br>&lt;CATEGORY&gt;publishing&lt;/CATEGORY&gt;";
+elseif ($rgb_cat =="255,255,0"){
+echo "<br>&lt;CATEGORY&gt;commercial&lt;/CATEGORY&gt;";
+elseif ($rgb_cat =="0,255,128"){
+echo "<br>&lt;CATEGORY&gt;garment&lt;/CATEGORY&gt;";
+elseif ($rgb_cat =="128,255,0"){
+echo "<br>&lt;CATEGORY&gt;nightlife&lt;/CATEGORY&gt;";
+elseif ($rgb_cat =="0,128,0"){
+echo "<br>&lt;CATEGORY&gt;gentry&lt;/CATEGORY&gt;";
+elseif ($rgb_cat =="128,128,64"){
+echo "<br>&lt;CATEGORY&gt;bohemian&lt;/CATEGORY&gt;";
+else {
+echo "<br>&lt;CATEGORY&gt;peripheral&lt;/CATEGORY&gt;";}
+
+
+
+
+
+
+
+if ($rgb_cereal =="255,255,255"){
+echo "<br>&lt;BUSINESS&gt;tenement&lt;/BUSINESS&gt;"; //done
+elseif ($rgb_cereal =="255,0,0"){
+echo "<br>&lt;BUSINESS&gt;commercial&lt;/BUSINESS&gt;"; //done
+elseif ($rgb_cereal =="0,255,255"){
+echo "<br>&lt;BUSINESS&gt;industrial&lt;/BUSINESS&gt;";//done
+//3
+
+elseif ($rgb_cereal =="128,64,0"){
+echo "<br>&lt;BUSINESS&gt;warehouse&lt;/BUSINESS&gt;";//done
+//4
+
+elseif ($rgb_cereal =="255,128,0"){
+echo "<br>&lt;BUSINESS&gt;bank&lt;/BUSINESS&gt;";//done
+elseif ($rgb_cereal =="255,0,255"){
+echo "<br>&lt;BUSINESS&gt;hotel&lt;/BUSINESS&gt;";//done
+elseif ($rgb_cereal =="255,255,0"){
+echo "<br>&lt;BUSINESS&gt;department store&lt;/BUSINESS&gt;";//done
+elseif ($rgb_cereal =="128,128,128"){
+echo "<br>&lt;BUSINESS&gt;newspaper&lt;/BUSINESS&gt;";//done
+elseif ($rgb_cereal =="128,128,64"){
+echo "<br>&lt;BUSINESS&gt;radio&lt;/BUSINESS&gt;";//done
+//9
+
+elseif ($rgb_cereal =="0,0,255"){
+echo "<br>&lt;BUSINESS&gt;police&lt;/BUSINESS&gt;";//done
+elseif ($rgb_cereal =="0,0,128"){
+echo "<br>&lt;BUSINESS&gt;FBI&lt;/BUSINESS&gt;";//done
+elseif ($rgb_cereal =="128,0,128"){
+echo "<br>&lt;BUSINESS&gt;court&lt;/BUSINESS&gt;";//done
+elseif ($rgb_cereal =="255,0,128"){
+echo "<br>&lt;BUSINESS&gt;city hall&lt;/BUSINESS&gt;";//done
+elseif ($rgb_cereal =="0,0,64"){
+echo "<br>&lt;BUSINESS&gt;jail&lt;/BUSINESS&gt;";//done
+//14
+
+if ($rgb_bui =="0,128,0"){
+echo "<br>&lt;BUSINESS&gt;church&lt;/BUSINESS&gt;";//done
+if ($rgb_bui =="0,128,0"){
+echo "<br>&lt;BUSINESS&gt;synagogue&lt;/BUSINESS&gt;";
+elseif ($rgb_cereal =="64,32,0"){
+echo "<br>&lt;BUSINESS&gt;railway station&lt;/BUSINESS&gt;";//done
+elseif ($rgb_bui =="0,128,255"){
+echo "<br>&lt;BUSINESS&gt;post office&lt;/BUSINESS&gt;";//done
+//17
+
+elseif ($rgb_bui =="128,255,0"){
+echo "<br>&lt;BUSINESS&gt;museum&lt;/BUSINESS&gt;";//done
+elseif ($rgb_bui =="128,128,0"){
+echo "<br>&lt;BUSINESS&gt;movie theatre&lt;/BUSINESS&gt;";//done
+elseif ($rgb_bui =="64,0,64"){
+echo "<br>&lt;BUSINESS&gt;school&lt;/BUSINESS&gt;";//done
+elseif ($rgb_bui =="64,0,64"){
+echo "<br>&lt;BUSINESS&gt;university&lt;/BUSINESS&gt;";
+elseif ($rgb_bui =="0,64,64"){
+echo "<br>&lt;BUSINESS&gt;orphanage&lt;/BUSINESS&gt;";
+elseif ($rgb_bui =="0,64,64"){
+echo "<br>&lt;BUSINESS&gt;hospital&lt;/BUSINESS&gt;";//done
+elseif ($rgb_bui =="64,0,0"){
+echo "<br>&lt;BUSINESS&gt;fire department&lt;/BUSINESS&gt;";
+//22
+
+
+
+
+

@@ -1,0 +1,158 @@
+-----
+
+--
+speed
+health
+intelligence
+stealth
+
+--
+guns
+knives
+fists
+
+--
+intimidation
+business
+raid
+
+--
+arson
+explosives
+
+-----
+
+pistol
+rifle
+shotgun
+tommygun
+
+-----
+
+roadster
+truck
+speedster
+
+
+--
+rob
+bribe
+kidnap
+extort
+
+--
+smash up
+assault
+torch
+bomb
+kill
+
+--
+collect protection
+export
+purchase
+set up business
+
+--
+audit
+
+-----
+
+-casino = ; bank, department store
+-counterfeit press = ; printer, stationer
+-gambling den = ; auction room, book store, cab company
+-grifters = pickpocket place; antiques dealer, gift store, jeweler, pawnbroker, fur store, gold merchant, stamp and coin dealer
+-loan shark = ; Accountant, auto dealer, finance company, lawyer
+-moonshine still = ; drug store, glassware, plumber
+-numbers racket = lottery; convience store, local store, news agency
+-office = hq; tenement
+-prizefight ring = ; gym, pool hall
+-speakeasy = ; cafe, restaurant
+-teamsters = ; freight forwarding
+-whorehouse = ; dance studio, health center, hotel, massage parlor
+
+-----
+
+godfather
+kingpin
+don
+underboss
+consigliere
+capo
+wiseguy
+associate
+
+-----
+
+frontpage = the major headlines
+economic = who (PC) bought what hotel, bank, restaurant, newspaper, department store
+obituaries  = which gangster (PC) died
+charity = who (PC) gave what to an orphanage, church
+
+$news_headline = "Citizens of the nation enforce dry legislation.";
+
+$news_headline = "Streets awash with illegal liquor says policechief.";
+
+-----
+
+--commercial
+food_staples
+gastronomy
+health_beauty
+clothing_fashion
+services
+companies
+finance_luxury
+novelty_luxury
+sports_leisure
+home_improvement
+media_entertainment
+
+--industrial
+food
+textile
+freight_forwarding
+construction
+iron
+junkyard
+common
+
+--residential
+tenement
+
+-----
+
+african
+chinese
+italian
+irish
+german
+jewish
+english
+
+-----wealth
+
+dilapidated
+impoverished
+mediocre
+upscale
+rich
+opulent
+
+-----commerce category
+
+peripheral
+boulevard
+bohemian
+gentry
+nightlife
+commercial
+financial
+
+-----residential category
+
+dilapidated
+blue_collar
+bourgeois
+gentry
+elite
