@@ -36,13 +36,10 @@
 <script src="Enemy/enemy.js"></script>
 <!--Tween-->
 <script src="Tween.js"></script>
-<!--Graph en Dijkstra-->
+<!--Graph-->
 <script src="Graph.js"></script>
+<!--Pathfinding-->
 <script src="Dijkstra.js"></script>
-<!--HUD-->
-<script src="Shooting.js"></script>
-<script src="Scoring.js"></script> 
-<script src="Gathering.js"></script>
 <!--styling-->
 <link rel="stylesheet" type="text/css" href="Styling.css">
 </head>
@@ -174,6 +171,7 @@ var eAmmo = leftOverAmmo+"/"+totalAmmo;
 var eWeapon ="Pistol";
 var totalscore = 0;
 var eScore ="Score: "+totalscore;
+
 //show HUD economy functions
 function appendAmmo()
 {   document.getElementById('ammo').innerHTML = eAmmo;}
@@ -181,6 +179,7 @@ function appendWeapon()
 {   document.getElementById('weapon').innerHTML = eWeapon;}
 function appendScore()
 {   document.getElementById('score').innerHTML = eScore;}
+
 
 //hit registration collision
 function clearText()
@@ -199,12 +198,14 @@ function appendText(txt)
                 appendAmmo();
                 appendWeapon();
                 appendScore();
-                //scoring
-                Scoring();
+
                 //shooting
                 Shot();
-                //gathering
+                //gathering props
                 propGathering();
+                //scoring
+                Scoring();
+
         })
         
         //loop runner
@@ -226,6 +227,7 @@ function appendText(txt)
 <div id="message"></div>
 <p class="ce">Use Q, E keys to rotate the camera</p>
 <p class="ce">Use the W, A, S, D keys to move around</p>
+<p class="ce">Use the X keys to shoot</p>
 <p class="ce">WebGL renderer is supported in Firefox 4+, Chrome 9+, and Safari 6+</p>
 <!--external sounds-->
 <audio autoplay loop><source src="sound/gangsters2.mp3" type="audio/mp3"></audio>
