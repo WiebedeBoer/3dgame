@@ -18,8 +18,12 @@
 <script src="Plane.js"></script>
 <!--skybox-->
 <script src="Skybox.js"></script>
-<!--skybox-->
+<!--lighting-->
 <script src="Lighting.js"></script>
+<script src="Pointlight.js"></script>
+<!--lighting-->
+<script src="props/Lantern.js"></script>
+<script src="props/Gun.js"></script>
 <!--loaders-->
 <script src="loaders/OBJLoader.js"></script>
 <script src="loaders/MTLLoader.js"></script>
@@ -89,6 +93,13 @@ camera.position.x = -61;
 
 //lighting
 Lighter();
+
+//props
+var lantern = new Lantern();
+scene.add(lantern);
+
+var gun = new Lantern();
+scene.add(gun);
 
 //plane                
 var plane = new Plane();
@@ -180,6 +191,6 @@ function appendText(txt)
 <p class="ce">Use the W, A, S, D keys to move around</p>
 <p class="ce">WebGL renderer is supported in Firefox 4+, Chrome 9+, and Safari 6+</p>
 <!--external sounds-->
-<!--<audio autoplay loop><source src="sound/gangsters2.mp3" type="audio/mp3"></audio>-->
+<audio autoplay loop><source src="sound/gangsters2.mp3" type="audio/mp3"></audio>
 </body>
 </html>
