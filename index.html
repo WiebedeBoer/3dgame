@@ -36,8 +36,13 @@
 <script src="Enemy/enemy.js"></script>
 <!--Tween-->
 <script src="Tween.js"></script>
-<!--Graph-->
+<!--Graph en Dijkstra-->
 <script src="Graph.js"></script>
+<script src="Dijkstra.js"></script>
+<!--HUD-->
+<script src="Shooting.js"></script>
+<script src="Scoring.js"></script> 
+<script src="Gathering.js"></script>
 <!--styling-->
 <link rel="stylesheet" type="text/css" href="Styling.css">
 </head>
@@ -194,6 +199,12 @@ function appendText(txt)
                 appendAmmo();
                 appendWeapon();
                 appendScore();
+                //scoring
+                Scoring();
+                //shooting
+                Shot();
+                //gathering
+                propGathering();
         })
         
         //loop runner
