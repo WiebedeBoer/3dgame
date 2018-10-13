@@ -1849,7 +1849,7 @@
 <YCO>4</YCO>
 </GRID>
 <GRID>
-<BUSINESS>commercial</BUSINESS>
+<BUSINESS>gunsmith</BUSINESS>
 <ID>135</ID>
 <WEALTH>mediocre</WEALTH>
 <CATEGORY>peripheral</CATEGORY>
@@ -2137,7 +2137,7 @@
 <YCO>4</YCO>
 </GRID>
 <GRID>
-<BUSINESS>commercial</BUSINESS>
+<BUSINESS>gunsmith</BUSINESS>
 <ID>153</ID>
 <WEALTH>rich</WEALTH>
 <CATEGORY>bohemian</CATEGORY>
@@ -12337,7 +12337,7 @@
 <YCO>18</YCO>
 </GRID>
 <GRID>
-<BUSINESS>commercial</BUSINESS>
+<BUSINESS>gunsmith</BUSINESS>
 <ID>702</ID>
 <WEALTH>opulent</WEALTH>
 <CATEGORY>publishing</CATEGORY>
@@ -13908,7 +13908,7 @@
 <YCO>20</YCO>
 </GRID>
 <GRID>
-<BUSINESS>commercial</BUSINESS>
+<BUSINESS>gunsmith</BUSINESS>
 <ID>783</ID>
 <WEALTH>opulent</WEALTH>
 <CATEGORY>downtown</CATEGORY>
@@ -19718,7 +19718,7 @@
 <YCO>30</YCO>
 </GRID>
 <GRID>
-<BUSINESS>commercial</BUSINESS>
+<BUSINESS>gunsmith</BUSINESS>
 <ID>1170</ID>
 <WEALTH>mediocre</WEALTH>
 <CATEGORY>commercial</CATEGORY>

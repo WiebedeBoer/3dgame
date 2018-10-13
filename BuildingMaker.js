@@ -15,6 +15,10 @@ scene.add(nFactory);
 var nCommerce = new Commercial("commercial","material_6","material_6","wall4","wall4",80);
 scene.add(nCommerce);
 
+//scene gunsmiths
+var nGunshop = new Commercial("gunsmith","storefront","storefront","wall4","wall4",60);
+scene.add(nGunshop);
+
 //scene 25 warehouses
 var nWarehouse = new Commercial("warehouse","material_13","material_13","wall2","wall2",80);
 scene.add(nWarehouse);
@@ -78,11 +82,11 @@ console.log(nStation);
 
 //single buildings: front texture, back texture, right texture, left texture, building height, row, col
 //scene 4 city hall
-var ncityhall = new Cityhall("material_18","material_18","material_20","ground9",100,22,21);
+var ncityhall = new Cityhall("material_18","material_18","material_20","concrete",100,22,21);
 scene.add(ncityhall);
 
 //scene 5 FBI
-var nFBI = new Cityhall("material_21","concrete","ground9","ground9",100,21,24);
+var nFBI = new Cityhall("material_21","concrete","wall2","wall2",100,21,24);
 scene.add(nFBI);
 
 //scene 6 jail
