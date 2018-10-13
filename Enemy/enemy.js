@@ -11,14 +11,17 @@ class Enemy extends THREE.Group {
             enemy.add(mesh);
         });
 
-        enemy.position.x = 0;
-        enemy.position.y = 10;
-        enemy.position.z = 0;
+        enemy.position.x = this.pX;
+        enemy.position.y = this.pY;
+        enemy.position.z = this.pZ;
         enemy.rotation.y = 90 * Math.PI / 180;
         refEnemy.add(enemy);
     }
-    constructor(){
+    constructor(pX,pY,pZ){
         super();
+        this.pX = pX;
+        this.pY = pY;
+        this.pZ = pZ;
         this.init();
     }
 }
