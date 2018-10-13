@@ -56,7 +56,6 @@ class Cityhall extends THREE.Group {
     this.nrow = crow;
     this.ncol = ccol;
     this.init();
-    console.log(this.frontTex);
     }
 
 
