@@ -4,7 +4,7 @@ class Skybox extends THREE.Group {
 				var imagePrefix = "images/skybox";
 	            var directions  = ["xpos", "xneg", "ypos", "yneg", "zpos", "zneg"];
 	            var imageSuffix = ".png";
-	            var skyGeometry = new THREE.CubeGeometry( 1000, 1000, 1000 );	
+	            var skyGeometry = new THREE.CubeGeometry( 5630, 5630, 5630 );	
 	
 	            var materialArray = [];
 	            for (var i = 0; i < 6; i++)
@@ -14,14 +14,14 @@ class Skybox extends THREE.Group {
 		            }));
 	            var skyMaterial = new THREE.MeshFaceMaterial( materialArray );
 				var skyBox = new THREE.Mesh( skyGeometry, skyMaterial );
+				//skyBox.rotation.x= - 90 * Math.PI / 180;
 				mskyBox.add(skyBox);
-				//scene.add( skyBox );
+				collidableMeshList.push(skyBox);
 			}
 
     
 			constructor(){
 				super();
-				//this._LoadState = LoadStates.NOT_LOADING;
 				this.init();
 			}	
         }

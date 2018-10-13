@@ -1,146 +1,185 @@
 <!DOCTYPE html>
 <html>
-
 <head>
-    <meta charset="UTF-8">
-    <title>SimulationView</title>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+<!--three.js-->
+<script src="three.js"></script>
+<!--camera controls-->
+<script src="FPControls.js"></script>
+<!--open xml-->
+<script src="openxml.js"></script>
+<!--buildings-->
+<script src="BuildingMaker.js"></script>
+<!--multiple buildings tenements, commercials, factories-->
+<script src="Buildings/commercials.js"></script>
+<!--single buildings-->
+<script src="Buildings/cityhall.js"></script>
+<!--plane-->
+<script src="Plane.js"></script>
+<!--skybox-->
+<script src="Skybox.js"></script>
+<!--loaders-->
+<script src="loaders/OBJLoader.js"></script>
+<script src="loaders/MTLLoader.js"></script>
+<script src="loaders/DDSLoader.js"></script>
+<script src="loaders/ModelLoader.js"></script>
+<!--collission detection-->
+<script src="KeyboardState.js"></script>
+<script src="Collision.js"></script>
+<!--styling-->
+<link rel="stylesheet" type="text/css" href="Styling.css">
 </head>
+<body class="ng-scope" style="margin: 0px; background-color: #d8e7ff; overflow: hidden;">
 
-<body style="margin:0px;padding:0px;overflow:hidden;">
+<div class="parent">  
+   <!--customcanvas-->       
+<div height="400" width="800" class="customcanvas" id="customcanvas">
+        <!--hud-->
+                <div id="content-frame" ng-controller="HudState" class="ng-scope">
+                                <div id="canvas-container">
+                                    <div id="canvas-align">
+                                        <canvas id="webgl-canvas" width="800" height="400"></canvas>
+                                        <div id="hud" ng-class="{visible: style.visible, transparent: style.transparent, perspective: style.perspective, animated: style.animated}" class="visible">
+                                            <div id="weapon" class="ng-binding">
+                                                
+                                            </div>
+                                            <div id="ammo" class="ng-binding">
+                                                
+                                            </div>
+                                            <div id="score" class="ng-binding">
+                                                
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                        </div> 
+                </div>
+<script>
+//keyboard
+var keyboard = new THREEx.KeyboardState();
+var clock = new THREE.Clock();
 
+//collision vars
+var MovingCube;
+var collidableMeshList = []; 
+       
+//updater
+var updateFcts = [];
+//scene
+var scene = new THREE.Scene();
+//fog
+scene.fog = new THREE.FogExp2( 0xd0e0f0, 0.0025 );
+//renderer
+var renderer = new THREE.WebGLRenderer( { antialias: false } );
+//window
+canvasWidth = 800;
+canvasHeight = 400;
+renderer.setSize( canvasWidth, canvasHeight );
+        
+//append object to it
+document.getElementById("customcanvas").appendChild(renderer.domElement);
 
-    <script>
-        function parseCommand(input = "") {
-            return JSON.parse(input);
-        }
-        var exampleSocket;
-        window.onload = function () {
-            var camera, scene, renderer;
-            var cameraControls;
-            var worldObjects = {};
+//camera
+var camera = new THREE.PerspectiveCamera(45, canvasWidth / canvasHeight, 0.01, 5700);
+camera.position.y = 102;
+camera.position.z = 15;
+camera.position.x = -61;
 
-            //initialize
-            function init() {
-                //camera
-                camera = new THREE.PerspectiveCamera(70, window.innerWidth / window.innerHeight, 1, 1000);
-                cameraControls = new THREE.OrbitControls(camera);
-                camera.position.z = 15;
-                camera.position.y = 5;
-                camera.position.x = 15;
-                cameraControls.update();
-                
-                //scene
-                scene = new THREE.Scene();
+//lighting
+var light = new THREE.HemisphereLight( 0xfffff0, 0x101020, 1.25 );
+light.position.set( 0.75, 1, 0.25 );
+scene.add( light );
 
-                //renderer
-                renderer = new THREE.WebGLRenderer({ antialias: true });
-                renderer.setPixelRatio(window.devicePixelRatio);
-                renderer.setSize(window.innerWidth, window.innerHeight + 5);
-                document.body.appendChild(renderer.domElement);
-                window.addEventListener('resize', onWindowResize, false);
+//plane                
+var plane = new Plane();
+scene.add(plane);
 
-                //plane                
-                var plane = new Plane();
-                scene.add(plane);
+//skybox
+var skyBox = new Skybox();
+scene.add( skyBox );
 
-                //depot
-                var ndepot = new Depot();
-                scene.add(ndepot);              
+//moving cube
+var cubeGeometry = new THREE.CubeGeometry(5,10,5,1,1,1);
+var wireMaterial = new THREE.MeshBasicMaterial( { color: 0xff0000, wireframe:true } );
+MovingCube = new THREE.Mesh( cubeGeometry, wireMaterial );
+MovingCube.position.set(camera.position.x, camera.position.y, camera.position.z);
+scene.add( MovingCube );
+        
+//Camera Controls
+var controls = new THREE.FirstPersonControls( camera );
+controls.movementSpeed = 80;
+controls.lookSpeed = 0.05;
+controls.lookVertical = false; //if true vertical look on mousemovement
+updateFcts.push(function(delta, now){
+                controls.update( delta );                
+        })
 
-                //ambient light
-                var light = new THREE.AmbientLight(0x404040);
-                light.intensity = 2;
-                scene.add(light);
+//city buildings
+BuildingMaker();
 
-                //skybox
-                var skyBox = new Skybox();
-                scene.add( skyBox );
+//Locking the pointer to the game
+document.getElementById("customcanvas").addEventListener( 'click', function ( event ) {
+        lock();
+}, false );
+function lock(rawr) {
+        document.getElementById("customcanvas").requestPointerLock();
+} 
 
-                //shader
-                var skyShader = new Skyshader();
-                scene.add(skyShader);
-                
-            }
+//economy variables
+var leftOverAmmo =23;
+var totalAmmo =50;
+var eAmmo = leftOverAmmo+"/"+totalAmmo;
+var eWeapon ="Pistol";
+var totalscore = 0;
+var eScore ="Score: "+totalscore;
+//show HUD economy functions
+function appendAmmo()
+{   document.getElementById('ammo').innerHTML = eAmmo;}
+function appendWeapon()
+{   document.getElementById('weapon').innerHTML = eWeapon;}
+function appendScore()
+{   document.getElementById('score').innerHTML = eScore;}
 
-            //window resize
-            function onWindowResize() {
-                camera.aspect = window.innerWidth / window.innerHeight;
-                camera.updateProjectionMatrix();
-                renderer.setSize(window.innerWidth, window.innerHeight);
-            }
-            
-            //animate
-            function animate() {
-                requestAnimationFrame(animate);
-                cameraControls.update();
-                renderer.render(scene, camera);
-            }
+//hit registration collision
+function clearText()
+{   document.getElementById('message').innerHTML = '.....';}
 
-            //socket update events
-            exampleSocket = new WebSocket("ws://" + window.location.hostname + ":" + window.location.port + "/connect_client");
-            exampleSocket.onmessage = function (event) {
-                var command = parseCommand(event.data);
-                if (command.command == "update") {
-                    if (Object.keys(worldObjects).indexOf(command.parameters.guid) < 0) {
-                        //robot
-                        if (command.parameters.type == "robot") {
+function appendText(txt)
+{   document.getElementById('message').innerHTML += txt;}
 
-                            var nrobot = new Robot();
-                            scene.add(nrobot);
-                            worldObjects[command.parameters.guid] = nrobot;
-
-                        }
-                        //kast
-                        else if (command.parameters.type == "kast") {
-                        
-                           var nkast = new Kast();
-                           scene.add(nkast);
-                           worldObjects[command.parameters.guid] = nkast;
-                        }
-                        //dumptruck
-                        else if (command.parameters.type == "dumptruck") {
-
-                            var ndumptruck = new Dumptruck();
-                            scene.add(ndumptruck);
-                            worldObjects[command.parameters.guid] = ndumptruck;
-
-                        }
-                    }
-                    var object = worldObjects[command.parameters.guid];
-                    object.position.x = command.parameters.x;
-                    object.position.y = command.parameters.y;
-                    object.position.z = command.parameters.z;
-                    object.rotation.x = command.parameters.rotationX;
-                    object.rotation.y = command.parameters.rotationY;
-                    object.rotation.z = command.parameters.rotationZ;
-                }
-                else if (command.command =="grid"){
-                    ShowGrid(command);
-                }
-            }
-            init();
-            animate();
-        }
-    </script>
-
-    <script src="three.min.js"></script>
-    <script src="OrbitControls.js"></script>
-    <script src="OBJLoader.js"></script>
-    <script src="MTLLoader.js"></script>
-    <script src="DDSLoader.js"></script>
-    <script src="ModelLoader.js"></script>
-    <script src="PointLight.js"></script>
-    <script src="SpotLight.js"></script>
-    <script src="Dumptruck.js"></script>
-    <script src="Kast.js"></script>
-    <script src="Robot.js"></script>
-    <script src="LoadStates.js"></script>
-    <script src="Depot.js"></script>
-    <script src="Skybox.js"></script>
-    <script src="Plane.js"></script>
-    <script src="Skyshader.js"></script>
-    <script src="Sky.js"></script>
-    <script src="dat.min.gui.js"></script>
+        //update function
+        updateFcts.push(function(){
+                //render the scene
+                renderer.render( scene, camera ); 
+                //collision detection
+                Collide();
+                //economy HUD
+                appendAmmo();
+                appendWeapon();
+                appendScore();
+        })
+        
+        //loop runner
+        var lastTimeMsec= null
+        requestAnimationFrame(function animate(nowMsec){
+                // keep looping
+                requestAnimationFrame( animate );
+                // measure time
+                lastTimeMsec = lastTimeMsec || nowMsec-1000/60
+                var deltaMsec = Math.min(200, nowMsec - lastTimeMsec)
+                lastTimeMsec = nowMsec
+                // call each update function
+                updateFcts.forEach(function(updateFn){
+                        updateFn(deltaMsec/1000, nowMsec/1000)
+                })
+        })
+</script>
+</div>
+<div id="message"></div>
+<p class="ce">Use Q, E keys to rotate the camera</p>
+<p class="ce">Use the W, A, S, D keys to move around</p>
+<p class="ce">WebGL renderer is supported in Firefox 4+, Chrome 9+, and Safari 6+</p>
+<!--external sounds-->
+<!--<audio autoplay loop><source src="sound/gangsters2.mp3" type="audio/mp3"></audio>-->
 </body>
-
 </html>
