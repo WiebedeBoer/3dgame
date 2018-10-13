@@ -140,9 +140,12 @@ updateFcts.push(function(delta, now){
 //city buildings
 BuildingMaker();
 
-// Enemy
-var enemy = new Enemy();
+// Enemies
+var enemy = new Enemy(0,10,0);
 scene.add(enemy);
+
+var enemy2 = new Enemy(50,10,0);
+scene.add(enemy2);
             
 // Move enemy camera towards player
 function EnemyMovement() {
