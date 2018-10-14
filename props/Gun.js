@@ -3,19 +3,20 @@ class Gun extends THREE.Group {
     init (){
 
         var dGun = this;
-        loadOBJModel("model_obj_gun/","model.obj","model_obj_gun/","materials.mtl", (mesh) => {
-            dGun.position.x = 12;
-            dGun.position.y = 1;
-            dGun.position.z = -60;
+        loadOBJModel("props/model_obj_gun/","model.obj","props/model_obj_gun/","materials.mtl", (mesh) => {
+            dGun.position.x = this.pX;
+            dGun.position.y = this.pY;
+            dGun.position.z = this.pZ;
             dGun.add(mesh);
          
         });
     }    
             
-    constructor(){
+    constructor(pX,pY,pZ){
         super();
-
+        this.pX = pX;
+        this.pY = pY;
+        this.pZ = pZ;
         this.init();
     }
-
 }

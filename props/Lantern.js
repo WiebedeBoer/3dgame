@@ -3,12 +3,12 @@ class Lantern extends THREE.Group {
     init (){
 
         var dLantern = this;
-        loadOBJModel("model_obj_lantern/","model.obj","model_obj_lantern/","materials.mtl", (mesh) => {
-            dLantern.position.x = 12;
-            dLantern.position.y = 1;
-            dLantern.position.z = -60;
+        loadOBJModel("props/model_obj_lantern/","model.obj","props/model_obj_lantern/","materials.mtl", (mesh) => {
+            dLantern.position.x = this.pX;
+            dLantern.position.y = this.pY;
+            dLantern.position.z = this.pZ;
             dLantern.add(mesh);
-            addPointLight(dLantern,0x0000ff, 0.1619262, -0.05053151, -0.02406043, 4, 25); //lantern light
+            addPointLight(dLantern,0x0000ff, 0.1, 15, 0.1, 4, 25); //lantern light
             var g = new THREE.BoxGeometry(1,1,1);
             var m = new THREE.MeshBasicMaterial({color: 0xffffff});
             dLantern._meshLight = new THREE.Mesh(g, m);
@@ -18,9 +18,11 @@ class Lantern extends THREE.Group {
         });
     }    
             
-    constructor(){
+    constructor(pX,pY,pZ){
         super();
-
+        this.pX = pX;
+        this.pY = pY;
+        this.pZ = pZ;
         this.init();
     }
 
