@@ -94,11 +94,11 @@ var start = '10';
 //get all solutions
 var solutions = solve(graph, start);
 
-console.log("From '"+start+"' to");
+//console.log("From '"+start+"' to");
 //display solutions
 for(var s in solutions) {
   if(!solutions[s]) continue;
-  console.log(" -> " + s + ": [" + solutions[s].join(", ") + "]   (dist:" + solutions[s].dist + ")");
+  //console.log(" -> " + s + ": [" + solutions[s].join(", ") + "]   (dist:" + solutions[s].dist + ")");
 }
 
 // From '10' to

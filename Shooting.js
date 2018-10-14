@@ -2,7 +2,6 @@
 function Shot(){
     //shoot ammo check
     if ( keyboard.pressed("X")){
-        console.log("shoot");
         if (leftOverAmmo >0){
             //less ammo
             leftOverAmmo = leftOverAmmo - 1;
