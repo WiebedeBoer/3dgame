@@ -5,8 +5,11 @@ class Lantern extends THREE.Group {
         var dLantern = this;
         loadOBJModel("props/model_obj_lantern/","model.obj","props/model_obj_lantern/","materials.mtl", (mesh) => {
             dLantern.position.x = this.pX;
-            dLantern.position.y = this.pY;
+            dLantern.position.y = 10;
             dLantern.position.z = this.pZ;
+            mesh.scale.x = 3;
+            dLantern.scale.y = 10;
+            mesh.scale.z = 3;
             dLantern.add(mesh);
             addPointLight(dLantern,0x0000ff, 0.1, 15, 0.1, 4, 25); //lantern light
             var g = new THREE.BoxGeometry(1,1,1);
