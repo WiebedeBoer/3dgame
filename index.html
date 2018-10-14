@@ -113,15 +113,15 @@ var lantern2 = new Lantern(163,1,99);
 scene.add(lantern2);
 
 //gun props
-var gun = new Gun(228,1,16); //shop 23,20
+var gun = new Gun(228,6,16); //shop 23,20
 scene.add(gun);
-var gun2 = new Gun(127,1,-161); //shop 22,18
+var gun2 = new Gun(127,6,-161); //shop 22,18
 scene.add(gun2);
-var gun3 = new Gun(-457,1,-1433); //shop 15,4
+var gun3 = new Gun(-457,6,-1433); //shop 15,4
 scene.add(gun3);
-var gun4 = new Gun(1150,1,-1428); //shop 33,4
+var gun4 = new Gun(1150,6,-1428); //shop 33,4
 scene.add(gun4);
-var gun5 = new Gun(-919,1,822); //shop 10,30
+var gun5 = new Gun(-919,6,822); //shop 10,30
 scene.add(gun5);
 
 //plane                
@@ -133,7 +133,7 @@ var skyBox = new Skybox();
 scene.add( skyBox );
 
 //moving cube
-var cubeGeometry = new THREE.CubeGeometry(5,10,5,1,1,1);
+var cubeGeometry = new THREE.CubeGeometry(5,5,5,1,1,1);
 var wireMaterial = new THREE.MeshBasicMaterial( { color: 0xff0000, wireframe:true, visible:false } );
 MovingCube = new THREE.Mesh( cubeGeometry, wireMaterial );
 MovingCube.position.set(camera.position.x, camera.position.y, camera.position.z);
@@ -152,11 +152,12 @@ updateFcts.push(function(delta, now){
 BuildingMaker();
 
 // Enemies
-var enemy = new Enemy(0,10,0);
+var enemy = new Enemy(-53,10,7);
 scene.add(enemy);
-
-var enemy2 = new Enemy(50,10,0);
+var enemy2 = new Enemy(-57,10,106);
 scene.add(enemy2);
+var enemy3 = new Enemy(440,10,13);
+scene.add(enemy3);
             
 // Move enemy camera towards player
 function EnemyMovement() {
