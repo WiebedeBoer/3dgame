@@ -12,25 +12,23 @@ var nFactory = new Commercial("industrial","material_10","material_10","wall2","
 scene.add(nFactory);
 
 //scene 8 commercials
-var nCommerce = new Commercial("commercial","material_6","material_6","wall4","wall4",80);
+var nCommerce = new Commercial("commercial","material_29","material_6","wall4","wall4",80);
 scene.add(nCommerce);
 
 //scene gunsmiths
-var nGunshop = new Commercial("gunsmith","storefront","storefront","wall4","wall4",60);
+var nGunshop = new Commercial("gunsmith","storefront","storefront","wall6","wall6",60);
 scene.add(nGunshop);
-
 
 //scene 25 warehouses
 var nWarehouse = new Commercial("warehouse","material_13","material_13","wall2","wall2",80);
 scene.add(nWarehouse);
 
-
 //scene 2 department stores
-var dpstore = new Commercial("department store","concrete","concrete","concrete","concrete",90);
+var dpstore = new Commercial("department store","material_30","material_30","concrete","concrete",90);
 scene.add(dpstore);
 
 //scene 10 fire department
-var nFD = new Commercial("fire department","concrete","concrete","concrete","concrete",80);
+var nFD = new Commercial("fire department","material_27","material_28","wall6","wall6",80);
 scene.add(nFD);
 
 //scene 18 police department
@@ -38,19 +36,19 @@ var nPD = new Commercial("police","material_2","concrete","wall3","wall3",80);
 scene.add(nPD);
 
 //scene 3 churches
-var nChurch = new Commercial("church","material_26","material_26","concrete","concrete",90);
+var nChurch = new Commercial("church","material_26","material_26","wall5","wall5",90);
 scene.add(nChurch);
 
 //scene 11 hospital
-var nHospital = new Commercial("hospital","material_5","concrete","wall3","wall3",90);
+var nHospital = new Commercial("hospital","material_5","hospitalfront","wall3","wall3",90);
 scene.add(nHospital);
 
 //scene 12 large banks
-var nBanks = new Commercial("bank","material_25","concrete","concrete","concrete",100);
+var nBanks = new Commercial("bank","material_25","material_25","concrete","concrete",100);
 scene.add(nBanks);
 
 //scene 13 large hotels
-var nHotels = new Commercial("hotel","material_3","concrete","wall3","wall3",100);
+var nHotels = new Commercial("hotel","material_3","material_3","wall3","wall3",100);
 scene.add(nHotels);
 
 //scene 14 movie theatres
@@ -70,11 +68,11 @@ var nPostoffice = new Commercial("post office","material_25","material_25","conc
 scene.add(nPostoffice);
 
 //scene 20 radio
-var nRadio = new Commercial("radio","material_16","concrete","concrete","concrete",80);
+var nRadio = new Commercial("radio","material_16","material_16","concrete","concrete",80);
 scene.add(nRadio);
 
 //scene 21 schools
-var nSchool = new Commercial("school","material_24","concrete","concrete","concrete",80);
+var nSchool = new Commercial("school","material_24","material_24","concrete","concrete",80);
 scene.add(nSchool);
 
 //scene 22 train stations
@@ -97,6 +95,5 @@ scene.add(nJail);
 //scene 9 court
 var nCourt = new Cityhall("material_19","material_19","material_21","material_21",100,22,22);
 scene.add(nCourt);
-
 
 }
