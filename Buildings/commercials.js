@@ -12,12 +12,12 @@ class Commercial extends THREE.Group {
 
     
     var comMaterials = [
-      new THREE.MeshPhongMaterial({ map: new THREE.TextureLoader().load("textures/ground/"+this.leftbuild+".jpg"), side: THREE.SingleSide }), //LEFT
-      new THREE.MeshPhongMaterial({ map: new THREE.TextureLoader().load("textures/ground/"+this.rightbuild+".jpg"), side: THREE.SingleSide }), //RIGHT
-      new THREE.MeshPhongMaterial({ map: new THREE.TextureLoader().load("textures/ground/ground11.jpg"), side: THREE.SingleSide }), //TOP
-      new THREE.MeshPhongMaterial({ map: new THREE.TextureLoader().load("textures/ground/ground3.jpg"), side: THREE.SingleSide }), //BOTTOM
-      new THREE.MeshPhongMaterial({ map: new THREE.TextureLoader().load("textures/ground/"+this.frontbuild+".jpg"), side: THREE.SingleSide }), //FRONT
-      new THREE.MeshPhongMaterial({ map: new THREE.TextureLoader().load("textures/ground/"+this.backbuild+".jpg"), side: THREE.SingleSide }), //BACK
+      new THREE.MeshPhongMaterial({ map: new THREE.TextureLoader().load("textures/ground/"+this.leftbuild+".jpg"), side: THREE.FrontSide }), //LEFT
+      new THREE.MeshPhongMaterial({ map: new THREE.TextureLoader().load("textures/ground/"+this.rightbuild+".jpg"), side: THREE.FrontSide }), //RIGHT
+      new THREE.MeshPhongMaterial({ map: new THREE.TextureLoader().load("textures/ground/ground11.jpg"), side: THREE.FrontSide }), //TOP
+      new THREE.MeshPhongMaterial({ map: new THREE.TextureLoader().load("textures/ground/ground3.jpg"), side: THREE.FrontSide }), //BOTTOM
+      new THREE.MeshPhongMaterial({ map: new THREE.TextureLoader().load("textures/ground/"+this.frontbuild+".jpg"), side: THREE.FrontSide }), //FRONT
+      new THREE.MeshPhongMaterial({ map: new THREE.TextureLoader().load("textures/ground/"+this.backbuild+".jpg"), side: THREE.FrontSide }), //BACK
       ];  
     var comMaterial = new THREE.MeshFaceMaterial(comMaterials);
     var buildingMesh = new THREE.Mesh(geometry);

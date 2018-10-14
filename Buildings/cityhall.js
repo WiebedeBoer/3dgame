@@ -15,12 +15,12 @@ class Cityhall extends THREE.Group {
 
     //material
     var hallMaterials = [
-        new THREE.MeshPhongMaterial({ map: new THREE.TextureLoader().load("textures/ground/"+this.leftTex+".jpg"), side: THREE.SingleSide }), //LEFT
-        new THREE.MeshPhongMaterial({ map: new THREE.TextureLoader().load("textures/ground/"+this.rightTex+".jpg"), side: THREE.SingleSide }), //RIGHT
-        new THREE.MeshPhongMaterial({ map: new THREE.TextureLoader().load("textures/ground/ground10.jpg"), side: THREE.SingleSide }), //TOP
-        new THREE.MeshPhongMaterial({ map: new THREE.TextureLoader().load("textures/ground/ground3.jpg"), side: THREE.SingleSide }), //BOTTOM
-        new THREE.MeshPhongMaterial({ map: new THREE.TextureLoader().load("textures/ground/"+this.frontTex+".jpg"), side: THREE.SingleSide }), //FRONT
-        new THREE.MeshPhongMaterial({ map: new THREE.TextureLoader().load("textures/ground/"+this.backTex+".jpg"), side: THREE.SingleSide }), //BACK
+        new THREE.MeshPhongMaterial({ map: new THREE.TextureLoader().load("textures/ground/"+this.leftTex+".jpg"), side: THREE.FrontSide }), //LEFT
+        new THREE.MeshPhongMaterial({ map: new THREE.TextureLoader().load("textures/ground/"+this.rightTex+".jpg"), side: THREE.FrontSide }), //RIGHT
+        new THREE.MeshPhongMaterial({ map: new THREE.TextureLoader().load("textures/ground/ground10.jpg"), side: THREE.FrontSide }), //TOP
+        new THREE.MeshPhongMaterial({ map: new THREE.TextureLoader().load("textures/ground/ground3.jpg"), side: THREE.FrontSide }), //BOTTOM
+        new THREE.MeshPhongMaterial({ map: new THREE.TextureLoader().load("textures/ground/"+this.frontTex+".jpg"), side: THREE.FrontSide }), //FRONT
+        new THREE.MeshPhongMaterial({ map: new THREE.TextureLoader().load("textures/ground/"+this.backTex+".jpg"), side: THREE.FrontSide }), //BACK
         ];
     var hallMaterial = new THREE.MeshFaceMaterial(hallMaterials);
     var meshCityhall = new THREE.Mesh(hallGeometry);
