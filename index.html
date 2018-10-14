@@ -106,12 +106,23 @@ camera.position.x = 140;
 //lighting
 Lighter();
 
-//props
-var lantern = new Lantern();
+//lantern props
+var lantern = new Lantern(137,1,99);
 scene.add(lantern);
+var lantern2 = new Lantern(163,1,99);
+scene.add(lantern2);
 
-var gun = new Lantern();
+//gun props
+var gun = new Gun(228,1,16); //shop 23,20
 scene.add(gun);
+var gun2 = new Gun(127,1,-161); //shop 22,18
+scene.add(gun2);
+var gun3 = new Gun(-457,1,-1433); //shop 15,4
+scene.add(gun3);
+var gun4 = new Gun(1150,1,-1428); //shop 33,4
+scene.add(gun4);
+var gun5 = new Gun(-919,1,822); //shop 10,30
+scene.add(gun5);
 
 //plane                
 var plane = new Plane();
