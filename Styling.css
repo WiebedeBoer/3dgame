@@ -1,7 +1,7 @@
 .parent {margin-left: auto; margin-right: auto; margin-top: 20px; width: 800px; height: 400px; display: block;
 border-style: solid; border-width: 1px; border-color: #000000;position:relative;}
 .customcanvas { position: absolute;left:0px;top:0px;z-index:1;}
-p.ce {text-align: center;}
+p.ce,div.ce {text-align: center;}
 div.ng-scope{ position: absolute;left:0px;top:0px;z-index:3;}
 div.ng-binding {font-weight: bold;}
 

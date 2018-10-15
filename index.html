@@ -163,6 +163,7 @@ scene.add(enemy3);
               else {
               }
             }
+            
 
 //Locking the pointer to the game
 document.getElementById("customcanvas").addEventListener( 'click', function ( event ) {
@@ -190,7 +191,7 @@ function appendScore(){
 
 //hit registration collision
 function clearText()
-{   document.getElementById('message').innerHTML = '.....';}
+{   document.getElementById('message').innerHTML = '....,.';}
 
 function appendText(txt)
 {   document.getElementById('message').innerHTML += txt;}
@@ -210,8 +211,8 @@ function appendText(txt)
                 MovingCube.rotation.y -= mcrotateAngle; //rotate right
 
                 MovingCube.position.x = camera.position.x;
-                MovingCube.position.y = camera.position.y - 5;
-                MovingCube.position.z = camera.position.z;
+                MovingCube.position.y = camera.position.y;
+                MovingCube.position.z = camera.position.z;                
 
                 //collision detection
                 Collide();
@@ -246,7 +247,7 @@ function appendText(txt)
         })
 </script>
 </div>
-<div id="message"></div>
+<div id="message" class="ce"></div>
 <p class="ce">Use Q, E keys to rotate the camera</p>
 <p class="ce">Use the W, A, S, D keys to move around</p>
 <p class="ce">Use the X key to shoot</p>

@@ -6,7 +6,7 @@ function propGathering(){
 var originPlayerPoint = MovingCube.position.clone();
 var propHit =0;
 
-clearText();
+
 
 //collision
     for (var vertexPropIndex = 0; vertexPropIndex < MovingCube.geometry.vertices.length; vertexPropIndex++)
@@ -19,6 +19,7 @@ clearText();
         var collisionResults = rayProp.intersectObjects( collidablePropMeshList );
         //check collision props
         if ( collisionResults.length > 0 && collisionResults[0].distance < directionVector.length() ){
+            clearText();
             appendText(" Grab ");
             propHit = 1;
         }
