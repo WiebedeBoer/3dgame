@@ -8,7 +8,7 @@ var propHit =0;
 
 
 
-//collision
+//gathering collision
     for (var vertexPropIndex = 0; vertexPropIndex < MovingCube.geometry.vertices.length; vertexPropIndex++)
     {
         var localVertex = MovingCube.geometry.vertices[vertexPropIndex].clone();
