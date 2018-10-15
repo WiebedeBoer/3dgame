@@ -1,18 +1,6 @@
 function Collide (){
 
-var mcdelta = clock.getDelta(); // seconds.
-var mcrotateAngle = Math.PI / 2 * mcdelta;   // pi/2 radians (90 degrees) per second
-
-if ( keyboard.pressed("q") )
-MovingCube.rotation.y += mcrotateAngle; //rotate left
-if ( keyboard.pressed("e") )
-MovingCube.rotation.y -= mcrotateAngle; //rotate right
-
-
-MovingCube.position.x = camera.position.x;
-MovingCube.position.y = camera.position.y;
-MovingCube.position.z = camera.position.z;
-
+//origin point
 var originPoint = MovingCube.position.clone();
 var collisionCheck = false;
 

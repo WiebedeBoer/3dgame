@@ -103,7 +103,7 @@ camera.position.y = 12;
 camera.position.z = 70;
 camera.position.x = 140;
 
-//lighting
+//lighting and lantern props
 Lighter();
 
 //lantern props
@@ -111,6 +111,24 @@ var lantern = new Lantern(137,1,99);
 scene.add(lantern);
 var lantern2 = new Lantern(163,1,99);
 scene.add(lantern2);
+
+var lantern6 = new Lantern(240,1,466); //school 23,26
+scene.add(lantern6);
+/*
+var lantern3 = new Lantern(163,1,99); //school 38,11
+scene.add(lantern3);
+var lantern4 = new Lantern(163,1,99); //school 34,14
+scene.add(lantern4);
+var lantern5 = new Lantern(163,1,99); //school 4,19
+scene.add(lantern5);
+
+var lantern7 = new Lantern(163,1,99); //school 27,26
+scene.add(lantern7);
+var lantern8 = new Lantern(163,1,99); //school 16,29
+scene.add(lantern8);
+var lantern9 = new Lantern(163,1,99); //school 16,29
+scene.add(lantern9);
+*/
 
 //gun props
 var gun = new Gun(228,6,16); //shop 23,20
@@ -141,7 +159,7 @@ scene.add( MovingCube );
         
 //Camera Controls
 var controls = new THREE.FirstPersonControls( camera );
-controls.movementSpeed = 80;
+//controls.movementSpeed = 80;
 controls.lookSpeed = 0.05;
 controls.lookVertical = false; //if true vertical look on mousemovement
 updateFcts.push(function(delta, now){
@@ -210,6 +228,20 @@ function appendText(txt)
         updateFcts.push(function(){
                 //render the scene
                 renderer.render( scene, camera ); 
+
+                //moving cube position and rotation
+                var mcdelta = clock.getDelta(); // seconds.
+                var mcrotateAngle = Math.PI / 2 * mcdelta;   // pi/2 radians (90 degrees) per second
+
+                if ( keyboard.pressed("q") )
+                MovingCube.rotation.y += mcrotateAngle; //rotate left
+                if ( keyboard.pressed("e") )
+                MovingCube.rotation.y -= mcrotateAngle; //rotate right
+
+                MovingCube.position.x = camera.position.x;
+                MovingCube.position.y = camera.position.y;
+                MovingCube.position.z = camera.position.z;
+
                 //collision detection
                 Collide();
                 //economy HUD
