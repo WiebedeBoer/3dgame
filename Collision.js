@@ -39,6 +39,10 @@ if (!collisionCheck){
         controls.movementSpeed = 80;}
         else if ( keyboard.pressed("a") || keyboard.pressed("w") ){
         controls.movementSpeed = 80;}
+        appendText(MovingCube.position.x+","+MovingCube.position.z+";");
+}
+else {
+        controls.movementSpeed -= controls.movementSpeed + controls.movementSpeed;
 }
 
 }
