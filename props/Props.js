@@ -21,6 +21,12 @@ var guncol4 = new GunCol(1150,6,-1428); //shop 33,4
 scene.add(guncol4);
 var guncol5 = new GunCol(-919,6,822); //shop 10,30
 scene.add(guncol5);
-
+//ambulances
+//var ambulance = new Ambulance(175,1,548); //hospital 22,26
+//scene.add(ambulance);
+//var ambulance2 = new Ambulance(175,1,548); //hospital 11,12
+//scene.add(ambulance2);
+//var ambulance3 = new Ambulance(175,1,548); //hospital 5,33
+//scene.add(ambulance3);
 
 }
