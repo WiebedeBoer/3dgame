@@ -1,8 +1,30 @@
 //prop gathering: health packs, ammo packs
 function propGathering(){
 
-    //check collision props
-    var propHit =0;
+    
+//origin point
+var originPlayerPoint = MovingCube.position.clone();
+var propHit =0;
+
+clearText();
+
+//collision
+    for (var vertexIndex = 0; vertexIndex < MovingCube.geometry.vertices.length; vertexIndex++)
+    {
+        var localVertex = MovingCube.geometry.vertices[vertexIndex].clone();
+        var globalVertex = localVertex.applyMatrix4( MovingCube.matrix );
+        var directionVector = globalVertex.sub( MovingCube.position );
+
+        var rayProp = new THREE.Raycaster( originPlayerPoint, directionVector.clone().normalize() );
+        var collisionResults = rayProp.intersectObjects( collidablePropMeshList );
+        //check collision props
+        if ( collisionResults.length > 0 && collisionResults[0].distance < directionVector.length() ){
+            appendText(" Grab ");
+            propHit =1;
+        }
+
+    }
+    
         //check particle hit
         if (propHit >0){
             //gather prop
