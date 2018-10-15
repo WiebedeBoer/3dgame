@@ -5,13 +5,11 @@ class GunCol extends THREE.Group {
         var dGunCol = this;
 
             var gunGeometry = new THREE.CubeGeometry(10,10,10,1,1,1);
-            var wireGunMaterial = new THREE.MeshBasicMaterial( { color: 0x0000ff, wireframe:true, visible:true } );
-            gunCubeMesh = new THREE.Mesh( gunGeometry, wireGunMaterial );
+            var wireGunMaterial = new THREE.MeshBasicMaterial( { color: 0x0000ff, wireframe:true, visible:false } );
+            var gunCubeMesh = new THREE.Mesh( gunGeometry, wireGunMaterial );
             gunCubeMesh.position.set(this.pX, 12, this.pZ);
             dGunCol.add(gunCubeMesh);
-            collidablePropMeshList.push(gunCubeMesh);
-
-        
+            collidablePropMeshList.push(gunCubeMesh);        
     }    
             
     constructor(pX,pY,pZ){
