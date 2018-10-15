@@ -1,161 +1,287 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <!--Meta-->
-        <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-        <!--three.js-->
-        <script src="three.js"></script>
-        <!--camera controls-->
-        <script src="FPControls.js"></script>
-        <!--open xml-->
-        <script src="openxml.js"></script>
-        <!--buildings tenements, commercials, factories-->
-        <script src="Buildings/tenements.js"></script>
-        <script src="Buildings/commercials.js"></script>
-        <script src="Buildings/factories.js"></script>
-        <!--buildings-->
-        <script src="Buildings/dpstore.js"></script>
-        <script src="Buildings/lbanks.js"></script>
-        <script src="Buildings/lhotels.js"></script>
-        <script src="Buildings/npapers.js"></script>
-        <script src="Buildings/radios.js"></script>
-        <script src="Buildings/stations.js"></script>
-        <script src="Buildings/movtheatres.js"></script>
-        <script src="Buildings/museums.js"></script>
-        <script src="Buildings/schools.js"></script>
-        <script src="Buildings/university.js"></script>
-        <script src="Buildings/orphanage.js"></script>
-        <script src="Buildings/churches.js"></script>
-        <script src="Buildings/synagogue.js"></script>
-        <script src="Buildings/policedep.js"></script>
-        <script src="Buildings/firedep.js"></script>
-        <script src="Buildings/fbi.js"></script>
-        <script src="Buildings/jail.js"></script>
-        <script src="Buildings/hospitals.js"></script>
-        <script src="Buildings/court.js"></script>
-        <script src="Buildings/cityhall.js"></script>
-        <script src="Buildings/postoffices.js"></script>
-        <script src="Buildings/warehouses.js"></script>
-        <!--Enemy-->
-        <script src="Enemy/enemy.js"></script>
-        <!--Graph-->
-        <script src="Graph.js"></script>
-        <!--test depot-->
-        <script src="Depot.js"></script>
-        <!--plane-->
-        <script src="Plane.js"></script>
-        <!--skybox-->
-        <script src="Skybox.js"></script>
-        <!--loaders-->
-        <script src="OBJLoader.js"></script>
-        <script src="MTLLoader.js"></script>
-        <script src="DDSLoader.js"></script>
-        <script src="ModelLoader.js"></script>
-        <script src="Tween.js"></script>
-        <!--collission detection-->
-        <script src="Collision.js"></script>
-        <style>
-            .customcanvas {margin-left: auto; margin-right: auto; margin-top: 20px; width: 1200px; height: 600px; display: block;
-            border-style: solid; border-width: 3px; border-color: #000000;}
-            p.ce {text-align: center;}
-        </style>
-    </head>
-    <body style="margin: 0px; background-color: #ffffff; overflow: hidden;">
-        <div height="400" width="800" class="customcanvas" id="customcanvas">
-        <script>
+<head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+<!--three.js-->
+<script src="three.js"></script>
+<!--camera controls-->
+<script src="FPControls.js"></script>
+<!--open xml-->
+<script src="openxml.js"></script>
+<!--buildings-->
+<script src="BuildingMaker.js"></script>
+<!--multiple buildings tenements, commercials, factories-->
+<script src="Buildings/commercials.js"></script>
+<!--single buildings-->
+<script src="Buildings/cityhall.js"></script>
+<!--plane-->
+<script src="Plane.js"></script>
+<!--skybox-->
+<script src="Skybox.js"></script>
+<!--lighting-->
+<script src="Lighting.js"></script>
+<script src="Pointlight.js"></script>
+<!--lighting-->
+<script src="props/Lantern.js"></script>
+<script src="props/Gun.js"></script>
+<!--loaders-->
+<script src="loaders/OBJLoader.js"></script>
+<script src="loaders/MTLLoader.js"></script>
+<script src="loaders/DDSLoader.js"></script>
+<script src="loaders/ModelLoader.js"></script>
+<!--collission detection-->
+<script src="KeyboardState.js"></script>
+<script src="Collision.js"></script>
+<!--Enemy-->
+<script src="Enemy/enemy.js"></script>
+<!--Tween-->
+<script src="Tween.js"></script>
+<!--Graph-->
+<script src="Graph.js"></script>
+<!--Pathfinding-->
+<script src="Dijkstra.js"></script>
+<!--economy-->
+<script src="Shooting.js"></script>
+<script src="Scoring.js"></script>
+<script src="Gathering.js"></script>
+<!--styling-->
+<link rel="stylesheet" type="text/css" href="Styling.css">
+</head>
+<body class="ng-scope" style="margin: 0px; background-color: #d8e7ff; overflow: hidden;">
 
-            // Updater
-            var updateFcts = [];
+<div class="parent">  
+   <!--customcanvas-->       
+<div height="400" width="800" class="customcanvas" id="customcanvas">
+        <!--hud-->
+                <div id="content-frame" ng-controller="HudState" class="ng-scope">
+                                <div id="canvas-container">
+                                    <div id="canvas-align">
+                                        <canvas id="webgl-canvas" width="800" height="400"></canvas>
+                                        <div id="hud" ng-class="{visible: style.visible, transparent: style.transparent, perspective: style.perspective, animated: style.animated}" class="visible">
+                                            <div id="weapon" class="ng-binding">
+                                                
+                                            </div>
+                                            <div id="ammo" class="ng-binding">
+                                                
+                                            </div>
+                                            <div id="score" class="ng-binding">
+                                                
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                        </div> 
+                </div>
+<script>
+//keyboard
+var keyboard = new THREEx.KeyboardState();
+var clock = new THREE.Clock();
 
-            // Scene
-            var scene = new THREE.Scene();
+//collision vars
+var MovingCube;
+var collidableMeshList = []; 
+       
+//updater
+var updateFcts = [];
+//scene
+var scene = new THREE.Scene();
+//fog
+scene.fog = new THREE.FogExp2( 0xd0e0f0, 0.0025 );
+//renderer
+var renderer = new THREE.WebGLRenderer( { antialias: false } );
+//window
+canvasWidth = 800;
+canvasHeight = 400;
+renderer.setSize( canvasWidth, canvasHeight );
+        
+//append object to it
+document.getElementById("customcanvas").appendChild(renderer.domElement);
 
-            // Fog
-            scene.fog = new THREE.FogExp2( 0xd0e0f0, 0.0025 );
+//camera
+var camera = new THREE.PerspectiveCamera(45, canvasWidth / canvasHeight, 0.01, 5700);
+camera.position.y = 12;
+camera.position.z = 70;
+camera.position.x = 140;
 
-            // Renderer
-            var renderer = new THREE.WebGLRenderer( { antialias: false } );
+//lighting and lantern props
+Lighter();
 
-            // Canvas
-            canvasWidth = 1200;
-            canvasHeight = 600;
-            renderer.setSize( canvasWidth, canvasHeight );
+//lantern props
+var lantern = new Lantern(137,1,99);
+scene.add(lantern);
+var lantern2 = new Lantern(163,1,99);
+scene.add(lantern2);
 
-            // Append Object
-            document.getElementById("customcanvas").appendChild(renderer.domElement);
+var lantern6 = new Lantern(240,1,466); //school 23,26
+scene.add(lantern6);
+/*
+var lantern3 = new Lantern(163,1,99); //school 38,11
+scene.add(lantern3);
+var lantern4 = new Lantern(163,1,99); //school 34,14
+scene.add(lantern4);
+var lantern5 = new Lantern(163,1,99); //school 4,19
+scene.add(lantern5);
 
-            // Camera
-            var camera = new THREE.PerspectiveCamera(45, canvasWidth / canvasHeight, 0.01, 8000);
-            camera.position.y = 12;
-            camera.position.z = 15;
-            camera.position.x = 15;
+var lantern7 = new Lantern(163,1,99); //school 27,26
+scene.add(lantern7);
+var lantern8 = new Lantern(163,1,99); //school 16,29
+scene.add(lantern8);
+var lantern9 = new Lantern(163,1,99); //school 16,29
+scene.add(lantern9);
+*/
 
-            // Lighting
-            var light = new THREE.HemisphereLight( 0xfffff0, 0x101020, 1.25 );
-            light.position.set( 0.75, 1, 0.25 );
-            scene.add( light );
+//gun props
+var gun = new Gun(228,6,16); //shop 23,20
+scene.add(gun);
+var gun2 = new Gun(127,6,-161); //shop 22,18
+scene.add(gun2);
+var gun3 = new Gun(-457,6,-1433); //shop 15,4
+scene.add(gun3);
+var gun4 = new Gun(1150,6,-1428); //shop 33,4
+scene.add(gun4);
+var gun5 = new Gun(-919,6,822); //shop 10,30
+scene.add(gun5);
 
-            // Plane
-            var plane = new Plane();
-            scene.add(plane);
+//plane                
+var plane = new Plane();
+scene.add(plane);
 
-            // Skybox
-            var skyBox = new Skybox();
-            scene.add( skyBox );
+//skybox
+var skyBox = new Skybox();
+scene.add( skyBox );
 
-            // Camera Controls
-            var controls = new THREE.FirstPersonControls( camera );
-            controls.movementSpeed = 80;
-            controls.lookSpeed = 0.05;
-            controls.lookVertical = false;
-            updateFcts.push(function(delta, now){
-                            controls.update( delta );
-            })
+//moving cube
+var cubeGeometry = new THREE.CubeGeometry(5,5,5,1,1,1);
+var wireMaterial = new THREE.MeshBasicMaterial( { color: 0xff0000, wireframe:true, visible:false } );
+MovingCube = new THREE.Mesh( cubeGeometry, wireMaterial );
+MovingCube.position.set(camera.position.x, camera.position.y, camera.position.z);
+scene.add( MovingCube );
+        
+//Camera Controls
+var controls = new THREE.FirstPersonControls( camera );
+//controls.movementSpeed = 80;
+controls.lookSpeed = 0.05;
+controls.lookVertical = false; //if true vertical look on mousemovement
+updateFcts.push(function(delta, now){
+                controls.update( delta );                
+        })
 
-            // Depot
-            var ndepot = new Depot();
-            scene.add(ndepot);
+//city buildings
+BuildingMaker();
 
-            // Enemy
-            var enemy = new Enemy();
-            scene.add(enemy);
-
-            // Move enemy camera towards player
-            function EnemyMovement() {
-                var distance = camera.position.x - enemy.position.x;
-                if (distance <= 100) {
+// Enemies
+var enemy = new Enemy(-53,10,7);
+scene.add(enemy);
+var enemy2 = new Enemy(-57,10,106);
+scene.add(enemy2);
+var enemy3 = new Enemy(440,10,13);
+scene.add(enemy3);
+            
+// Move enemy camera towards player
+function EnemyMovement() {
+        var distance = camera.position.x - enemy.position.x;
+        if (distance <= 100) {
                     enemy.lookAt(camera.position);
                     new TWEEN.Tween(enemy.position)
                         .to(camera.position, 100)
                         .start();
                         TWEEN.update();
-                }
-                else if (distance >= 101) {
+        }
+        else if (distance >= 101) {
                     enemy.rotation.x += Math.random();
                     enemy.position.x += Math.random();
-                }
-            }
+        }
+}
 
-            // DPStore
-            var dpstore = new DepartmentStore();
-            scene.add(dpstore);
+//Locking the pointer to the game
+document.getElementById("customcanvas").addEventListener( 'click', function ( event ) {
+        lock();
+}, false );
+function lock(rawr) {
+        document.getElementById("customcanvas").requestPointerLock();
+} 
 
-            updateFcts.push(function(){
-                renderer.render(scene, camera);
+//economy variables
+var leftOverAmmo = 23;
+var totalAmmo = 50;
+var eAmmo = leftOverAmmo+"/"+totalAmmo;
+var eWeapon ="Pistol";
+var totalscore = 0;
+var eScore ="Score: "+totalscore;
+
+//show HUD economy functions
+function appendAmmo(){ 
+        document.getElementById('ammo').innerHTML = eAmmo;}
+function appendWeapon(){
+        document.getElementById('weapon').innerHTML = eWeapon;}
+function appendScore(){ 
+        document.getElementById('score').innerHTML = eScore;}
+
+//hit registration collision
+function clearText()
+{   document.getElementById('message').innerHTML = '.....';}
+
+function appendText(txt)
+{   document.getElementById('message').innerHTML += txt;}
+
+        //update function
+        updateFcts.push(function(){
+                //render the scene
+                renderer.render( scene, camera ); 
+
+                //moving cube position and rotation
+                var mcdelta = clock.getDelta(); // seconds.
+                var mcrotateAngle = Math.PI / 2 * mcdelta;   // pi/2 radians (90 degrees) per second
+
+                if ( keyboard.pressed("q") )
+                MovingCube.rotation.y += mcrotateAngle; //rotate left
+                if ( keyboard.pressed("e") )
+                MovingCube.rotation.y -= mcrotateAngle; //rotate right
+
+                MovingCube.position.x = camera.position.x;
+                MovingCube.position.y = camera.position.y;
+                MovingCube.position.z = camera.position.z;
+
+                //collision detection
+                Collide();
+                //economy HUD
+                appendAmmo();
+                appendWeapon();
+                appendScore();
+
+                //shooting
+                Shot();
+                //gathering props
+                propGathering();
+                //scoring
+                Scoring();
+                //enemy movement
                 EnemyMovement();
-            })
 
-            var lastTimeMsec= null
-            requestAnimationFrame(function animate(nowMsec){
+        })
+        
+        //loop runner
+        var lastTimeMsec= null
+        requestAnimationFrame(function animate(nowMsec){
+                // keep looping
                 requestAnimationFrame( animate );
+                // measure time
                 lastTimeMsec = lastTimeMsec || nowMsec-1000/60
                 var deltaMsec = Math.min(200, nowMsec - lastTimeMsec)
                 lastTimeMsec = nowMsec
+                // call each update function
                 updateFcts.forEach(function(updateFn){
-                    updateFn(deltaMsec/1000, nowMsec/1000)
+                        updateFn(deltaMsec/1000, nowMsec/1000)
                 })
-            })
-        </script>
-        </div>
-    </body>
+        })
+</script>
+</div>
+<div id="message"></div>
+<p class="ce">Use Q, E keys to rotate the camera</p>
+<p class="ce">Use the W, A, S, D keys to move around</p>
+<p class="ce">Use the X key to shoot</p>
+<p class="ce">WebGL renderer is supported in Firefox 4+, Chrome 9+, and Safari 6+</p>
+<!--external sounds-->
+<audio autoplay loop><source src="sound/gangsters2.mp3" type="audio/mp3"></audio>
+</body>
 </html>
