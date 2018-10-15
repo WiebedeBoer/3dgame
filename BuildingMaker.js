@@ -38,6 +38,20 @@ scene.add(nPD);
 //scene 3 churches
 var nChurch = new Commercial("church","material_26","material_26","wall5","wall5",90);
 scene.add(nChurch);
+/*
+var nChurch = new Church(16,-10,5); //16,5
+scene.add(nChurch);
+var nChurch2 = new Church(34,-10,9); //34,9
+scene.add(nChurch2);
+var nChurch3 = new Church(5,-10,18); //5,18
+scene.add(nChurch3);
+var nChurch4 = new Church(11,-10,18); //11,18
+scene.add(nChurch4);
+var nChurch5 = new Church(30,-10,29); //30,29
+scene.add(nChurch5);
+var nChurch6 = new Church(10,-10,36); //10,36
+scene.add(nChurch6);
+*/
 
 //scene 11 hospital
 var nHospital = new Commercial("hospital","material_5","hospitalfront","wall3","wall3",90);
