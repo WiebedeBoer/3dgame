@@ -21,8 +21,10 @@
 <!--lighting-->
 <script src="Lighting.js"></script>
 <script src="Pointlight.js"></script>
-<!--lighting-->
 <script src="props/Lantern.js"></script>
+<!--props-->
+<script src="props/Props.js"></script>
+<script src="props/GunCollect.js"></script>
 <script src="props/Gun.js"></script>
 <!--loaders-->
 <script src="loaders/OBJLoader.js"></script>
@@ -107,34 +109,8 @@ camera.position.x = 140;
 //lighting and lantern props
 Lighter();
 
-
-/*
-var lantern3 = new Lantern(163,1,99); //school 38,11
-scene.add(lantern3);
-var lantern4 = new Lantern(163,1,99); //school 34,14
-scene.add(lantern4);
-var lantern5 = new Lantern(163,1,99); //school 4,19
-scene.add(lantern5);
-
-var lantern7 = new Lantern(163,1,99); //school 27,26
-scene.add(lantern7);
-var lantern8 = new Lantern(163,1,99); //school 16,29
-scene.add(lantern8);
-var lantern9 = new Lantern(163,1,99); //school 16,29
-scene.add(lantern9);
-*/
-
 //gun props
-var gun = new Gun(228,6,16); //shop 23,20
-scene.add(gun);
-var gun2 = new Gun(127,6,-161); //shop 22,18
-scene.add(gun2);
-var gun3 = new Gun(-457,6,-1433); //shop 15,4
-scene.add(gun3);
-var gun4 = new Gun(1150,6,-1428); //shop 33,4
-scene.add(gun4);
-var gun5 = new Gun(-919,6,822); //shop 10,30
-scene.add(gun5);
+Props();
 
 //plane                
 var plane = new Plane();

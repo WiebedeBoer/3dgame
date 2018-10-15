@@ -9,9 +9,9 @@ var propHit =0;
 clearText();
 
 //collision
-    for (var vertexIndex = 0; vertexIndex < MovingCube.geometry.vertices.length; vertexIndex++)
+    for (var vertexPropIndex = 0; vertexPropIndex < MovingCube.geometry.vertices.length; vertexPropIndex++)
     {
-        var localVertex = MovingCube.geometry.vertices[vertexIndex].clone();
+        var localVertex = MovingCube.geometry.vertices[vertexPropIndex].clone();
         var globalVertex = localVertex.applyMatrix4( MovingCube.matrix );
         var directionVector = globalVertex.sub( MovingCube.position );
 
@@ -20,7 +20,7 @@ clearText();
         //check collision props
         if ( collisionResults.length > 0 && collisionResults[0].distance < directionVector.length() ){
             appendText(" Grab ");
-            propHit =1;
+            propHit = 1;
         }
 
     }
