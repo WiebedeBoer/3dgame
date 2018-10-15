@@ -11,7 +11,7 @@ class Gun extends THREE.Group {
             dGun.position.y = this.pY;
             dGun.position.z = this.pZ;
             dGun.add(mesh);
-         
+            collidablePropMeshList.push(mesh);
         });
     }    
             
