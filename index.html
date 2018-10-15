@@ -107,14 +107,7 @@ camera.position.x = 140;
 //lighting and lantern props
 Lighter();
 
-//lantern props
-var lantern = new Lantern(137,1,99);
-scene.add(lantern);
-var lantern2 = new Lantern(163,1,99);
-scene.add(lantern2);
 
-var lantern6 = new Lantern(240,1,466); //school 23,26
-scene.add(lantern6);
 /*
 var lantern3 = new Lantern(163,1,99); //school 38,11
 scene.add(lantern3);
@@ -153,7 +146,7 @@ scene.add( skyBox );
 
 //moving cube
 var cubeGeometry = new THREE.CubeGeometry(5,5,5,1,1,1);
-var wireMaterial = new THREE.MeshBasicMaterial( { color: 0xff0000, wireframe:true, visible:false } );
+var wireMaterial = new THREE.MeshBasicMaterial( { color: 0xff0000, wireframe:true, visible:true } );
 MovingCube = new THREE.Mesh( cubeGeometry, wireMaterial );
 MovingCube.position.set(camera.position.x, camera.position.y, camera.position.z);
 scene.add( MovingCube );
@@ -178,21 +171,26 @@ scene.add(enemy2);
 var enemy3 = new Enemy(440,10,13);
 scene.add(enemy3);
             
-// Move enemy camera towards player
-function EnemyMovement() {
-        var distance = camera.position.x - enemy.position.x;
-        if (distance <= 100) {
-                    enemy.lookAt(camera.position);
-                    new TWEEN.Tween(enemy.position)
-                        .to(camera.position, 100)
-                        .start();
-                        TWEEN.update();
-        }
-        else if (distance >= 101) {
-                    enemy.rotation.x += Math.random();
-                    enemy.position.x += Math.random();
-        }
-}
+            // Move enemy camera towards player
+            function EnemyMovement() {
+              //  var distance = camera.position.x - enemy.position.x;
+              //  if (distance <= 100) {
+              //enemy.distanceTo(camera);
+              //console.log(enemy.distanceTo(camera.position));
+              var cameraPosition = new THREE.Vector3(camera.position.x, camera.position.y, camera.position.z);
+              var enemyPosition = new THREE.Vector3(enemy.position.x, enemy.position.y, enemy.position.z);
+              var distance = cameraPosition.distanceTo(enemyPosition);
+              console.log(distance);
+              if(distance < 100){
+                enemy.lookAt(camera.position);
+                new TWEEN.Tween(enemy.position)
+                    .to(camera.position, 200)
+                    .start();
+                    TWEEN.update();
+              }
+              else {
+              }
+            }
 
 //Locking the pointer to the game
 document.getElementById("customcanvas").addEventListener( 'click', function ( event ) {
@@ -239,8 +237,8 @@ function appendText(txt)
                 if ( keyboard.pressed("e") )
                 MovingCube.rotation.y -= mcrotateAngle; //rotate right
 
-                MovingCube.position.x = camera.position.x;
-                MovingCube.position.y = camera.position.y;
+                MovingCube.position.x = camera.position.x + 20;
+                MovingCube.position.y = camera.position.y - 5;
                 MovingCube.position.z = camera.position.z;
 
                 //collision detection
