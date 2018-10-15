@@ -7,9 +7,9 @@ class Lantern extends THREE.Group {
             dLantern.position.x = this.pX;
             dLantern.position.y = 10;
             dLantern.position.z = this.pZ;
-            mesh.scale.x = 3;
-            mesh.scale.y = 10;
-            mesh.scale.z = 3;
+            mesh.scale.x = 4;
+            mesh.scale.y = 30;
+            mesh.scale.z = 4;
             dLantern.add(mesh);
             addPointLight(dLantern,0xf8eabb, 0, 1, 0, 4, 25); //lantern light
             var g = new THREE.BoxGeometry(1,1,1);
