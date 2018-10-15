@@ -1,6 +1,6 @@
 class Enemy extends THREE.Group {
     init(){
-        var refEnemy, enemy, material, geometry;
+        var refEnemy, enemy;
 
         refEnemy = this;
 
