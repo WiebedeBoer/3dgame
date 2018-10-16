@@ -60,7 +60,7 @@
 
 <div class="parent">  
    <!--customcanvas-->       
-<div height="400" width="800" class="customcanvas" id="customcanvas">
+<div height="400" width="800" class="customcanvas" id="customcanvas"></div>
         <!--hud-->
                 <div id="content-frame" ng-controller="HudState" class="ng-scope">
                                 <div id="canvas-container">
@@ -79,8 +79,25 @@
                                         </div>
                                     </div>
                                 </div>
-                        </div> 
-                </div>
+                        </div>
+                        <!--menu-->
+                        <div id="menu" class="ng-menu">
+                                <div id="content-frame" class="ng-scope">
+                                        <div id="canvas-container">
+                                                <div id="quit">
+                                                        <button id="quitbutton">Quit</button>                                                        
+                                                </div>
+                                                <div id="resume">
+                                                        <button id="resumebutton">Resume</button>
+                                                </div>
+                                        </div>
+                                        
+                                </div>
+                                        
+                        </div>
+</div>
+
+
 <script>
 //keyboard
 var keyboard = new THREEx.KeyboardState();
