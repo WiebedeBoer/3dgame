@@ -146,14 +146,17 @@ updateFcts.push(function(delta, now){
 //BuildingMaker();
 
 // Enemies
-var x = 0;
-var z = 0;
-for (i = 0; i < 5; i++)
+var enemyX = 0;
+var enemyY = 10;
+var enemyZ = 0;
+var aantalEnemies = 1;
+for (i = 0; i < aantalEnemies; i++)
 {
-    var enemy = new Enemy(x, 10, z);
+    var enemy = new Enemy(enemyX, enemyY, enemyZ);
     scene.add(enemy);
-    x += 2 * Math.floor(Math.random() * 10) + 1  ;
-    z += 2 * Math.floor(Math.random() * 10) + 1  ;
+    enemy.position.x += 2 * Math.floor(Math.random() * 30) + 1  ;
+    enemy.position.z += 2 * Math.floor(Math.random() * 30) + 1  ;
+    console.log(enemy);
 }
 
 //Locking the pointer to the game
