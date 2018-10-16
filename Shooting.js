@@ -1,7 +1,6 @@
 //shooting
 function Shot(){
     //shoot ammo check
-    if ( keyboard.pressed("X")){
         if (leftOverAmmo >0){
             //less ammo
             leftOverAmmo = leftOverAmmo - 1;
@@ -19,8 +18,6 @@ function Shot(){
         //display ammo in HUD
         eAmmo = leftOverAmmo+"/"+totalAmmo;        
         document.getElementById('ammo').innerHTML = eAmmo;
-        
-    }
     
 }
                

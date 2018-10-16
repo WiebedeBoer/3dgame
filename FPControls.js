@@ -115,6 +115,7 @@ THREE.FirstPersonControls = function ( object, domElement ) {
                         case 103: this.mouseX = 0; break;
                         case 69: this.mouseX = 0; break; /*e rotate right*/
                         case 105: this.mouseX = 0; break;
+                        case 88: /*X*/ Shot(); break;
                 }
 
         };
