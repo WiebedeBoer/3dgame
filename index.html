@@ -90,6 +90,9 @@ var MovingCube;
 var collidableMeshList = []; 
 var collidablePropMeshList = []; 
 var collidableBulletMeshList = [];
+
+// Bullets array
+var bullets = [];
        
 //updater
 var updateFcts = [];
@@ -144,7 +147,7 @@ updateFcts.push(function(delta, now){
         })
 
 //city buildings
-BuildingMaker();
+//BuildingMaker();
 
 // Enemies
 var enemy = new Enemy(-53,10,7);
@@ -169,8 +172,6 @@ function lock(rawr) {
         document.getElementById("customcanvas").requestPointerLock();
 } 
 
-
-
 //economy variables
 var leftOverAmmo = 23;
 var totalAmmo = 50;
@@ -178,10 +179,6 @@ var eAmmo = leftOverAmmo+"/"+totalAmmo;
 var eWeapon ="Pistol";
 var totalscore = 0;
 var eScore ="Score: "+totalscore;
-//economy HUD. Initialize
-appendAmmo();
-appendWeapon();
-appendScore();
 
 //show HUD economy functions
 function appendAmmo(){ 
@@ -190,7 +187,6 @@ function appendWeapon(){
         document.getElementById('weapon').innerHTML = eWeapon;}
 function appendScore(){ 
         document.getElementById('score').innerHTML = eScore;}
-        
 
 //hit registration collision
 function clearText()
@@ -225,6 +221,7 @@ appendScore();
 
                 //collision detection
                 Collide();
+
                 //gathering props
                 propGathering();
                 //scoring
