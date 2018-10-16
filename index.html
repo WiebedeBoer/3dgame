@@ -39,7 +39,6 @@
 <script src="Collision.js"></script>
 <!--Enemy-->
 <script src="Enemy/enemy.js"></script>
-<script src="Enemy/EnemyMaker.js"></script>
 <script src="Enemy/EnemyMovement.js"></script>
 <!--Tween-->
 <script src="Tween.js"></script>
@@ -56,8 +55,8 @@
 </head>
 <body class="ng-scope" style="margin: 0px; background-color: #d8e7ff; overflow: hidden;">
 
-<div class="parent">  
-   <!--customcanvas-->       
+<div class="parent">
+   <!--customcanvas-->
 <div height="400" width="800" class="customcanvas" id="customcanvas">
         <!--hud-->
                 <div id="content-frame" ng-controller="HudState" class="ng-scope">
@@ -66,18 +65,18 @@
                                         <canvas id="webgl-canvas" width="800" height="400"></canvas>
                                         <div id="hud" ng-class="{visible: style.visible, transparent: style.transparent, perspective: style.perspective, animated: style.animated}" class="visible">
                                             <div id="weapon" class="ng-binding">
-                                                
+
                                             </div>
                                             <div id="ammo" class="ng-binding">
-                                                
+
                                             </div>
                                             <div id="score" class="ng-binding">
-                                                
+
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                        </div> 
+                        </div>
                 </div>
 <script>
 //keyboard
@@ -86,11 +85,11 @@ var clock = new THREE.Clock();
 
 //collision vars
 var MovingCube;
-var collidableMeshList = []; 
-var collidablePropMeshList = []; 
+var collidableMeshList = [];
+var collidablePropMeshList = [];
 var collidableBulletMeshList = [];
-var enemyCube; 
-       
+var enemyCube;
+
 //updater
 var updateFcts = [];
 //scene
@@ -103,7 +102,7 @@ var renderer = new THREE.WebGLRenderer( { antialias: false } );
 canvasWidth = 800;
 canvasHeight = 400;
 renderer.setSize( canvasWidth, canvasHeight );
-        
+
 //append object to it
 document.getElementById("customcanvas").appendChild(renderer.domElement);
 
@@ -119,7 +118,7 @@ Lighter();
 //gun props
 Props();
 
-//plane                
+//plane
 var plane = new Plane();
 scene.add(plane);
 
@@ -133,21 +132,22 @@ var wireMaterial = new THREE.MeshBasicMaterial( { color: 0xff0000, wireframe:tru
 MovingCube = new THREE.Mesh( cubeGeometry, wireMaterial );
 MovingCube.position.set(camera.position.x, camera.position.y, camera.position.z);
 scene.add( MovingCube );
-        
+
 //Camera Controls
 var controls = new THREE.FirstPersonControls( camera );
 //controls.movementSpeed = 80;
 controls.lookSpeed = 0.05;
 controls.lookVertical = false; //if true vertical look on mousemovement
 updateFcts.push(function(delta, now){
-                controls.update( delta );                
+                controls.update( delta );
         })
 
 //city buildings
-BuildingMaker();
+//BuildingMaker();
 
 // Enemies
-EnemyMaker();                
+var enemy = new Enemy(0,10,0);
+scene.add(enemy);
 
 //Locking the pointer to the game
 document.getElementById("customcanvas").addEventListener( 'click', function ( event ) {
@@ -155,7 +155,7 @@ document.getElementById("customcanvas").addEventListener( 'click', function ( ev
 }, false );
 function lock(rawr) {
         document.getElementById("customcanvas").requestPointerLock();
-} 
+}
 
 //economy variables
 var leftOverAmmo = 23;
@@ -166,11 +166,11 @@ var totalscore = 0;
 var eScore ="Score: "+totalscore;
 
 //show HUD economy functions
-function appendAmmo(){ 
+function appendAmmo(){
         document.getElementById('ammo').innerHTML = eAmmo;}
 function appendWeapon(){
         document.getElementById('weapon').innerHTML = eWeapon;}
-function appendScore(){ 
+function appendScore(){
         document.getElementById('score').innerHTML = eScore;}
 
 //hit registration collision
@@ -183,7 +183,7 @@ function appendText(txt)
         //update function
         updateFcts.push(function(){
                 //render the scene
-                renderer.render( scene, camera ); 
+                renderer.render( scene, camera );
 
                 //moving cube position and rotation
                 var mcdelta = clock.getDelta(); // seconds.
@@ -196,7 +196,7 @@ function appendText(txt)
 
                 MovingCube.position.x = camera.position.x;
                 MovingCube.position.y = camera.position.y;
-                MovingCube.position.z = camera.position.z;                
+                MovingCube.position.z = camera.position.z;
 
                 //collision detection
                 Collide();
@@ -209,12 +209,11 @@ function appendText(txt)
                 //gathering props
                 propGathering();
                 //scoring
-                Scoring();
+                //Scoring();
                 //enemy movement
                 EnemyMovement();
-
         })
-        
+
         //loop runner
         var lastTimeMsec= null
         requestAnimationFrame(function animate(nowMsec){
