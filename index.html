@@ -40,6 +40,7 @@
 <!--Enemy-->
 <script src="Enemy/enemy.js"></script>
 <script src="Enemy/enemyCube.js"></script>
+<script src="Enemy/enemyCubeMovement.js"></script>
 <script src="Enemy/EnemyMaker.js"></script>
 <script src="Enemy/EnemyMovement.js"></script>
 <!--Tween-->
@@ -152,17 +153,17 @@ updateFcts.push(function(delta, now){
 // Enemies
 var enemy = new Enemy(-53,10,7);
 scene.add(enemy);
-var enemy2 = new Enemy(-57,10,106);
-scene.add(enemy2);
-var enemy3 = new Enemy(440,10,13);
-scene.add(enemy3); 
+//var enemy2 = new Enemy(-57,10,106);
+//scene.add(enemy2);
+//var enemy3 = new Enemy(440,10,13);
+//scene.add(enemy3); 
 
-var nenemyCube = new EnemyCube(-53,10,7);
-scene.add(nenemyCube);
-var nenemy2Cube = new EnemyCube(-57,10,106);
-scene.add(nenemy2Cube);
-var nenemy3Cube = new EnemyCube(440,10,13);
-scene.add(nenemy3Cube);   
+var enemyCube = new EnemyCube(-53,10,7);
+scene.add(enemyCube);
+//var nenemy2Cube = new EnemyCube(-57,10,106);
+//scene.add(nenemy2Cube);
+//var nenemy3Cube = new EnemyCube(440,10,13);
+//scene.add(nenemy3Cube);   
 
 //Locking the pointer to the game
 document.getElementById("customcanvas").addEventListener( 'click', function ( event ) {
@@ -228,6 +229,7 @@ appendScore();
                 Scoring();
                 //enemy movement
                 EnemyMovement();
+                CubeMovement();
 
         })
         
