@@ -1,7 +1,7 @@
 //scoring
 function Scoring(){
     //registrate particle hit
-    var particleHit =0;
+    var particleHit =false;
     //particle collision
     var originEnemyPoint = enemyCube.position.clone();
     
@@ -17,18 +17,24 @@ function Scoring(){
         if ( collisionResults.length > 0 && collisionResults[0].distance < directionVector.length() ){
             clearText();
             appendText(" kill ");
-            particleHit = 1;
+            particleHit = true;
         }
 
     }
     
     
     //check particle hit
-    if (particleHit >0){
+    if (particleHit ==true){
     //increase score    
-    totalscore += totalscore;
+    totalscore = totalscore + 1;
+    console.log("score:"+totalscore);
     //update score
     eScore ="Score: "+totalscore;
-    document.getElementById('score').innerHTML = eScore;
+    document.getElementById('score').innerHTML = eScore; 
+    particleHit = false;
+    //kill ammo cube
+    ammoCube.alive = false;
+    scene.remove(ammoCube);
     }
+    
 }
