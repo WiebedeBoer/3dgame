@@ -146,8 +146,15 @@ updateFcts.push(function(delta, now){
 //BuildingMaker();
 
 // Enemies
-var enemy = new Enemy(0,10,0);
-scene.add(enemy);
+var x = 0;
+var z = 0;
+for (i = 0; i < 5; i++)
+{
+    var enemy = new Enemy(x, 10, z);
+    scene.add(enemy);
+    x += 2 * Math.floor(Math.random() * 10) + 1  ;
+    z += 2 * Math.floor(Math.random() * 10) + 1  ;
+}
 
 //Locking the pointer to the game
 document.getElementById("customcanvas").addEventListener( 'click', function ( event ) {

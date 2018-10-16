@@ -12,7 +12,5 @@ function EnemyMovement() {
     }
     else {
     }
-     
     // console.log(distance);
-
 }
