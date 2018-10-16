@@ -157,6 +157,8 @@ function lock(rawr) {
         document.getElementById("customcanvas").requestPointerLock();
 } 
 
+
+
 //economy variables
 var leftOverAmmo = 23;
 var totalAmmo = 50;
@@ -164,6 +166,10 @@ var eAmmo = leftOverAmmo+"/"+totalAmmo;
 var eWeapon ="Pistol";
 var totalscore = 0;
 var eScore ="Score: "+totalscore;
+//economy HUD. Initialize
+appendAmmo();
+appendWeapon();
+appendScore();
 
 //show HUD economy functions
 function appendAmmo(){ 
@@ -172,6 +178,7 @@ function appendWeapon(){
         document.getElementById('weapon').innerHTML = eWeapon;}
 function appendScore(){ 
         document.getElementById('score').innerHTML = eScore;}
+        
 
 //hit registration collision
 function clearText()
@@ -200,12 +207,6 @@ function appendText(txt)
 
                 //collision detection
                 Collide();
-                //economy HUD
-                appendAmmo();
-                appendWeapon();
-                appendScore();
-                //shooting
-                Shot();
                 //gathering props
                 propGathering();
                 //scoring
