@@ -39,6 +39,7 @@
 <script src="Collision.js"></script>
 <!--Enemy-->
 <script src="Enemy/enemy.js"></script>
+<script src="Enemy/enemyCube.js"></script>
 <script src="Enemy/EnemyMaker.js"></script>
 <script src="Enemy/EnemyMovement.js"></script>
 <!--Tween-->
@@ -89,7 +90,6 @@ var MovingCube;
 var collidableMeshList = []; 
 var collidablePropMeshList = []; 
 var collidableBulletMeshList = [];
-var enemyCube; 
        
 //updater
 var updateFcts = [];
@@ -147,7 +147,19 @@ updateFcts.push(function(delta, now){
 BuildingMaker();
 
 // Enemies
-EnemyMaker();                
+var enemy = new Enemy(-53,10,7);
+scene.add(enemy);
+var enemy2 = new Enemy(-57,10,106);
+scene.add(enemy2);
+var enemy3 = new Enemy(440,10,13);
+scene.add(enemy3); 
+
+var enemyCube = new EnemyCube(-53,10,7);
+scene.add(enemyCube);
+var enemy2Cube = new EnemyCube(-57,10,106);
+scene.add(enemy2Cube);
+var enemy3Cube = new EnemyCube(440,10,13);
+scene.add(enemy3Cube);   
 
 //Locking the pointer to the game
 document.getElementById("customcanvas").addEventListener( 'click', function ( event ) {
@@ -180,6 +192,12 @@ function clearText()
 function appendText(txt)
 {   document.getElementById('message').innerHTML += txt;}
 
+//economy HUD
+appendAmmo();
+appendWeapon();
+appendScore();
+
+
         //update function
         updateFcts.push(function(){
                 //render the scene
@@ -200,10 +218,7 @@ function appendText(txt)
 
                 //collision detection
                 Collide();
-                //economy HUD
-                appendAmmo();
-                appendWeapon();
-                appendScore();
+
                 //shooting
                 Shot();
                 //gathering props
