@@ -39,6 +39,8 @@
 <script src="Collision.js"></script>
 <!--Enemy-->
 <script src="Enemy/enemy.js"></script>
+<script src="Enemy/enemyCube.js"></script>
+<script src="Enemy/enemyCubeMovement.js"></script>
 <script src="Enemy/EnemyMovement.js"></script>
 <!--Tween-->
 <script src="Tween.js"></script>
@@ -145,11 +147,15 @@ updateFcts.push(function(delta, now){
 //city buildings
 //BuildingMaker();
 
+// Enemy Cube
+var nenemyCube = new EnemyCube(0,10,0);
+scene.add(nenemyCube);
+
 // Enemies
 var enemyX = 0;
 var enemyY = 10;
 var enemyZ = 0;
-var aantalEnemies = 1;
+var aantalEnemies = 5;
 for (i = 0; i < aantalEnemies; i++)
 {
     var enemy = new Enemy(enemyX, enemyY, enemyZ);
@@ -222,6 +228,7 @@ function appendText(txt)
                 //Scoring();
                 //enemy movement
                 EnemyMovement();
+                CubeMovement();
         })
 
         //loop runner
