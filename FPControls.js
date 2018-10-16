@@ -61,7 +61,15 @@ THREE.FirstPersonControls = function ( object, domElement ) {
 
         };
 
+        //mouse move
+        this.onMouseMove = function ( event ) {
+		var movementX = event.movementX || event.mozMovementX || event.webkitMovementX || 0;
+		var movementY = event.movementY || event.mozMovementY || event.webkitMovementY || 0;
+		this.mouseX = movementX * 150;
+                this.mouseY = movementY * 150;
+	}
 
+        //loose keys keyboard
         this.onKeyDown = function ( event ) {
 
                 switch ( event.keyCode ) {
@@ -86,6 +94,7 @@ THREE.FirstPersonControls = function ( object, domElement ) {
 
         };
 
+        //on key pressed keyboard
         this.onKeyUp = function ( event ) {
 
                 switch( event.keyCode ) {
@@ -110,6 +119,7 @@ THREE.FirstPersonControls = function ( object, domElement ) {
 
         };
 
+        //update
         this.update = function( delta ) {
 
                 var actualMoveSpeed = delta * this.movementSpeed;
@@ -146,7 +156,8 @@ THREE.FirstPersonControls = function ( object, domElement ) {
 
         };
 
-
+        //event listeners
+        this.domElement.addEventListener( 'mousemove', bind( this, this.onMouseMove ), false );
         this.domElement.addEventListener( 'contextmenu', function ( event ) { event.preventDefault(); }, false );
 
         this.domElement.addEventListener( 'keydown', bind( this, this.onKeyDown ), false );
