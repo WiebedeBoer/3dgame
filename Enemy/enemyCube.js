@@ -6,10 +6,10 @@ class EnemyCube extends THREE.Group {
 
             var enemyCubeGeometry = new THREE.CubeGeometry(10,10,10,1,1,1);
             var enemyCubeMaterial = new THREE.MeshBasicMaterial( { color: 0x00ff00, wireframe:true, visible:true } );
-            var enemyCubeMesh = new THREE.Mesh( enemyCubeGeometry, enemyCubeMaterial );
-            enemyCubeMesh.position.set(this.pX, 12, this.pZ);
-            dEnemyCube.add(enemyCubeMesh);
-            //collidablePropMeshList.push(enemyCubeMesh);        
+            var enemyCube = new THREE.Mesh( enemyCubeGeometry, enemyCubeMaterial );
+            enemyCube.position.set(this.pX, 12, this.pZ);
+            dEnemyCube.add(enemyCube);
+                   
     }    
             
     constructor(pX,pY,pZ){
