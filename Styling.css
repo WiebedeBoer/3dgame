@@ -57,3 +57,19 @@ div.ng-binding {font-weight: bold;}
             #stats {
                 float: right;
             }
+	    #menu {
+		position: absolute;
+		top: 0;
+                width: 800px;
+                height: 400px;
+                margin: auto;
+                z-index: 5;
+                display: none;
+	    }
+	    #quit, #resume {
+		position: absolute;
+                border: 3px solid #FFF;
+                border-radius: 5px;
+                color: #FFF;
+                font-family: arial;
+	    }

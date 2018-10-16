@@ -56,7 +56,7 @@
 
 <div class="parent">  
    <!--customcanvas-->       
-<div height="400" width="800" class="customcanvas" id="customcanvas">
+<div id="customcanvas" class="customcanvas" height="400" width="800">
         <!--hud-->
                 <div id="content-frame" ng-controller="HudState" class="ng-scope">
                                 <div id="canvas-container">
@@ -76,7 +76,25 @@
                                     </div>
                                 </div>
                         </div> 
-                </div>
+                        <div id="menu" class="ng-menu">
+                                <div id="content-frame" class="ng-scope">
+                                        <div id="canvas-container">
+                                                <div id="quit">
+                                                        <button id="quitbutton">Quit</button>
+                                                        <b>quit</b>
+                                                </div>
+                                                <div id="resume">
+                                                        <button id="resumebutton">Resume</button>
+                                                </div>
+                                        </div>
+                                        
+                                </div>
+                                        
+                        </div>
+
+</div>
+
+
 <script>
 //keyboard
 var keyboard = new THREEx.KeyboardState();
@@ -142,7 +160,7 @@ updateFcts.push(function(delta, now){
         })
 
 //city buildings
-BuildingMaker();
+//BuildingMaker();
 
 // Enemies
 var enemy = new Enemy(-53,10,7);
