@@ -6,6 +6,7 @@ function EnemyMovement() {
         
         var enemyPosition = new THREE.Vector3(enemy.position.x, enemy.position.y, enemy.position.z);
         var distance = cameraPosition.distanceTo(enemyPosition);
+        console.log(enemy.uuid);
 
         if(distance > 10 && distance < 100){
           enemy.lookAt(cameraPosition);
