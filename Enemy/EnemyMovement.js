@@ -15,6 +15,11 @@
               else if (distance <10){
                 clearText();
                 appendText(" you died ");
+                var gameover = document.getElementById("menu");
+                if (gameover.style.display === "none") {
+                    gameover.style.display = "block";} 
+                    //else {
+                    //gameover.style.display = "none";}
               }
               else {
               }
