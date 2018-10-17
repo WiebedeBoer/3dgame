@@ -109,6 +109,10 @@ var collidableMeshList = [];
 var collidablePropMeshList = []; 
 var collidableBulletMeshList = [];
 
+//no show menu
+var gamestart = document.getElementById("menu");
+gamestart.style.display = "none";
+
 // Bullets array
 var bullets = [];
        
@@ -244,6 +248,7 @@ appendScore();
                 propGathering();
                 //scoring
                 Scoring();
+                particleHit = false;
                 //enemy movement
                 EnemyMovement();
                 CubeMovement();
