@@ -5,6 +5,8 @@ p.ce,div.ce {text-align: center;}
 div.ng-scope{ position: absolute;left:0px;top:0px;z-index:3;}
 div.ng-binding {font-weight: bold;}
 
+div.ng-menu {position: absolute;left:0px;top:0px;z-index:5;}
+
 #canvas-align {
                 position: relative;
                 width: 800px;

@@ -40,6 +40,7 @@
 <!--Enemy-->
 <script src="Enemy/enemy.js"></script>
 <script src="Enemy/enemyCube.js"></script>
+<script src="Enemy/enemyCubeMovement.js"></script>
 <script src="Enemy/EnemyMaker.js"></script>
 <script src="Enemy/EnemyMovement.js"></script>
 <!--Tween-->
@@ -59,7 +60,7 @@
 
 <div class="parent">  
    <!--customcanvas-->       
-<div height="400" width="800" class="customcanvas" id="customcanvas">
+<div height="400" width="800" class="customcanvas" id="customcanvas"></div>
         <!--hud-->
                 <div id="content-frame" ng-controller="HudState" class="ng-scope">
                                 <div id="canvas-container">
@@ -78,8 +79,25 @@
                                         </div>
                                     </div>
                                 </div>
-                        </div> 
-                </div>
+                        </div>
+                        <!--menu-->
+                        <div id="menu" class="ng-menu">
+                                <div id="content-frame" class="ng-scope">
+                                        <div id="canvas-container">
+                                                <div id="quit">
+                                                        <button id="quitbutton">Quit</button>                                                        
+                                                </div>
+                                                <div id="resume">
+                                                        <button id="resumebutton">Resume</button>
+                                                </div>
+                                        </div>
+                                        
+                                </div>
+                                        
+                        </div>
+</div>
+
+
 <script>
 //keyboard
 var keyboard = new THREEx.KeyboardState();
@@ -90,6 +108,13 @@ var MovingCube;
 var collidableMeshList = []; 
 var collidablePropMeshList = []; 
 var collidableBulletMeshList = [];
+
+//no show menu
+var gamestart = document.getElementById("menu");
+gamestart.style.display = "none";
+
+// Bullets array
+var bullets = [];
        
 //updater
 var updateFcts = [];
@@ -149,17 +174,17 @@ BuildingMaker();
 // Enemies
 var enemy = new Enemy(-53,10,7);
 scene.add(enemy);
-var enemy2 = new Enemy(-57,10,106);
-scene.add(enemy2);
-var enemy3 = new Enemy(440,10,13);
-scene.add(enemy3); 
+//var enemy2 = new Enemy(-57,10,106);
+//scene.add(enemy2);
+//var enemy3 = new Enemy(440,10,13);
+//scene.add(enemy3); 
 
-var nenemyCube = new EnemyCube(-53,10,7);
-scene.add(nenemyCube);
-var nenemy2Cube = new EnemyCube(-57,10,106);
-scene.add(nenemy2Cube);
-var nenemy3Cube = new EnemyCube(440,10,13);
-scene.add(nenemy3Cube);   
+var enemyCube = new EnemyCube(-53,10,7);
+scene.add(enemyCube);
+//var nenemy2Cube = new EnemyCube(-57,10,106);
+//scene.add(nenemy2Cube);
+//var nenemy3Cube = new EnemyCube(440,10,13);
+//scene.add(nenemy3Cube);   
 
 //Locking the pointer to the game
 document.getElementById("customcanvas").addEventListener( 'click', function ( event ) {
@@ -169,8 +194,6 @@ function lock(rawr) {
         document.getElementById("customcanvas").requestPointerLock();
 } 
 
-
-
 //economy variables
 var leftOverAmmo = 23;
 var totalAmmo = 50;
@@ -178,10 +201,6 @@ var eAmmo = leftOverAmmo+"/"+totalAmmo;
 var eWeapon ="Pistol";
 var totalscore = 0;
 var eScore ="Score: "+totalscore;
-//economy HUD. Initialize
-appendAmmo();
-appendWeapon();
-appendScore();
 
 //show HUD economy functions
 function appendAmmo(){ 
@@ -190,7 +209,6 @@ function appendWeapon(){
         document.getElementById('weapon').innerHTML = eWeapon;}
 function appendScore(){ 
         document.getElementById('score').innerHTML = eScore;}
-        
 
 //hit registration collision
 function clearText()
@@ -225,12 +243,15 @@ appendScore();
 
                 //collision detection
                 Collide();
+
                 //gathering props
                 propGathering();
                 //scoring
                 Scoring();
+                particleHit = false;
                 //enemy movement
                 EnemyMovement();
+                CubeMovement();
 
         })
         
