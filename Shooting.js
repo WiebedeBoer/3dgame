@@ -45,6 +45,7 @@ function Shot(){
     
 }
 function BulletTravel(){
-
-
+    bullets.forEach(element => {
+        element.translateZ( -2 );
+    });
 }
