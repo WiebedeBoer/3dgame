@@ -3,15 +3,16 @@ function EnemyMovement() {
 
     var cameraPosition = new THREE.Vector3(camera.position.x, camera.position.y, camera.position.z);
     enemyList.forEach(function(enemy) {
-        
+
         var enemyPosition = new THREE.Vector3(enemy.position.x, enemy.position.y, enemy.position.z);
         var distance = cameraPosition.distanceTo(enemyPosition);
-        console.log(enemy.uuid);
 
-        if(distance > 10 && distance < 100){
+        if(distance > 10 && distance < 200){
           enemy.lookAt(cameraPosition);
-          enemy.translateZ(0.3);
-        }else if (distance < 10){
+          enemy.translateZ(0.9);
+        }
+
+        else if (distance < 10){
             clearText();
             appendText("you died");
         }

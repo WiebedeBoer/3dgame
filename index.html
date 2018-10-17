@@ -174,7 +174,7 @@ updateFcts.push(function(delta, now){
 var enemyX = 0;
 var enemyY = 10;
 var enemyZ = 0;
-var aantalEnemies = 2;
+var aantalEnemies = 20;
 var enemyList = [];
 
 for (var i = 0; i < aantalEnemies; i++)
@@ -182,10 +182,10 @@ for (var i = 0; i < aantalEnemies; i++)
     // Spawn Enemy
     var enemy = new Enemy(enemyX, enemyY, enemyZ);
     enemyList.push(enemy);
-    //enemyCubeList.push(nenemyCube);
+    // enemyCubeList.push(nenemyCube);
     scene.add(enemy);
-    enemy.position.x += 2 * Math.floor(Math.random() * 50) + 1;
-    enemy.position.z += 2 * Math.floor(Math.random() * 50) + 1;
+    enemy.position.x += 2 * Math.floor(Math.random() * 80) + 1;
+    enemy.position.z += 2 * Math.floor(Math.random() * 80) + 1;
 }
 
 //Locking the pointer to the game
@@ -199,10 +199,10 @@ function lock(rawr) {
 //economy variables
 var leftOverAmmo = 23;
 var totalAmmo = 50;
-var eAmmo = leftOverAmmo+"/"+totalAmmo;
+var eAmmo = leftOverAmmo+"/"+ totalAmmo;
 var eWeapon ="Pistol";
 var totalscore = 0;
-var eScore ="Score: "+totalscore;
+var eScore ="Score: "+ totalscore;
 
 //show HUD economy functions
 function appendAmmo(){
@@ -227,7 +227,7 @@ appendScore();
         //update function
         updateFcts.push(function(){
                 //render the scene
-                renderer.render( scene, camera );
+                renderer.render(scene, camera);
 
                 //moving cube position and rotation
                 var mcdelta = clock.getDelta(); // seconds.
@@ -244,7 +244,6 @@ appendScore();
 
                 //collision detection
                 Collide();
-
                 //gathering props
                 propGathering();
                 //scoring
@@ -254,7 +253,6 @@ appendScore();
                 EnemyMovement();
                 //bullets
                 BulletTravel();
-
         })
 
         //loop runner
@@ -271,6 +269,7 @@ appendScore();
                         updateFn(deltaMsec/1000, nowMsec/1000)
                 })
         })
+
 </script>
 </div>
 <div id="message" class="ce"></div>
