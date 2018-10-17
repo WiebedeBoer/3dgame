@@ -1,5 +1,6 @@
 class Enemy extends THREE.Group {
     init(){
+        
         var refEnemy, enemy;
 
         refEnemy = this;
@@ -12,6 +13,8 @@ class Enemy extends THREE.Group {
         });
         enemy.rotation.y = 90 * Math.PI / 180;
         refEnemy.add(enemy);
+
+        
     }
     constructor(pX,pY,pZ){
         super();
@@ -19,5 +22,8 @@ class Enemy extends THREE.Group {
         this.position.y = pY;
         this.position.z = pZ;
         this.init();
+        //Creating and locating the HitboxCube of the enemy.
+        this.enemyCube = new EnemyCube(pX, pY, pZ);
+        scene.add(this.enemyCube);
     }
 }

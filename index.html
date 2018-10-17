@@ -173,7 +173,6 @@ var enemyY = 10;
 var enemyZ = 0;
 var aantalEnemies = 5;
 var enemyList = [];
-var enemyCubeList = [];
 
 for (var i = 0; i < aantalEnemies; i++)
 {
@@ -183,13 +182,6 @@ for (var i = 0; i < aantalEnemies; i++)
     scene.add(enemy);
     enemy.position.x += 2 * Math.floor(Math.random() * 50) + 1;
     enemy.position.z += 2 * Math.floor(Math.random() * 50) + 1;
-
-    // Spawn Cube
-    var nenemyCube = new EnemyCube(enemyX, enemyY, enemyZ);
-    enemyCubeList.push(nenemyCube);
-    scene.add(nenemyCube);
-    nenemyCube.position.x = enemy.position.x;
-    nenemyCube.position.z = enemy.position.z;
 }
 
 //Locking the pointer to the game
@@ -254,9 +246,8 @@ appendScore();
                 //scoring
                 //Scoring();
 
-                //enemy movement
+                //enemy&cube movement
                 EnemyMovement();
-                CubeMovement();
         })
 
         //loop runner
