@@ -170,11 +170,24 @@ updateFcts.push(function(delta, now){
 //city buildings
 //BuildingMaker();
 
+// Vectors
+var nodeY = 10;
+new v3d.Vector3( 0, nodeY, 0 );
+new v3d.Vector3( 10, nodeY, 0 );
+new v3d.Vector3( 10, nodeY, 10 );
+new v3d.Vector3( 20, nodeY, 10 );
+new v3d.Vector3( 20, nodeY, 20 );
+new v3d.Vector3( 30, nodeY, 20 );
+new v3d.Vector3( 30, nodeY, 30 );
+new v3d.Vector3( 40, nodeY, 30 );
+new v3d.Vector3( 40, nodeY, 40 );
+new v3d.Vector3( 50, nodeY, 40 );
+
 // Enemies
 var enemyX = 0;
 var enemyY = 10;
 var enemyZ = 0;
-var aantalEnemies = 20;
+var aantalEnemies = 10;
 var enemyList = [];
 
 for (var i = 0; i < aantalEnemies; i++)
@@ -184,8 +197,8 @@ for (var i = 0; i < aantalEnemies; i++)
     enemyList.push(enemy);
     // enemyCubeList.push(nenemyCube);
     scene.add(enemy);
-    enemy.position.x += 2 * Math.floor(Math.random() * 80) + 1;
-    enemy.position.z += 2 * Math.floor(Math.random() * 80) + 1;
+    enemy.position.x += 2 * Math.floor(Math.random() * 50) + 1;
+    enemy.position.z += 2 * Math.floor(Math.random() * 50) + 1;
 }
 
 //Locking the pointer to the game
