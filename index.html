@@ -58,7 +58,7 @@
 </head>
 <body class="ng-scope" style="margin: 0px; background-color: #d8e7ff; overflow: hidden;">
 
-<div class="parent">  
+<div class="parent" id="parent">  
    <!--customcanvas-->       
 <div height="400" width="800" class="customcanvas" id="customcanvas"></div>
         <!--hud-->
@@ -187,11 +187,11 @@ scene.add(enemyCube);
 //scene.add(nenemy3Cube);   
 
 //Locking the pointer to the game
-document.getElementById("customcanvas").addEventListener( 'click', function ( event ) {
+document.getElementById("parent").addEventListener( 'click', function ( event ) {
         lock();
 }, false );
 function lock(rawr) {
-        document.getElementById("customcanvas").requestPointerLock();
+        document.getElementById("parent").requestPointerLock();
 } 
 
 //economy variables
@@ -222,7 +222,6 @@ appendAmmo();
 appendWeapon();
 appendScore();
 
-
         //update function
         updateFcts.push(function(){
                 //render the scene
@@ -252,6 +251,7 @@ appendScore();
                 //enemy movement
                 EnemyMovement();
                 CubeMovement();
+                //bullets
                 BulletTravel();
 
         })
