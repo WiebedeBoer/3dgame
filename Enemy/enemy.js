@@ -1,8 +1,11 @@
 class Enemy extends THREE.Group {
     init(){
         var refEnemy, enemy;
+
         refEnemy = this;
+
         enemy = new THREE.Group();
+
         loadOBJModel("Models/Dummy/", "model.obj", "Models/Dummy/", "materials.mtl", (mesh) => {
             mesh.scale.set(10, 10, 10);
             enemy.add(mesh);
