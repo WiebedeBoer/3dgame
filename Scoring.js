@@ -27,14 +27,20 @@ function Scoring(){
     if (particleHit ==true){
     //increase score    
     totalscore = totalscore + 1;
-    console.log("score:"+totalscore);
     //update score
     eScore ="Score: "+totalscore;
     document.getElementById('score').innerHTML = eScore; 
     particleHit = false;
     //kill ammo cube
-    ammoCube.alive = false;
-    scene.remove(ammoCube);
+    //ammoCube.alive = false;
+    //scene.remove(ammoCube);
+    //kill enemy cube
+    //enemyCube.alive = false;
+    //scene.remove(enemyCube);
+    //kill enemy
+    //enemy.alive = false;
+    //scene.remove(enemy);
     }
+    console.log(particleHit);
     
 }
