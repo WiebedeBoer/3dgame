@@ -150,13 +150,13 @@ scene.add( skyBox );
 
 //moving cube
 var cubeGeometry = new THREE.CubeGeometry(5,5,5,1,1,1);
-var wireMaterial = new THREE.MeshBasicMaterial( { color: 0xff0000, wireframe:true, visible:false } );
+var wireMaterial = new THREE.MeshBasicMaterial( { color: 0xff0000, wireframe:true, visible:false});
 MovingCube = new THREE.Mesh( cubeGeometry, wireMaterial );
 MovingCube.position.set(camera.position.x, camera.position.y, camera.position.z);
-scene.add( MovingCube );
+scene.add(MovingCube);
 
 //Camera Controls
-var controls = new THREE.FirstPersonControls( camera );
+var controls = new THREE.FirstPersonControls(camera);
 //controls.movementSpeed = 80;
 controls.lookSpeed = 0.05;
 controls.lookVertical = false; //if true vertical look on mousemovement
@@ -171,7 +171,7 @@ updateFcts.push(function(delta, now){
 var enemyX = 0;
 var enemyY = 10;
 var enemyZ = 0;
-var aantalEnemies = 1;
+var aantalEnemies = 5;
 var enemyList = [];
 var enemyCubeList = [];
 
@@ -192,7 +192,6 @@ for (var i = 0; i < aantalEnemies; i++)
     nenemyCube.position.z = enemy.position.z;
 }
 
-
 //Locking the pointer to the game
 document.getElementById("customcanvas").addEventListener( 'click', function ( event ) {
         lock();
@@ -207,7 +206,7 @@ var totalAmmo = 50;
 var eAmmo = leftOverAmmo+"/"+totalAmmo;
 var eWeapon ="Pistol";
 var totalscore = 0;
-var eScore ="Score: "+totalscore;
+var eScore ="Score: "+ totalscore;
 
 //show HUD economy functions
 function appendAmmo(){
@@ -229,20 +228,19 @@ appendAmmo();
 appendWeapon();
 appendScore();
 
-
         //update function
         updateFcts.push(function(){
                 //render the scene
-                renderer.render( scene, camera );
+                renderer.render(scene, camera);
 
                 //moving cube position and rotation
                 var mcdelta = clock.getDelta(); // seconds.
                 var mcrotateAngle = Math.PI / 2 * mcdelta;   // pi/2 radians (90 degrees) per second
 
                 if ( keyboard.pressed("q") )
-                MovingCube.rotation.y += mcrotateAngle; //rotate left
+                MovingCube.rotation.y += mcrotateAngle; // rotate left
                 if ( keyboard.pressed("e") )
-                MovingCube.rotation.y -= mcrotateAngle; //rotate right
+                MovingCube.rotation.y -= mcrotateAngle; // rotate right
 
                 MovingCube.position.x = camera.position.x;
                 MovingCube.position.y = camera.position.y;
@@ -255,10 +253,10 @@ appendScore();
                 propGathering();
                 //scoring
                 //Scoring();
+
                 //enemy movement
                 EnemyMovement();
                 CubeMovement();
-
         })
 
         //loop runner
@@ -275,6 +273,7 @@ appendScore();
                         updateFn(deltaMsec/1000, nowMsec/1000)
                 })
         })
+
 </script>
 </div>
 <div id="message" class="ce"></div>

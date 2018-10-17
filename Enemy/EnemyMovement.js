@@ -16,7 +16,7 @@ function EnemyMovement() {
 
         else if (distance < 10){
             clearText();
-            appendText(" you died ");
+            appendText("you died");
         }
 
         else {
