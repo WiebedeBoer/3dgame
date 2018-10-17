@@ -7,7 +7,7 @@ function Scoring(){
     
     for (var vertexBulletIndex = 0; vertexBulletIndex < enemy.enemyCubeGeometry.vertices.length; vertexBulletIndex++)
     {
-        var localVertex = enemyCube.enemyCubeGeometry.vertices[vertexBulletIndex].clone();
+        var localVertex = enemy.enemyCubeGeometry.vertices[vertexBulletIndex].clone();
         var globalVertex = localVertex.applyMatrix4( enemy.matrix );
         var directionVector = globalVertex.sub( enemy.position );
 
