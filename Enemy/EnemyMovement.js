@@ -19,7 +19,7 @@ function EnemyMovement() {
             appendText(" you died ");
         }
 
-        else{
+        else {
 
         }
     });
