@@ -10,12 +10,17 @@ class Enemy extends THREE.Group {
             mesh.scale.set(10, 10, 10);
             enemy.add(mesh);
         });
+
         enemy.rotation.y = 90 * Math.PI / 180;
         refEnemy.add(enemy);
+
+        var nenemyCube = new EnemyCube(enemyX, 0, enemyZ);
+        refEnemy.add(nenemyCube);
     }
+
     constructor(pX,pY,pZ){
         super();
-        this.position.x = pX; 
+        this.position.x = pX;
         this.position.y = pY;
         this.position.z = pZ;
         this.init();

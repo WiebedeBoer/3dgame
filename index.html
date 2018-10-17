@@ -171,7 +171,7 @@ updateFcts.push(function(delta, now){
 var enemyX = 0;
 var enemyY = 10;
 var enemyZ = 0;
-var aantalEnemies = 5;
+var aantalEnemies = 2;
 var enemyList = [];
 var enemyCubeList = [];
 
@@ -180,16 +180,15 @@ for (var i = 0; i < aantalEnemies; i++)
     // Spawn Enemy
     var enemy = new Enemy(enemyX, enemyY, enemyZ);
     enemyList.push(enemy);
+    //enemyCubeList.push(nenemyCube);
     scene.add(enemy);
-    enemy.position.x += 2 * Math.floor(Math.random() * 50) + 1;
-    enemy.position.z += 2 * Math.floor(Math.random() * 50) + 1;
+    enemy.position.x += 2 * Math.floor(Math.random() * 20) + 1;
+    enemy.position.z += 2 * Math.floor(Math.random() * 20) + 1;
 
     // Spawn Cube
-    var nenemyCube = new EnemyCube(enemyX, enemyY, enemyZ);
-    enemyCubeList.push(nenemyCube);
-    scene.add(nenemyCube);
-    nenemyCube.position.x = enemy.position.x;
-    nenemyCube.position.z = enemy.position.z;
+    //scene.add(nenemyCube);
+    //nenemyCube.position.x = enemy.position.x;
+    //nenemyCube.position.z = enemy.position.z;
 }
 
 //Locking the pointer to the game

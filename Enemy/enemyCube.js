@@ -12,9 +12,9 @@ class EnemyCube extends THREE.Group {
 
     constructor(pX,pY,pZ){
         super();
-        this.position.x = pX;
-        this.position.y = pY;
-        this.position.z = pZ;
+        //this.position.x = pX;
+        //this.position.y = pY;
+        //this.position.z = pZ;
         this.init();
     }
 }
