@@ -39,6 +39,6 @@ function Scoring(){
     //enemy.alive = false;
     //scene.remove(enemy);
     }
-    console.log(particleHit);
+    //console.log(particleHit);
     
 }
