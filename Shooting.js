@@ -20,17 +20,20 @@ function Shot(){
             
             //ammoCube.position.add(ammoCube.velocity);
 
-            //set timeout bullet
-            ammoCube.alive = true;
-            setTimeout(function(){
-                ammoCube.alive = false;
-                scene.remove(ammoCube);
-            }, 10000);
-
             //add particle
             scene.add( ammoCube );
             collidableBulletMeshList.push(ammoCube); 
             bullets.push(ammoCube);
+
+            //set timeout bullet
+            ammoCube.alive = true;
+            setTimeout(function(){
+                let pos = bullets.indexOf(ammoCube.uuid);
+                ammoCube.alive = false;
+                bullets.splice(pos,1);
+                scene.remove(ammoCube);
+            }, 10000);
+            console.log(bullets);
 
         }
         else {
@@ -40,4 +43,8 @@ function Shot(){
         eAmmo = leftOverAmmo+"/"+totalAmmo;        
         document.getElementById('ammo').innerHTML = eAmmo;
     
-}            
+}
+function BulletTravel(){
+
+
+}
