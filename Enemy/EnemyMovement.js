@@ -17,12 +17,14 @@ function EnemyMovement() {
             gameover.style.display = "block";} 
       }
       //Relocate the cube to the enemy at all times.
-      enemy.enemyCube.position.x = enemy.position.x;
-      enemy.enemyCube.position.y = enemy.position.y;
-      enemy.enemyCube.position.z = enemy.position.z;
-      enemy.enemyCube.rotation.x = enemy.rotation.x;
-      enemy.enemyCube.rotation.y = enemy.rotation.y;
-      enemy.enemyCube.rotation.z = enemy.rotation.z;
+      /*
+        enemy.enemyCube.position.x = enemy.position.x;
+        enemy.enemyCube.position.y = enemy.position.y;
+        enemy.enemyCube.position.z = enemy.position.z;
+        enemy.enemyCube.rotation.x = enemy.rotation.x;
+        enemy.enemyCube.rotation.y = enemy.rotation.y;
+        enemy.enemyCube.rotation.z = enemy.rotation.z;
+      */
   });
 }     
             
