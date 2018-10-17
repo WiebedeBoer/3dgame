@@ -28,12 +28,10 @@ function Shot(){
             //set timeout bullet
             ammoCube.alive = true;
             setTimeout(function(){
-                let pos = bullets.indexOf(ammoCube.uuid);
                 ammoCube.alive = false;
-                bullets.splice(pos,1);
+                bullets.splice(0,1);
                 scene.remove(ammoCube);
             }, 10000);
-            console.log(bullets);
 
         }
         else {
