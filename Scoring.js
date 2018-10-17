@@ -3,13 +3,13 @@ function Scoring(){
     //registrate particle hit
     var particleHit =false;
     //particle collision
-    var originEnemyPoint = enemyCube.position.clone();
+    var originEnemyPoint = enemy.position.clone();
     
-    for (var vertexBulletIndex = 0; vertexBulletIndex < enemyCube.enemyCubeGeometry.vertices.length; vertexBulletIndex++)
+    for (var vertexBulletIndex = 0; vertexBulletIndex < enemy.enemyCubeGeometry.vertices.length; vertexBulletIndex++)
     {
         var localVertex = enemyCube.enemyCubeGeometry.vertices[vertexBulletIndex].clone();
-        var globalVertex = localVertex.applyMatrix4( enemyCube.matrix );
-        var directionVector = globalVertex.sub( enemyCube.position );
+        var globalVertex = localVertex.applyMatrix4( enemy.matrix );
+        var directionVector = globalVertex.sub( enemy.position );
 
         var rayBullet = new THREE.Raycaster( originEnemyPoint, directionVector.clone().normalize() );
         var collisionResults = rayBullet.intersectObjects( collidableBulletMeshList );
@@ -19,9 +19,7 @@ function Scoring(){
             appendText(" kill ");
             particleHit = true;
         }
-
-    }
-    
+    }    
     
     //check particle hit
     if (particleHit ==true){
