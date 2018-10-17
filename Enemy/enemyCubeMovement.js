@@ -1,6 +1,11 @@
+// Move enemyCube camera towards enemy
 function CubeMovement() {
-    new TWEEN.Tween(nenemyCube.position)
-          .to(enemy.position, 10)
-          .start();
-          TWEEN.update();
+    enemyCubeList.forEach(function(nenemyCube) {
+        var nenemyPosition = new THREE.Vector3(nenemyCube.position.x, nenemyCube.position.y, nenemyCube.position.z);
+        var enemyPosition = new THREE.Vector3(enemy.position.x, enemy.position.y, enemy.position.z);
+        new TWEEN.Tween(nenemyCube.position)
+            .to(enemy.position, 100)
+            .start();
+            TWEEN.update();
+    });
 }

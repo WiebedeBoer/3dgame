@@ -145,24 +145,30 @@ updateFcts.push(function(delta, now){
         })
 
 //city buildings
-//BuildingMaker();
-
-// Enemy Cube
-var nenemyCube = new EnemyCube(0,10,0);
-scene.add(nenemyCube);
+BuildingMaker();
 
 // Enemies
-var enemyX = 0;
+var enemyX = 100;
 var enemyY = 10;
 var enemyZ = 0;
 var aantalEnemies = 5;
-for (i = 0; i < aantalEnemies; i++)
+var enemyList = [];
+var enemyCubeList = [];
+
+for (var i = 0; i < aantalEnemies; i++)
 {
+    // Spawn Enemy
     var enemy = new Enemy(enemyX, enemyY, enemyZ);
+    enemyList.push(enemy);
     scene.add(enemy);
-    enemy.position.x += 2 * Math.floor(Math.random() * 30) + 1  ;
-    enemy.position.z += 2 * Math.floor(Math.random() * 30) + 1  ;
-    console.log(enemy);
+    enemy.position.x += 2 * Math.floor(Math.random() * 30) + 1;
+    enemy.position.z += 2 * Math.floor(Math.random() * 30) + 1;
+    // Spawn Cube
+    var nenemyCube = new EnemyCube(enemyX, enemyY, enemyZ);
+    enemyCubeList.push(nenemyCube);
+    scene.add(nenemyCube);
+    nenemyCube.position.x = enemy.position.x;
+    nenemyCube.position.z = enemy.position.z;
 }
 
 //Locking the pointer to the game
@@ -228,7 +234,6 @@ function appendText(txt)
                 //Scoring();
                 //enemy movement
                 EnemyMovement();
-                CubeMovement();
         })
 
         //loop runner
