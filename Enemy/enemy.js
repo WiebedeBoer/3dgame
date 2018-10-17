@@ -17,12 +17,10 @@ class Enemy extends THREE.Group {
         
         this.enemyCubeGeometry = new THREE.CubeGeometry(10,10,10,1,1,1);
         var enemyCubeMaterial = new THREE.MeshBasicMaterial( { color: 0x00ff00, wireframe:true, visible:true } );
-        this.enemyCubeMesh = new THREE.Mesh( this.enemyCubeGeometry, enemyCubeMaterial );
-        //refEnemy.add(enemyCubeMesh);
+        this.enemyCube = new THREE.Mesh( this.enemyCubeGeometry, enemyCubeMaterial );
+        //enemy.add(this.enemyCube);
         this.position.set(this.position.x, this.position.y, this.position.z);
-
-
-        
+        this.enemyCube.position.set(this.position.x, this.position.y, this.position.z);    
 
         
     }
@@ -35,6 +33,6 @@ class Enemy extends THREE.Group {
         this.init();
         //Creating and locating the HitboxCube of the enemy.
         //this.enemyCube = new EnemyCube(pX, pY, pZ);
-        scene.add(this.enemyCubeMesh);
+        scene.add(this.enemyCube);
     }
 }
