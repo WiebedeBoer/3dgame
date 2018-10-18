@@ -28,6 +28,8 @@ function Scoring(){
                 //Remove enemy
                 scene.remove(enemyResult.enemyCube);
                 scene.remove(enemyResult);
+                //remove bullet
+                BulletKill();
             }
         }    
     });

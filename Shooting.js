@@ -30,10 +30,7 @@ function Shot(){
             //set timeout bullet
             ammoCube.alive = true;
             setTimeout(function(){
-                let pos = bullets.indexOf(ammoCube.uuid);
-                ammoCube.alive = false;
-                bullets.splice(pos,1);
-                scene.remove(ammoCube);
+                BulletKill();
             }, 10000);
 
         }
@@ -50,4 +47,11 @@ function BulletTravel(){
     bullets.forEach(element => {
         element.translateZ( -2 );
     });
+}
+
+function BulletKill(){
+    let pos = bullets.indexOf(ammoCube.uuid);
+    ammoCube.alive = false;
+    bullets.splice(pos,1);
+    scene.remove(ammoCube);
 }
