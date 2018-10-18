@@ -28,7 +28,9 @@ function Scoring(){
                 bullets.splice(indexBullet,1);
                 let indexEnemy = enemyList.map(e => e.uuid).indexOf(enemyResult.uuid);
                 enemyList.splice(indexEnemy,1);
-                scene.remove(collisionResults[0]['object']);
+                //remove bullet and bullet mesh                
+                scene.remove(collisionResults[0]['object']);                
+                //scene.remove(collisionResults[0]['object']);                
                 //Remove enemy and bullet from the scene
                 scene.remove(enemyResult.enemyCube)
                 scene.remove(enemyResult);

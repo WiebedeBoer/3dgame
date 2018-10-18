@@ -6,14 +6,29 @@ function Shot(){
             leftOverAmmo = leftOverAmmo - 1;
             //create ammo particle
             var ammoGeometry = new THREE.CubeGeometry(3,3,3,1,1,1);
-            var ammoMaterial = new THREE.MeshBasicMaterial( { color: 0xff0000, wireframe:true, visible:true } );
+            var ammoMaterial = new THREE.MeshBasicMaterial( { color: 0xff0000, wireframe:true, visible:false } );
             var ammoCube = new THREE.Mesh( ammoGeometry, ammoMaterial );
+
             //set particle position
             ammoCube.position.set(camera.position.x, camera.position.y - 3, camera.position.z);
             //set rotation to that of the camera (player)
             ammoCube.rotation.x = camera.rotation.x;
             ammoCube.rotation.y = camera.rotation.y;
             ammoCube.rotation.z = camera.rotation.z;
+            
+            //create bullet mesh
+            var bulletmesh;
+            bulletmesh = new THREE.Group();
+                loadOBJModel("Models/Bullet_obj/", "Bullet.obj", "Models/Bullet_obj/", "Bullet.mtl", (bulletmesh) => {
+                    bulletmesh.scale.set(0.01, 0.01, 0.01);
+                    scene.add(bulletmesh);
+                    bulletmesh.position.set(ammoCube.position.x, ammoCube.position.y - 3, ammoCube.position.z);
+                    //set rotation to that of the camera (player)
+                    bulletmesh.rotation.x = camera.rotation.x;
+                    bulletmesh.rotation.y = camera.rotation.y;
+                    bulletmesh.rotation.z = camera.rotation.z;
+                    bulletmeshes.push(bulletmesh);
+                });
             
 
             //add particle
@@ -28,6 +43,7 @@ function Shot(){
                 if(indexBullet !== -1){
                     bullets.splice(indexBullet,1);
                     scene.remove(ammoCube);
+                    scene.remove(bulletmesh);
                 }
             }, 10000);
 
@@ -43,6 +59,11 @@ function Shot(){
 
 function BulletTravel(){
     bullets.forEach(element => {
+        element.translateZ( -2 );
+    });
+}
+function BulletMeshTravel(){
+    bulletmeshes.forEach(element => {
         element.translateZ( -2 );
     });
 }
