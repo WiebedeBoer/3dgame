@@ -14,11 +14,7 @@ function Shot(){
             ammoCube.rotation.x = camera.rotation.x;
             ammoCube.rotation.y = camera.rotation.y;
             ammoCube.rotation.z = camera.rotation.z;
-
-            // set the velocity of the bullet
-            //ammoCube.velocity = new THREE.Vector3(-Math.sin(80),0,Math.cos(80));
             
-            //ammoCube.position.add(ammoCube.velocity);
 
             //add particle
             scene.add( ammoCube );
@@ -28,9 +24,11 @@ function Shot(){
             //set timeout bullet
             ammoCube.alive = true;
             setTimeout(function(){
-                ammoCube.alive = false;
-                bullets.splice(0,1);
-                scene.remove(ammoCube);
+                let indexBullet = bullets.map(e => e.uuid).indexOf(ammoCube.uuid);
+                if(indexBullet !== -1){
+                    bullets.splice(indexBullet,1);
+                    scene.remove(ammoCube);
+                }
             }, 10000);
 
         }
@@ -41,7 +39,8 @@ function Shot(){
         eAmmo = leftOverAmmo+"/"+totalAmmo;        
         document.getElementById('ammo').innerHTML = eAmmo;
     
-}
+} 
+
 function BulletTravel(){
     bullets.forEach(element => {
         element.translateZ( -2 );

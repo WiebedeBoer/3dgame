@@ -1,5 +1,6 @@
 class Enemy extends THREE.Group {
     init(){
+        
         var refEnemy, enemy;
 
         refEnemy = this;
@@ -11,17 +12,27 @@ class Enemy extends THREE.Group {
             enemy.add(mesh);
         });
 
-        enemy.position.x = this.pX;
-        enemy.position.y = this.pY;
-        enemy.position.z = this.pZ;
         enemy.rotation.y = 90 * Math.PI / 180;
         refEnemy.add(enemy);
+        
+        this.enemyCubeGeometry = new THREE.CubeGeometry(10,10,10,1,1,1);
+        var enemyCubeMaterial = new THREE.MeshBasicMaterial( { color: 0x00ff00, wireframe:true, visible:true } );
+        this.enemyCube = new THREE.Mesh( this.enemyCubeGeometry, enemyCubeMaterial );
+        //enemy.add(this.enemyCube);
+        this.position.set(this.position.x, this.position.y, this.position.z);
+        this.enemyCube.position.set(this.position.x, this.position.y, this.position.z);    
+
+        
     }
+
     constructor(pX,pY,pZ){
         super();
-        this.pX = pX;
-        this.pY = pY;
-        this.pZ = pZ;
+        this.position.x = pX;
+        this.position.y = pY;
+        this.position.z = pZ;
         this.init();
+        //Creating and locating the HitboxCube of the enemy.
+        //this.enemyCube = new EnemyCube(pX, pY, pZ);
+        scene.add(this.enemyCube);
     }
 }
