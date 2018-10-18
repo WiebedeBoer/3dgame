@@ -14,25 +14,24 @@ function Scoring(){
             var collisionResults = rayBullet.intersectObjects( collidableBulletMeshList );
             //check collision bullets
             if ( collisionResults.length > 0 && collisionResults[0].distance < directionVector.length() ){
-                console.log(collisionResults);
-
                 clearText();
                 appendText(" kill ");
-                
+
                 //increase score    
                 totalscore = totalscore + 1;
                 //update score
                 eScore ="Score: "+totalscore;
-                document.getElementById('score').innerHTML = eScore; 
-                
-                //Remove enemy
-                scene.remove(enemyResult.enemyCube);
+                document.getElementById('score').innerHTML = eScore;
+
+                //Remove enemy and bullet from their respective arrays
+                let indexBullet = bullets.map(e => e.uuid).indexOf(collisionResults[0]['object']['uuid']);
+                bullets.splice(indexBullet,1);
+                let indexEnemy = enemyList.map(e => e.uuid).indexOf(enemyResult.uuid);
+                enemyList.splice(indexEnemy,1);
+                scene.remove(collisionResults[0]['object']);
+                //Remove enemy and bullet from the scene
+                scene.remove(enemyResult.enemyCube)
                 scene.remove(enemyResult);
-                //remove enemy from list
-                let posindex = bullets.indexOf(enemy.uuid);                
-                enemyList.splice(posindex,1);
-                //remove bullet
-                BulletKill();
             }
         }    
     });
