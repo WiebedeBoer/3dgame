@@ -28,6 +28,9 @@ function Scoring(){
                 //Remove enemy
                 scene.remove(enemyResult.enemyCube);
                 scene.remove(enemyResult);
+                //remove enemy from list
+                let posindex = bullets.indexOf(enemy.uuid);                
+                enemyList.splice(posindex,1);
                 //remove bullet
                 BulletKill();
             }
