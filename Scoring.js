@@ -34,10 +34,10 @@ function Scoring(){
     //scene.remove(ammoCube);
     //kill enemy cube
     //enemyCube.alive = false;
-    //scene.remove(enemyCube);
+    scene.remove(enemy.enemyCube);
     //kill enemy
     //enemy.alive = false;
-    //scene.remove(enemy);
+    scene.remove(enemy);
     }
     //console.log(particleHit);
     
