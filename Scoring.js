@@ -30,13 +30,14 @@ function Scoring(){
     document.getElementById('score').innerHTML = eScore; 
     particleHit = false;
     //kill ammo cube
-    //ammoCube.alive = false;
-    //scene.remove(ammoCube);
+    let pos = bullets.indexOf(ammoCube.uuid);
+    ammoCube.alive = false;
+    bullets.splice(pos,1);
+    collidableBulletMeshList.splice(pos,1);
+    scene.remove(ammoCube);
     //kill enemy cube
-    //enemyCube.alive = false;
     scene.remove(enemy.enemyCube);
     //kill enemy
-    //enemy.alive = false;
     scene.remove(enemy);
     }
     //console.log(particleHit);

@@ -7,7 +7,7 @@ function Shot(){
             //create ammo particle
             var ammoGeometry = new THREE.CubeGeometry(3,3,3,1,1,1);
             var ammoMaterial = new THREE.MeshBasicMaterial( { color: 0xff0000, wireframe:true, visible:true } );
-            var ammoCube = new THREE.Mesh( ammoGeometry, ammoMaterial );
+            ammoCube = new THREE.Mesh( ammoGeometry, ammoMaterial );
             //set particle position
             ammoCube.position.set(camera.position.x, camera.position.y - 3, camera.position.z);
             //set rotation to that of the camera (player)
@@ -16,9 +16,11 @@ function Shot(){
             ammoCube.rotation.z = camera.rotation.z;
 
             // set the velocity of the bullet
-            //ammoCube.velocity = new THREE.Vector3(-Math.sin(80),0,Math.cos(80));
+            //ammoCube.velocity = new THREE.Vector3(-Math.sin(ammoCube.rotation.y),0,Math.cos(ammoCube.rotation.y));
             
             //ammoCube.position.add(ammoCube.velocity);
+
+            //console.log(camera);
 
             //add particle
             scene.add( ammoCube );
@@ -28,8 +30,9 @@ function Shot(){
             //set timeout bullet
             ammoCube.alive = true;
             setTimeout(function(){
+                let pos = bullets.indexOf(ammoCube.uuid);
                 ammoCube.alive = false;
-                bullets.splice(0,1);
+                bullets.splice(pos,1);
                 scene.remove(ammoCube);
             }, 10000);
 
@@ -41,7 +44,8 @@ function Shot(){
         eAmmo = leftOverAmmo+"/"+totalAmmo;        
         document.getElementById('ammo').innerHTML = eAmmo;
     
-}
+} 
+
 function BulletTravel(){
     bullets.forEach(element => {
         element.translateZ( -2 );
