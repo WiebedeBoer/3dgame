@@ -106,7 +106,7 @@ var MovingCube;
 var collidableMeshList = []; 
 var collidablePropMeshList = []; 
 var collidableBulletMeshList = [];
-var ammoCube;
+//var ammoCube;
 
 //no show menu
 var gamestart = document.getElementById("menu");
@@ -143,9 +143,9 @@ Lighter();
 //gun props
 Props();
 
-//plane                
-var plane = new Plane();
-scene.add(plane);
+//planes 
+var planeroad = new Plane(5630,5630);
+scene.add(planeroad);  
 
 //skybox
 var skyBox = new Skybox();
@@ -223,10 +223,14 @@ appendAmmo();
 appendWeapon();
 appendScore();
 
+                //planegreen.renderOrder = 1;
+                //planeroad.renderOrder = 2; 
+                //renderer.sortObjects = false;
+
         //update function
         updateFcts.push(function(){
                 //render the scene
-                renderer.render( scene, camera ); 
+                renderer.render( scene, camera );
 
                 //moving cube position and rotation
                 var mcdelta = clock.getDelta(); // seconds.
