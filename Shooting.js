@@ -33,7 +33,8 @@ function Shot(){
                     //push in list
                     bulletmeshes.push(bulletmesh);
                     //add to scene
-                    scene.add(bulletmesh);             
+                    scene.add(bulletmesh); 
+                    //ammoCube.add(bulletmesh);  //kan niet adden          
                 });                 
 
             //add particle
