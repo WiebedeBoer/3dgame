@@ -41,6 +41,10 @@
 <script src="Collision.js"></script>
 <!--Enemy-->
 <script src="Enemy/enemy.js"></script>
+<!--<script src="Enemy/enemyCube.js"></script>-->
+<!--<script src="Enemy/enemyCubeMovement.js"></script>-->
+<script src="Enemy/EnemyMaker.js"></script>
+<script src="Enemy/EnemyMovement.js"></script>
 <!--Tween-->
 <script src="Tween.js"></script>
 <!--Graph-->
@@ -56,45 +60,44 @@
 </head>
 <body class="ng-scope" style="margin: 0px; background-color: #d8e7ff; overflow: hidden;">
 
-        <div class="parent">  
-                <!--customcanvas-->       
-             <div height="400" width="800" class="customcanvas" id="customcanvas"></div>
-                     <!--hud-->
-                             <div id="content-frame" ng-controller="HudState" class="ng-scope">
-                                             <div id="canvas-container">
-                                                 <div id="canvas-align">
-                                                     <canvas id="webgl-canvas" width="800" height="400"></canvas>
-                                                     <div id="hud" ng-class="{visible: style.visible, transparent: style.transparent, perspective: style.perspective, animated: style.animated}" class="visible">
-                                                         <div id="weapon" class="ng-binding">
-                                                             
-                                                         </div>
-                                                         <div id="ammo" class="ng-binding">
-                                                             
-                                                         </div>
-                                                         <div id="score" class="ng-binding">
-                                                             
-                                                         </div>
-                                                     </div>
-                                                 </div>
-                                             </div>
-                                     </div>
-                                     <!--menu-->
-                                     <div id="menu" class="ng-menu">
-                                             <div id="content-frame" class="ng-scope">
-                                                     <div id="canvas-container">
-                                                             <div id="quit">
-                                                                     <button id="quitbutton">Quit</button>                                                        
-                                                             </div>
-                                                             <div id="resume">
-                                                                     <button id="resumebutton">Resume</button>
-                                                             </div>
-                                                     </div>
-                                                     
-                                             </div>
-                                                     
-                                     </div>
-             </div>
-
+<div class="parent" id="parent">  
+   <!--customcanvas-->       
+<div height="400" width="800" class="customcanvas" id="customcanvas"></div>
+        <!--hud-->
+                <div id="content-frame" ng-controller="HudState" class="ng-scope">
+                                <div id="canvas-container">
+                                    <div id="canvas-align">
+                                        <canvas id="webgl-canvas" width="800" height="400"></canvas>
+                                        <div id="hud" ng-class="{visible: style.visible, transparent: style.transparent, perspective: style.perspective, animated: style.animated}" class="visible">
+                                            <div id="weapon" class="ng-binding">
+                                                
+                                            </div>
+                                            <div id="ammo" class="ng-binding">
+                                                
+                                            </div>
+                                            <div id="score" class="ng-binding">
+                                                
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                        </div>
+                        <!--menu-->
+                        <div id="menu" class="ng-menu">
+                                <div id="content-frame" class="ng-scope">
+                                        <div id="canvas-container">
+                                                <div id="quit">
+                                                        <button id="quitbutton">Quit</button>                                                        
+                                                </div>
+                                                <div id="resume">
+                                                        <button id="resumebutton">Resume</button>
+                                                </div>
+                                        </div>
+                                        
+                                </div>
+                                        
+                        </div>
+</div>
 <script>
 //keyboard
 var keyboard = new THREEx.KeyboardState();
@@ -105,7 +108,14 @@ var MovingCube;
 var collidableMeshList = []; 
 var collidablePropMeshList = []; 
 var collidableBulletMeshList = [];
-var enemyCube; 
+//var ammoCube;
+
+//no show menu
+var gamestart = document.getElementById("menu");
+gamestart.style.display = "none";
+
+// Bullets array
+var bullets = [];
        
 //updater
 var updateFcts = [];
@@ -135,9 +145,9 @@ Lighter();
 //gun props
 Props();
 
-//plane                
-var plane = new Plane();
-scene.add(plane);
+//planes 
+var planeroad = new Plane(5630,5630);
+scene.add(planeroad);  
 
 //skybox
 var skyBox = new Skybox();
@@ -163,37 +173,28 @@ updateFcts.push(function(delta, now){
 //BuildingMaker();
 
 // Enemies
-var enemy = new Enemy(-53,10,7);
-scene.add(enemy);
-var enemy2 = new Enemy(-57,10,106);
-scene.add(enemy2);
-var enemy3 = new Enemy(440,10,13);
-scene.add(enemy3);
-            
-            // Move enemy camera towards player
-            function EnemyMovement() {
-              var cameraPosition = new THREE.Vector3(camera.position.x, camera.position.y, camera.position.z);
-              var enemyPosition = new THREE.Vector3(enemy.position.x, enemy.position.y, enemy.position.z);
-              var distance = cameraPosition.distanceTo(enemyPosition);
-              //console.log(distance);
-              if(distance < 100){
-                enemy.lookAt(camera.position);
-                new TWEEN.Tween(enemy.position)
-                    .to(camera.position, 200)
-                    .start();
-                    TWEEN.update();
-              }
-              else {
-              }
-            }
-            
+var enemyX = 0;
+var enemyY = 10;
+var enemyZ = 0;
+var aantalEnemies = 2;
+var enemyList = [];
+for (var i = 0; i < aantalEnemies; i++)
+{
+    // Spawn Enemy
+    var enemy = new Enemy(enemyX, enemyY, enemyZ);
+    enemyList.push(enemy);
+    //enemyCubeList.push(nenemyCube);
+    scene.add(enemy);
+    enemy.position.x += 2 * Math.floor(Math.random() * 50) + 1;
+    enemy.position.z += 2 * Math.floor(Math.random() * 50) + 1;
+}
 
 //Locking the pointer to the game
-document.getElementById("customcanvas").addEventListener( 'click', function ( event ) {
+document.getElementById("parent").addEventListener( 'click', function ( event ) {
         lock();
 }, false );
 function lock(rawr) {
-        document.getElementById("customcanvas").requestPointerLock();
+        document.getElementById("parent").requestPointerLock();
 } 
 
 //economy variables
@@ -231,10 +232,19 @@ function clearText()
 function appendText(txt)
 {   document.getElementById('message').innerHTML += txt;}
 
+//economy HUD
+appendAmmo();
+appendWeapon();
+appendScore();
+
+                //planegreen.renderOrder = 1;
+                //planeroad.renderOrder = 2; 
+                //renderer.sortObjects = false;
+
         //update function
         updateFcts.push(function(){
                 //render the scene
-                renderer.render( scene, camera ); 
+                renderer.render( scene, camera );
 
                 //moving cube position and rotation
                 var mcdelta = clock.getDelta(); // seconds.
@@ -251,18 +261,17 @@ function appendText(txt)
 
                 //collision detection
                 Collide();
-                //economy HUD
-                appendAmmo();
-                appendWeapon();
-                appendScore();
-                //shooting
-                Shot();
+
                 //gathering props
                 propGathering();
                 //scoring
                 Scoring();
+                particleHit = false;
                 //enemy movement
                 EnemyMovement();
+                //CubeMovement();
+                //bullets
+                BulletTravel();
 
         })
         
