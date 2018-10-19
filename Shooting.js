@@ -31,12 +31,14 @@ function Shot(){
                     bulletmesh.rotation.y = camera.rotation.y;
                     bulletmesh.rotation.z = camera.rotation.z;
                     //push in list
-                    bulletmeshes.push(bulletmesh);
+                    bulletmeshes.push(bulletmesh);  
                     //add to scene
                     scene.add(bulletmesh); 
-                    //ammoCube.add(bulletmesh);  //kan niet adden          
-                });                 
-
+                    //ammoCube.add(bulletmesh);  //kan niet adden   
+                        
+                }); 
+                              
+                console.log(bulletmeshes);   
             //add particle
             scene.add( ammoCube );
             collidableBulletMeshList.push(ammoCube); 
@@ -45,15 +47,13 @@ function Shot(){
             //set timeout bullet
             ammoCube.alive = true;
             setTimeout(function(){
-                let indexBullet = bullets.map(e => e.uuid).indexOf(ammoCube.uuid);                
+                let indexBullet = bullets.map(e => e.uuid).indexOf(ammoCube.uuid);
+                //We check if the bullet still exists. If it doesent we dont delete a thing               
                 if(indexBullet !== -1){
                     bullets.splice(indexBullet,1);
-                    scene.remove(ammoCube);                    
-                }
-                let indexBulletmesh = bulletmeshes.map(m => m.uuid).indexOf(bulletmesh.uuid);
-                if(indexBulletmesh !== -1){
+                    scene.remove(ammoCube);
                     bulletmeshes.splice(indexBullet,1);                    
-                    scene.remove(bulletmesh);
+                    scene.remove(bulletmesh);                 
                 }
             }, 5000);
 
