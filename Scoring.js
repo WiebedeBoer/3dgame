@@ -30,7 +30,7 @@ function Scoring(){
                 enemyList.splice(indexEnemy,1);
                 //remove bullet and bullet mesh                
                 scene.remove(collisionResults[0]['object']);                
-                //scene.remove(collisionResults[0]['object']);                
+                //scene.remove(collisionResults[0]['object'].bulletmesh);   //dit werkt nog niet             
                 //Remove enemy and bullet from the scene
                 scene.remove(enemyResult.enemyCube)
                 scene.remove(enemyResult);
