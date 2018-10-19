@@ -4,6 +4,8 @@
 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
 <!--three.js-->
 <script src="three.js"></script>
+<!--jQuery-->
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
 <!--camera controls-->
 <script src="FPControls.js"></script>
 <!--open xml-->
@@ -54,46 +56,44 @@
 </head>
 <body class="ng-scope" style="margin: 0px; background-color: #d8e7ff; overflow: hidden;">
 
-<div class="parent">  
-   <!--customcanvas-->       
-<div id="customcanvas" class="customcanvas" height="400" width="800">
-        <!--hud-->
-                <div id="content-frame" ng-controller="HudState" class="ng-scope">
-                                <div id="canvas-container">
-                                    <div id="canvas-align">
-                                        <canvas id="webgl-canvas" width="800" height="400"></canvas>
-                                        <div id="hud" ng-class="{visible: style.visible, transparent: style.transparent, perspective: style.perspective, animated: style.animated}" class="visible">
-                                            <div id="weapon" class="ng-binding">
-                                                
-                                            </div>
-                                            <div id="ammo" class="ng-binding">
-                                                
-                                            </div>
-                                            <div id="score" class="ng-binding">
-                                                
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                        </div> 
-                        <div id="menu" class="ng-menu">
-                                <div id="content-frame" class="ng-scope">
-                                        <div id="canvas-container">
-                                                <div id="quit">
-                                                        <button id="quitbutton">Quit</button>
-                                                        <b>quit</b>
-                                                </div>
-                                                <div id="resume">
-                                                        <button id="resumebutton">Resume</button>
-                                                </div>
-                                        </div>
-                                        
-                                </div>
-                                        
-                        </div>
-
-</div>
-
+        <div class="parent">  
+                <!--customcanvas-->       
+             <div height="400" width="800" class="customcanvas" id="customcanvas"></div>
+                     <!--hud-->
+                             <div id="content-frame" ng-controller="HudState" class="ng-scope">
+                                             <div id="canvas-container">
+                                                 <div id="canvas-align">
+                                                     <canvas id="webgl-canvas" width="800" height="400"></canvas>
+                                                     <div id="hud" ng-class="{visible: style.visible, transparent: style.transparent, perspective: style.perspective, animated: style.animated}" class="visible">
+                                                         <div id="weapon" class="ng-binding">
+                                                             
+                                                         </div>
+                                                         <div id="ammo" class="ng-binding">
+                                                             
+                                                         </div>
+                                                         <div id="score" class="ng-binding">
+                                                             
+                                                         </div>
+                                                     </div>
+                                                 </div>
+                                             </div>
+                                     </div>
+                                     <!--menu-->
+                                     <div id="menu" class="ng-menu">
+                                             <div id="content-frame" class="ng-scope">
+                                                     <div id="canvas-container">
+                                                             <div id="quit">
+                                                                     <button id="quitbutton">Quit</button>                                                        
+                                                             </div>
+                                                             <div id="resume">
+                                                                     <button id="resumebutton">Resume</button>
+                                                             </div>
+                                                     </div>
+                                                     
+                                             </div>
+                                                     
+                                     </div>
+             </div>
 
 <script>
 //keyboard
@@ -211,6 +211,18 @@ function appendWeapon(){
         document.getElementById('weapon').innerHTML = eWeapon;}
 function appendScore(){ 
         document.getElementById('score').innerHTML = eScore;}
+
+//open menu
+jQuery('body, html').on('keydown', openMenu)
+
+function openMenu(e) {
+  console.log(e.keyCode)
+  if (e.keyCode == '17') // KEY 17 = CTRL
+  {
+    e.preventDefault()
+    document.getElementById("menu").visible = hidden;
+  }
+}
 
 //hit registration collision
 function clearText()
