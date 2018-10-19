@@ -53,6 +53,8 @@
 <script src="Shooting.js"></script>
 <script src="Scoring.js"></script>
 <script src="Gathering.js"></script>
+<!--bullets-->
+<script src="Ammo.js"></script>
 <!--styling-->
 <link rel="stylesheet" type="text/css" href="Styling.css">
 </head>
@@ -106,7 +108,6 @@ var MovingCube;
 var collidableMeshList = []; 
 var collidablePropMeshList = []; 
 var collidableBulletMeshList = [];
-var ammoCube;
 
 //no show menu
 var gamestart = document.getElementById("menu");
@@ -114,6 +115,7 @@ gamestart.style.display = "none";
 
 // Bullets array
 var bullets = [];
+var bulletmeshes = [];
        
 //updater
 var updateFcts = [];
@@ -143,9 +145,9 @@ Lighter();
 //gun props
 Props();
 
-//plane                
-var plane = new Plane();
-scene.add(plane);
+//planes 
+var planeroad = new Plane(5630,5630);
+scene.add(planeroad);  
 
 //skybox
 var skyBox = new Skybox();
@@ -168,7 +170,7 @@ updateFcts.push(function(delta, now){
         })
 
 //city buildings
-BuildingMaker();
+//BuildingMaker();
 
 // Enemies
 var enemyX = 0;
@@ -226,7 +228,7 @@ appendScore();
         //update function
         updateFcts.push(function(){
                 //render the scene
-                renderer.render( scene, camera ); 
+                renderer.render( scene, camera );
 
                 //moving cube position and rotation
                 var mcdelta = clock.getDelta(); // seconds.
@@ -254,7 +256,7 @@ appendScore();
                 //CubeMovement();
                 //bullets
                 BulletTravel();
-
+                BulletMeshTravel();
         })
         
         //loop runner

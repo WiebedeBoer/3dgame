@@ -7,7 +7,7 @@ function Shot(){
             
             //create ammo particle
             var ammoGeometry = new THREE.CubeGeometry(3,3,3,1,1,1);
-            var ammoMaterial = new THREE.MeshBasicMaterial( { color: 0xff0000, wireframe:true, visible:true } );
+            var ammoMaterial = new THREE.MeshBasicMaterial( { color: 0xff0000, wireframe:true, visible:false } );
             var ammoCube = new THREE.Mesh( ammoGeometry, ammoMaterial );
 
             //set particle position
@@ -21,24 +21,20 @@ function Shot(){
             var bulletmesh;
             bulletmesh = new THREE.Group();
                 loadOBJModel("Models/Bullet_obj/", "Bullet.obj", "Models/Bullet_obj/", "Bullet.mtl", (mesh) => {
+                    bulletmesh.add(mesh);
                     //scale
-                    mesh.scale.set(0.01, 0.01, 0.01);
+                    bulletmesh.scale.set(0.01, 0.01, 0.01);                    
                     //set position
-                    mesh.position.set(camera.position.x, camera.position.y - 3, camera.position.z);
+                    bulletmesh.position.set(ammoCube.position.x, ammoCube.position.y, ammoCube.position.z);
                     //set rotation to that of the camera (player)
-                    mesh.rotation.x = camera.rotation.x;
-                    mesh.rotation.y = camera.rotation.y;
-                    mesh.rotation.z = camera.rotation.z; 
-                    bulletmesh.add(mesh);              
+                    bulletmesh.rotation.x = camera.rotation.x;
+                    bulletmesh.rotation.y = camera.rotation.y;
+                    bulletmesh.rotation.z = camera.rotation.z;
+                    //push in list
+                    bulletmeshes.push(bulletmesh);
+                    //add to scene
+                    scene.add(bulletmesh);             
                 });                 
-            
-
-            
-            //var ammoCube = new Ammo(camera.position.x, camera.position.y - 3, camera.position.z);
-            //bulletmeshes.push(ammoCube.bulletmesh);
-            bulletmeshes.push(bulletmesh);
-            //add to scene
-            scene.add(bulletmesh);
 
             //add particle
             scene.add( ammoCube );
@@ -78,6 +74,6 @@ function BulletTravel(){
 
 function BulletMeshTravel(){
     bulletmeshes.forEach(element => {
-        element.translateZ( -2 ); //dit werkt nog niet
+        element.translateZ( -2 ); 
     });
 }
