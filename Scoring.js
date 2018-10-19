@@ -1,7 +1,7 @@
 //scoring
 function Scoring(){
     //particle collision
-    
+
     enemyList.forEach(enemyResult => {
         var originEnemyPoint = enemyResult.position.clone();
         for (var vertexBulletIndex = 0; vertexBulletIndex < enemyResult.enemyCubeGeometry.vertices.length; vertexBulletIndex++)
@@ -9,7 +9,7 @@ function Scoring(){
             var localVertex = enemyResult.enemyCubeGeometry.vertices[vertexBulletIndex].clone();
             var globalVertex = localVertex.applyMatrix4( enemyResult.matrix );
             var directionVector = globalVertex.sub( enemyResult.position );
-    
+
             var rayBullet = new THREE.Raycaster( originEnemyPoint, directionVector.clone().normalize() );
             var collisionResults = rayBullet.intersectObjects( collidableBulletMeshList );
             //check collision bullets
@@ -17,7 +17,7 @@ function Scoring(){
                 clearText();
                 appendText(" kill ");
 
-                //increase score    
+                //increase score
                 totalscore = totalscore + 1;
                 //update score
                 eScore ="Score: "+totalscore;
@@ -32,8 +32,10 @@ function Scoring(){
                 //Remove enemy and bullet from the scene
                 scene.remove(enemyResult.enemyCube)
                 scene.remove(enemyResult);
+                enemyCounter--;
+                console.log('Aantal enemies:'enemyCounter);
             }
-        }    
+        }
     });
-    
+
 }
