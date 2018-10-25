@@ -23,20 +23,18 @@ var propHit =0;
             appendText(" Grab ");
             propHit = 1;
         }
-
     }
     
         //check particle hit
         if (propHit >0){
-            //gather prop
-    
+            //gather prop    
             //amend economy
-            leftOverAmmo = 99;
-            totalAmmo = 100;
-            eAmmo = leftOverAmmo+"/"+totalAmmo;
+            leftOverAmmo = 49;
+            totalAmmo = 50;            
             eWeapon ="Tommygun";
-            //display economy
-            document.getElementById('weapon').innerHTML = eWeapon;
-            document.getElementById('ammo').innerHTML = eAmmo;
+            //update weapon in HUD
+            appendWeapon();
+            //update ammo in HUD
+            appendAmmo();
         }
 }
