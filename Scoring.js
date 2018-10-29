@@ -16,21 +16,23 @@ function Scoring(){
             if ( collisionResults.length > 0 && collisionResults[0].distance < directionVector.length() ){
                 clearText();
                 appendText(" kill ");
-
                 //increase score
-                totalscore++;
+                totalscore = totalscore + 1;
                 //update score
-                eScore ="Score: "+totalscore;
-                document.getElementById('score').innerHTML = eScore;
-
+                appendScore();
                 //Remove enemy and bullet from their respective arrays
+                //remove bullet and bullet mesh from the scene
                 let indexBullet = bullets.map(e => e.uuid).indexOf(collisionResults[0]['object']['uuid']);
                 bullets.splice(indexBullet,1);
+                scene.remove(collisionResults[0]['object']);
+                //remove from bulletmeshes array
+                var rem = bulletmeshes.slice(indexBullet,indexBullet+1);
+                scene.remove(rem[0]);
+                bulletmeshes.splice(indexBullet,1);
+                //Remove enemy and enemy cube from the scene
                 let indexEnemy = enemyList.map(e => e.uuid).indexOf(enemyResult.uuid);
                 enemyList.splice(indexEnemy,1);
-                scene.remove(collisionResults[0]['object']);
-                //Remove enemy and bullet from the scene
-                scene.remove(enemyResult.enemyCube)
+                scene.remove(enemyResult.enemyCube);
                 scene.remove(enemyResult);
                 enemyCounter++;
                 console.log('Score counter:' + enemyCounter);
