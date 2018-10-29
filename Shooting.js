@@ -28,17 +28,14 @@ function Shot(){
                     bulletmesh.position.set(ammoCube.position.x, ammoCube.position.y, ammoCube.position.z);
                     //set rotation to that of the camera (player)
                     bulletmesh.rotation.x = camera.rotation.x;
-                    bulletmesh.rotation.y = camera.rotation.y;
+                    bulletmesh.rotation.y = camera.rotation.y;                                   
                     bulletmesh.rotation.z = camera.rotation.z;
                     //push in list
-                    bulletmeshes.push(bulletmesh);  
+                    bulletmeshes.push(bulletmesh);
                     //add to scene
-                    scene.add(bulletmesh); 
-                    //ammoCube.add(bulletmesh);  //kan niet adden   
-                        
-                }); 
-                              
-                console.log(bulletmeshes);   
+                    scene.add(bulletmesh);                            
+                });                 
+
             //add particle
             scene.add( ammoCube );
             collidableBulletMeshList.push(ammoCube); 
@@ -47,34 +44,33 @@ function Shot(){
             //set timeout bullet
             ammoCube.alive = true;
             setTimeout(function(){
-                let indexBullet = bullets.map(e => e.uuid).indexOf(ammoCube.uuid);
-                //We check if the bullet still exists. If it doesent we dont delete a thing               
+                let indexBullet = bullets.map(e => e.uuid).indexOf(ammoCube.uuid);                
                 if(indexBullet !== -1){
                     bullets.splice(indexBullet,1);
-                    scene.remove(ammoCube);
-                    bulletmeshes.splice(indexBullet,1);                    
-                    scene.remove(bulletmesh);                 
+                    scene.remove(ammoCube);                    
                 }
-            }, 5000);
+                let indexBulletmesh = bulletmeshes.map(m => m.uuid).indexOf(bulletmesh.uuid);
+                if(indexBulletmesh !== -1){
+                    bulletmeshes.splice(indexBullet,1);                    
+                    scene.remove(bulletmesh);
+                }
+            }, 3000);
 
         }
         else {
             leftOverAmmo = 0;  
         }
-        //display ammo in HUD
-        eAmmo = leftOverAmmo+"/"+totalAmmo;        
-        document.getElementById('ammo').innerHTML = eAmmo;
+        //update ammo in HUD
+        appendAmmo();
     
 } 
-
+//move bullet cube
 function BulletTravel(){
     bullets.forEach(element => {
-        element.translateZ( -2 );
+        element.translateZ(-10);
+    });
+    bulletmeshes.forEach(element => {
+        element.translateZ(-10); 
     });
 }
 
-function BulletMeshTravel(){
-    bulletmeshes.forEach(element => {
-        element.translateZ( -2 ); 
-    });
-}

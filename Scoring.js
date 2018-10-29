@@ -19,8 +19,7 @@ function Scoring(){
                 //increase score    
                 totalscore = totalscore + 1;
                 //update score
-                eScore ="Score: "+totalscore;
-                document.getElementById('score').innerHTML = eScore;
+                appendScore();
                 //Remove enemy and bullet from their respective arrays
                 //remove bullet and bullet mesh from the scene  
                 let indexBullet = bullets.map(e => e.uuid).indexOf(collisionResults[0]['object']['uuid']);
