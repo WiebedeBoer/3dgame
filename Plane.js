@@ -4,9 +4,10 @@ class Plane extends THREE.Group {
 
         mPlane = this;
         
-            texture = new THREE.TextureLoader().load( "textures/plane/ground_texture3.jpg" );
+            texture = new THREE.TextureLoader().load( "textures/plane/ground2.jpg" );
             texture.wrapS = texture.wrapT = THREE.RepeatWrapping;
-            texture.repeat.set( 200, 200 );
+            texture.repeat.set( this.width / 90, this.length / 90 );
+            texture.offset.set( 0.45 , 0.45 ); 
             material = new THREE.MeshBasicMaterial( { map: texture} );
         
       

@@ -108,7 +108,6 @@ var MovingCube;
 var collidableMeshList = []; 
 var collidablePropMeshList = []; 
 var collidableBulletMeshList = [];
-//var ammoCube;
 
 //no show menu
 var gamestart = document.getElementById("menu");
@@ -147,7 +146,7 @@ Lighter();
 Props();
 
 //planes 
-var planeroad = new Plane(5630,5630);
+var planeroad = new Plane(5500,5500);
 scene.add(planeroad);  
 
 //skybox
@@ -177,7 +176,7 @@ BuildingMaker();
 var enemyX = 0;
 var enemyY = 10;
 var enemyZ = 0;
-var aantalEnemies = 3;
+var aantalEnemies = 2;
 var enemyList = [];
 for (var i = 0; i < aantalEnemies; i++)
 {
@@ -194,24 +193,24 @@ for (var i = 0; i < aantalEnemies; i++)
 document.getElementById("parent").addEventListener( 'click', function ( event ) {
         lock();
 }, false );
-function lock() {
+function lock(rawr) {
         document.getElementById("parent").requestPointerLock();
 } 
 
-//economy variables
+//initial economy variables
 var leftOverAmmo = 23;
-var totalAmmo = 50;
-var eAmmo = leftOverAmmo+"/"+totalAmmo;
+var totalAmmo = 24;
 var eWeapon ="Pistol";
 var totalscore = 0;
-var eScore ="Score: "+totalscore;
 
 //show HUD economy functions
 function appendAmmo(){ 
+        var eAmmo = leftOverAmmo+"/"+totalAmmo;
         document.getElementById('ammo').innerHTML = eAmmo;}
 function appendWeapon(){
         document.getElementById('weapon').innerHTML = eWeapon;}
 function appendScore(){ 
+        var eScore ="Score: "+totalscore;
         document.getElementById('score').innerHTML = eScore;}
 
 //hit registration collision
@@ -225,10 +224,6 @@ function appendText(txt)
 appendAmmo();
 appendWeapon();
 appendScore();
-
-                //planegreen.renderOrder = 1;
-                //planeroad.renderOrder = 2; 
-                //renderer.sortObjects = false;
 
         //update function
         updateFcts.push(function(){
@@ -250,7 +245,6 @@ appendScore();
 
                 //collision detection
                 Collide();
-
                 //gathering props
                 propGathering();
                 //scoring
@@ -258,10 +252,9 @@ appendScore();
                 particleHit = false;
                 //enemy movement
                 EnemyMovement();
-                //CubeMovement();
                 //bullets
                 BulletTravel();
-                BulletMeshTravel();
+                //BulletMeshTravel();
         })
         
         //loop runner
