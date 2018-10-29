@@ -25,11 +25,11 @@ function Shot(){
                     //scale
                     bulletmesh.scale.set(0.01, 0.01, 0.01);                    
                     //set position
-                    bulletmesh.position.set(ammoCube.position.x, ammoCube.position.y, ammoCube.position.z);
+                    bulletmesh.position.set(camera.position.x, camera.position.y - 3, camera.position.z);
                     //set rotation to that of the camera (player)
                     bulletmesh.rotation.x = camera.rotation.x;
-                    bulletmesh.rotation.y = camera.rotation.y;                                   
-                    bulletmesh.rotation.z = camera.rotation.z;
+                    bulletmesh.rotation.y = camera.rotation.y+1.5708;                                   
+                    bulletmesh.rotation.z = -1.5708;
                     //push in list
                     bulletmeshes.push(bulletmesh);
                     //add to scene
@@ -67,10 +67,10 @@ function Shot(){
 //move bullet cube
 function BulletTravel(){
     bullets.forEach(element => {
-        element.translateZ(-10);
+        element.translateY(10);
     });
     bulletmeshes.forEach(element => {
-        element.translateZ(-10); 
+        element.translateY(10); 
     });
 }
 
