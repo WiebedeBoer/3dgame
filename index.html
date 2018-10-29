@@ -170,7 +170,7 @@ updateFcts.push(function(delta, now){
         })
 
 //city buildings
-BuildingMaker();
+//BuildingMaker();
 
 // Enemies
 var enemyX = 0;
@@ -179,7 +179,6 @@ var enemyZ = 0;
 var aantalEnemies = 2;
 var enemyCounter = 0;
 var enemyList = [];
-var maxEnemies = 24;
 for (var i = 0; i < aantalEnemies; i++)
 {
     // Spawn Enemy
@@ -248,10 +247,8 @@ appendScore();
                 MovingCube.position.z = camera.position.z;
 
                 // Spawn Enemies
-                if (enemyList.length < aantalEnemies)
+                if (enemyList.length < aantalEnemies && aantalEnemies < 25)
                 {
-                    if (aantalEnemies < maxEnemies)
-                    {
                         // Spawn Enemy
                         var enemy = new Enemy(enemyX, enemyY, enemyZ);
                         enemyList.push(enemy);
@@ -261,7 +258,6 @@ appendScore();
                         enemy.position.z += 2 * Math.floor(Math.random() * 50) + 1;
                         // Berekend aantal enemies in de map
                         console.log('Aantal enemies:' + enemyList.length);
-                    }
                 }
 
                 // Spawn more enemies for each 5 kills
