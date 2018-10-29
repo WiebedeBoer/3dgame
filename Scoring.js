@@ -32,7 +32,7 @@ function Scoring(){
                 //Remove enemy and enemy cube from the scene
                 let indexEnemy = enemyList.map(e => e.uuid).indexOf(enemyResult.uuid);
                 enemyList.splice(indexEnemy,1);
-                scene.remove(enemyResult.enemyCube)
+                scene.remove(enemyResult.enemyCube);
                 scene.remove(enemyResult);
             }
         }    
