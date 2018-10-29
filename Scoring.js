@@ -18,7 +18,7 @@ function Scoring(){
                 appendText(" kill ");
 
                 //increase score
-                totalscore = totalscore + 1;
+                totalscore++;
                 //update score
                 eScore ="Score: "+totalscore;
                 document.getElementById('score').innerHTML = eScore;
@@ -32,9 +32,9 @@ function Scoring(){
                 //Remove enemy and bullet from the scene
                 scene.remove(enemyResult.enemyCube)
                 scene.remove(enemyResult);
-                // Berekend aantal enemies in de map
-                enemyCounter--;
-                console.log('Aantal enemies:' + enemyCounter);
+                enemyCounter++;
+                console.log('Score counter:' + enemyCounter);
+                console.log('Aantal enemies:' + enemyList.length);
             }
         }
     });

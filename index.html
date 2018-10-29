@@ -196,8 +196,7 @@ for (var i = 0; i < aantalEnemies; i++)
     enemy.position.x += 2 * Math.floor(Math.random() * 50) + 1;
     enemy.position.z += 2 * Math.floor(Math.random() * 50) + 1;
     // Berekend aantal enemies in de map
-    enemyCounter++;
-    console.log('Aantal enemies:' + enemyCounter);
+    console.log('Aantal enemies:' + enemyList.length);
 }
 
 //Locking the pointer to the game
@@ -259,7 +258,7 @@ appendScore();
                 MovingCube.position.z = camera.position.z;
 
                 // Spawn Enemies
-                if (enemyCounter < aantalEnemies)
+                if (enemyList.length < aantalEnemies)
                 {
                     // Spawn Enemy
                     var enemy = new Enemy(enemyX, enemyY, enemyZ);
@@ -269,9 +268,15 @@ appendScore();
                     enemy.position.x += 2 * Math.floor(Math.random() * 50) + 1;
                     enemy.position.z += 2 * Math.floor(Math.random() * 50) + 1;
                     // Berekend aantal enemies in de map
-                    enemyCounter++
-                    console.log('Aantal enemies:',enemyCounter);
+                    console.log('Aantal enemies:' + enemyList.length);
                 }
+                // Spawn more enemies for each 5 kills
+                if (enemyCounter == 5)
+                {
+                    aantalEnemies += 1;
+                    enemyCounter = 0;
+                }
+
                 //collision detection
                 Collide();
 
