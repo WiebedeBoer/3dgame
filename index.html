@@ -82,12 +82,12 @@
                                     </div>
                                 </div>
                         </div>
-                        <!--menu-->
+                        <!--pause menu-->
                         <div id="menu" class="ng-menu">
                                 <div id="content-frame" class="ng-scope">
                                         <div id="canvas-container">
                                                 <div id="quit">
-                                                        <button id="quitbutton">Quit</button>                                                        
+                                                        <button id="quitbutton" onclick="Quit()">Quit</button>                                                        
                                                 </div>
                                                 <div id="resume">
                                                         <button id="resumebutton" onclick="Resume()">Resume</button>
@@ -96,6 +96,19 @@
                                         
                                 </div>
                                         
+                        </div>
+                        <!--dead menu-->
+                        <div id="deadmenu" class="de-menu">
+                                <div id="content-frame" class="ng-scope">
+                                        <div id="canvas-container">
+                                                <div id="newgame">
+                                                         <a href="index.html">new game</a>                                                       
+                                                </div>
+
+                                        </div>
+                                                                
+                                </div>
+                                                                
                         </div>
 </div>
 <script>
@@ -112,6 +125,8 @@ var collidableBulletMeshList = [];
 //no show menu
 var gamestart = document.getElementById("menu");
 gamestart.style.display = "none";
+var deadstart = document.getElementById("deadmenu");
+deadstart.style.display = "none";
 //pause
 var pausemenu = document.getElementById("menu");
 var checkPause = false;

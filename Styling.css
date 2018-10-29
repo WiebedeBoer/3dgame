@@ -6,8 +6,10 @@ div.ng-scope{ position: absolute;left:0px;top:0px;z-index:3;}
 div.ng-binding {font-weight: bold;}
 
 div.ng-menu {position: absolute;left:0px;top:0px;z-index:5;}
+div.de-menu {position: absolute;left:0px;top:0px;z-index:7;}
 
-#menu {width:800px;height:400px;background-color: #000000;}
+#menu,#deadmenu {width:800px;height:400px;background-color: #000000;}
+
 
 #canvas-align {
                 position: relative;
