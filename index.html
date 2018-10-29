@@ -179,6 +179,7 @@ var enemyZ = 0;
 var aantalEnemies = 2;
 var enemyCounter = 0;
 var enemyList = [];
+var maxEnemies = 24;
 for (var i = 0; i < aantalEnemies; i++)
 {
     // Spawn Enemy
@@ -249,15 +250,18 @@ appendScore();
                 // Spawn Enemies
                 if (enemyList.length < aantalEnemies)
                 {
-                    // Spawn Enemy
-                    var enemy = new Enemy(enemyX, enemyY, enemyZ);
-                    enemyList.push(enemy);
-                    //enemyCubeList.push(nenemyCube);
-                    scene.add(enemy);
-                    enemy.position.x += 2 * Math.floor(Math.random() * 50) + 1;
-                    enemy.position.z += 2 * Math.floor(Math.random() * 50) + 1;
-                    // Berekend aantal enemies in de map
-                    console.log('Aantal enemies:' + enemyList.length);
+                    if (aantalEnemies < maxEnemies)
+                    {
+                        // Spawn Enemy
+                        var enemy = new Enemy(enemyX, enemyY, enemyZ);
+                        enemyList.push(enemy);
+                        //enemyCubeList.push(nenemyCube);
+                        scene.add(enemy);
+                        enemy.position.x += 2 * Math.floor(Math.random() * 50) + 1;
+                        enemy.position.z += 2 * Math.floor(Math.random() * 50) + 1;
+                        // Berekend aantal enemies in de map
+                        console.log('Aantal enemies:' + enemyList.length);
+                    }
                 }
                 // Spawn more enemies for each 5 kills
                 if (enemyCounter == 5)
