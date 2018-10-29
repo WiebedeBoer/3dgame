@@ -1,101 +1,99 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta http-equiv="content-type" content="text/html; charset=UTF-8">
-<!--three.js-->
-<script src="three.js"></script>
-<!--camera controls-->
-<script src="FPControls.js"></script>
-<!--open xml-->
-<script src="openxml.js"></script>
-<!--buildings-->
-<script src="BuildingMaker.js"></script>
-<!--multiple buildings tenements, commercials, factories-->
-<script src="Buildings/commercials.js"></script>
-<!--single buildings-->
-<script src="Buildings/cityhall.js"></script>
-<!--single buildings-->
-<script src="Buildings/church.js"></script>
-<!--plane-->
-<script src="Plane.js"></script>
-<!--skybox-->
-<script src="Skybox.js"></script>
-<!--lighting-->
-<script src="Lighting.js"></script>
-<script src="Pointlight.js"></script>
-<script src="props/Lantern.js"></script>
-<!--props-->
-<script src="props/Props.js"></script>
-<script src="props/GunCollect.js"></script>
-<script src="props/Gun.js"></script>
-<script src="props/Ambulance.js"></script>
-<!--loaders-->
-<script src="loaders/OBJLoader.js"></script>
-<script src="loaders/MTLLoader.js"></script>
-<script src="loaders/DDSLoader.js"></script>
-<script src="loaders/ModelLoader.js"></script>
-<!--collission detection-->
-<script src="KeyboardState.js"></script>
-<script src="Collision.js"></script>
-<!--Enemy-->
-<script src="Enemy/enemy.js"></script>
-<!--<script src="Enemy/enemyCube.js"></script>-->
-<!--<script src="Enemy/enemyCubeMovement.js"></script>-->
-<script src="Enemy/EnemyMaker.js"></script>
-<script src="Enemy/EnemyMovement.js"></script>
-<!--Tween-->
-<script src="Tween.js"></script>
-<!--Graph-->
-<script src="Graph.js"></script>
-<!--Pathfinding-->
-<script src="Dijkstra.js"></script>
-<!--economy-->
-<script src="Shooting.js"></script>
-<script src="Scoring.js"></script>
-<script src="Gathering.js"></script>
-<!--bullets-->
-<script src="Ammo.js"></script>
-<!--styling-->
-<link rel="stylesheet" type="text/css" href="Styling.css">
+    <!--Meta-->
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <!--Three.js-->
+    <script src="three.js"></script>
+    <!--Camera Controls-->
+    <script src="FPControls.js"></script>
+    <!--Open XML-->
+    <script src="openxml.js"></script>
+    <!--Building Maker-->
+    <script src="BuildingMaker.js"></script>
+    <!--Multiple Buildings-->
+    <script src="Buildings/commercials.js"></script>
+    <!--Single Buildings-->
+    <script src="Buildings/cityhall.js"></script>
+    <script src="Buildings/church.js"></script>
+    <!--Plane-->
+    <script src="Plane.js"></script>
+    <!--Skybox-->
+    <script src="Skybox.js"></script>
+    <!--Lighting & Shader-->
+    <script src="LightShades/Lighting.js"></script>
+    <script src="LightShades/Pointlight.js"></script>
+    <script src="LightShades/Shader.js"></script>
+    <!--Props-->
+    <script src="props/Props.js"></script>
+    <script src="props/GunCollect.js"></script>
+    <script src="props/Gun.js"></script>
+    <script src="props/Ambulance.js"></script>
+    <script src="props/Lantern.js"></script>
+    <!--Loaders-->
+    <script src="loaders/OBJLoader.js"></script>
+    <script src="loaders/MTLLoader.js"></script>
+    <script src="loaders/DDSLoader.js"></script>
+    <script src="loaders/ModelLoader.js"></script>
+    <!--Collission Detection-->
+    <script src="KeyboardState.js"></script>
+    <script src="Collision.js"></script>
+    <!--Enemy-->
+    <script src="Enemy/enemy.js"></script>
+    <script src="Enemy/EnemyMaker.js"></script>
+    <script src="Enemy/EnemyMovement.js"></script>
+    <!--Tween-->
+    <script src="Tween.js"></script>
+    <!--Graph-->
+    <script src="Graph.js"></script>
+    <!--Pathfinding-->
+    <script src="Dijkstra.js"></script>
+    <!--Economy-->
+    <script src="Shooting.js"></script>
+    <script src="Scoring.js"></script>
+    <script src="Gathering.js"></script>
+    <!--Styling-->
+    <link rel="stylesheet" type="text/css" href="CSS/Styling.css">
 </head>
+
 <body class="ng-scope" style="margin: 0px; background-color: #d8e7ff; overflow: hidden;">
 
-<div class="parent" id="parent">  
-   <!--customcanvas-->       
+<div class="parent" id="parent">
+<!--Customcanvas-->
 <div height="400" width="800" class="customcanvas" id="customcanvas"></div>
-        <!--hud-->
+                <!--Hud-->
                 <div id="content-frame" ng-controller="HudState" class="ng-scope">
                                 <div id="canvas-container">
                                     <div id="canvas-align">
                                         <canvas id="webgl-canvas" width="800" height="400"></canvas>
                                         <div id="hud" ng-class="{visible: style.visible, transparent: style.transparent, perspective: style.perspective, animated: style.animated}" class="visible">
                                             <div id="weapon" class="ng-binding">
-                                                
+
                                             </div>
                                             <div id="ammo" class="ng-binding">
-                                                
+
                                             </div>
                                             <div id="score" class="ng-binding">
-                                                
+
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                         </div>
-                        <!--menu-->
+                        <!--Menu-->
                         <div id="menu" class="ng-menu">
                                 <div id="content-frame" class="ng-scope">
                                         <div id="canvas-container">
                                                 <div id="quit">
-                                                        <button id="quitbutton">Quit</button>                                                        
+                                                        <button id="quitbutton">Quit</button>
                                                 </div>
                                                 <div id="resume">
                                                         <button id="resumebutton">Resume</button>
                                                 </div>
                                         </div>
-                                        
+
                                 </div>
-                                        
+
                         </div>
 </div>
 <script>
@@ -105,9 +103,10 @@ var clock = new THREE.Clock();
 
 //collision vars
 var MovingCube;
-var collidableMeshList = []; 
-var collidablePropMeshList = []; 
+var collidableMeshList = [];
+var collidablePropMeshList = [];
 var collidableBulletMeshList = [];
+//var ammoCube;
 
 //no show menu
 var gamestart = document.getElementById("menu");
@@ -115,21 +114,26 @@ gamestart.style.display = "none";
 
 // Bullets array
 var bullets = [];
-var bulletmeshes = [];
-       
+
 //updater
 var updateFcts = [];
+
 //scene
 var scene = new THREE.Scene();
+
 //fog
 scene.fog = new THREE.FogExp2( 0xd0e0f0, 0.0025 );
+
 //renderer
 var renderer = new THREE.WebGLRenderer( { antialias: false } );
+renderer.shadowMap.enabled = true;
+renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+
 //window
 canvasWidth = 800;
 canvasHeight = 400;
 renderer.setSize( canvasWidth, canvasHeight );
-        
+
 //append object to it
 document.getElementById("customcanvas").appendChild(renderer.domElement);
 
@@ -139,15 +143,18 @@ camera.position.y = 12;
 camera.position.z = 70;
 camera.position.x = 140;
 
-//lighting and lantern props
+// Shading
+Shader();
+
+// Lighting
 Lighter();
 
-//gun props
+// Props
 Props();
 
-//planes 
-var planeroad = new Plane(5500,5500);
-scene.add(planeroad);  
+// Plane
+var planeroad = new Plane(5630,5630);
+scene.add( planeroad );
 
 //skybox
 var skyBox = new Skybox();
@@ -159,24 +166,25 @@ var wireMaterial = new THREE.MeshBasicMaterial( { color: 0xff0000, wireframe:tru
 MovingCube = new THREE.Mesh( cubeGeometry, wireMaterial );
 MovingCube.position.set(camera.position.x, camera.position.y, camera.position.z);
 scene.add( MovingCube );
-        
+
 //Camera Controls
 var controls = new THREE.FirstPersonControls( camera );
 //controls.movementSpeed = 80;
 controls.lookSpeed = 0.05;
 controls.lookVertical = false; //if true vertical look on mousemovement
 updateFcts.push(function(delta, now){
-                controls.update( delta );                
+                controls.update( delta );
         })
 
 //city buildings
-BuildingMaker();
+//BuildingMaker();
 
 // Enemies
 var enemyX = 0;
 var enemyY = 10;
 var enemyZ = 0;
 var aantalEnemies = 2;
+var enemyCounter = 0;
 var enemyList = [];
 for (var i = 0; i < aantalEnemies; i++)
 {
@@ -187,6 +195,8 @@ for (var i = 0; i < aantalEnemies; i++)
     scene.add(enemy);
     enemy.position.x += 2 * Math.floor(Math.random() * 50) + 1;
     enemy.position.z += 2 * Math.floor(Math.random() * 50) + 1;
+    // Berekend aantal enemies in de map
+    console.log('Aantal enemies:' + enemyList.length);
 }
 
 //Locking the pointer to the game
@@ -195,22 +205,22 @@ document.getElementById("parent").addEventListener( 'click', function ( event ) 
 }, false );
 function lock(rawr) {
         document.getElementById("parent").requestPointerLock();
-} 
+}
 
-//initial economy variables
+//economy variables
 var leftOverAmmo = 23;
-var totalAmmo = 24;
+var totalAmmo = 50;
+var eAmmo = leftOverAmmo+"/"+totalAmmo;
 var eWeapon ="Pistol";
 var totalscore = 0;
+var eScore ="Score: "+totalscore;
 
 //show HUD economy functions
-function appendAmmo(){ 
-        var eAmmo = leftOverAmmo+"/"+totalAmmo;
+function appendAmmo(){
         document.getElementById('ammo').innerHTML = eAmmo;}
 function appendWeapon(){
         document.getElementById('weapon').innerHTML = eWeapon;}
-function appendScore(){ 
-        var eScore ="Score: "+totalscore;
+function appendScore(){
         document.getElementById('score').innerHTML = eScore;}
 
 //hit registration collision
@@ -224,6 +234,10 @@ function appendText(txt)
 appendAmmo();
 appendWeapon();
 appendScore();
+
+                //planegreen.renderOrder = 1;
+                //planeroad.renderOrder = 2;
+                //renderer.sortObjects = false;
 
         //update function
         updateFcts.push(function(){
@@ -241,10 +255,31 @@ appendScore();
 
                 MovingCube.position.x = camera.position.x;
                 MovingCube.position.y = camera.position.y;
-                MovingCube.position.z = camera.position.z;                
+                MovingCube.position.z = camera.position.z;
+
+                // Spawn Enemies
+                if (enemyList.length < aantalEnemies)
+                {
+                    // Spawn Enemy
+                    var enemy = new Enemy(enemyX, enemyY, enemyZ);
+                    enemyList.push(enemy);
+                    //enemyCubeList.push(nenemyCube);
+                    scene.add(enemy);
+                    enemy.position.x += 2 * Math.floor(Math.random() * 50) + 1;
+                    enemy.position.z += 2 * Math.floor(Math.random() * 50) + 1;
+                    // Berekend aantal enemies in de map
+                    console.log('Aantal enemies:' + enemyList.length);
+                }
+                // Spawn more enemies for each 5 kills
+                if (enemyCounter == 5)
+                {
+                    aantalEnemies += 1;
+                    enemyCounter = 0;
+                }
 
                 //collision detection
                 Collide();
+
                 //gathering props
                 propGathering();
                 //scoring
@@ -254,9 +289,9 @@ appendScore();
                 EnemyMovement();
                 //bullets
                 BulletTravel();
-                //BulletMeshTravel();
+
         })
-        
+
         //loop runner
         var lastTimeMsec= null
         requestAnimationFrame(function animate(nowMsec){
