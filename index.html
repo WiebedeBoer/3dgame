@@ -60,8 +60,13 @@
 </head>
 <body class="ng-scope" style="margin: 0px; background-color: #d8e7ff; overflow: hidden;">
 
+<<<<<<< HEAD
 <div class="parent" id="parent">  
    <!--customcanvas-->       
+=======
+<div class="parent" id="parent">
+   <!--customcanvas-->
+>>>>>>> ricardo
 <div height="400" width="800" class="customcanvas" id="customcanvas"></div>
         <!--hud-->
                 <div id="content-frame" ng-controller="HudState" class="ng-scope">
@@ -70,6 +75,7 @@
                                         <canvas id="webgl-canvas" width="800" height="400"></canvas>
                                         <div id="hud" ng-class="{visible: style.visible, transparent: style.transparent, perspective: style.perspective, animated: style.animated}" class="visible">
                                             <div id="weapon" class="ng-binding">
+<<<<<<< HEAD
                                                 
                                             </div>
                                             <div id="ammo" class="ng-binding">
@@ -77,6 +83,15 @@
                                             </div>
                                             <div id="score" class="ng-binding">
                                                 
+=======
+
+                                            </div>
+                                            <div id="ammo" class="ng-binding">
+
+                                            </div>
+                                            <div id="score" class="ng-binding">
+
+>>>>>>> ricardo
                                             </div>
                                         </div>
                                     </div>
@@ -87,15 +102,25 @@
                                 <div id="content-frame" class="ng-scope">
                                         <div id="canvas-container">
                                                 <div id="quit">
+<<<<<<< HEAD
                                                         <button id="quitbutton">Quit</button>                                                        
+=======
+                                                        <button id="quitbutton">Quit</button>
+>>>>>>> ricardo
                                                 </div>
                                                 <div id="resume">
                                                         <button id="resumebutton">Resume</button>
                                                 </div>
                                         </div>
+<<<<<<< HEAD
                                         
                                 </div>
                                         
+=======
+
+                                </div>
+
+>>>>>>> ricardo
                         </div>
 </div>
 <script>
@@ -105,8 +130,13 @@ var clock = new THREE.Clock();
 
 //collision vars
 var MovingCube;
+<<<<<<< HEAD
 var collidableMeshList = []; 
 var collidablePropMeshList = []; 
+=======
+var collidableMeshList = [];
+var collidablePropMeshList = [];
+>>>>>>> ricardo
 var collidableBulletMeshList = [];
 
 //no show menu
@@ -116,7 +146,11 @@ gamestart.style.display = "none";
 // Bullets array
 var bullets = [];
 var bulletmeshes = [];
+<<<<<<< HEAD
        
+=======
+
+>>>>>>> ricardo
 //updater
 var updateFcts = [];
 //scene
@@ -129,7 +163,11 @@ var renderer = new THREE.WebGLRenderer( { antialias: false } );
 canvasWidth = 800;
 canvasHeight = 400;
 renderer.setSize( canvasWidth, canvasHeight );
+<<<<<<< HEAD
         
+=======
+
+>>>>>>> ricardo
 //append object to it
 document.getElementById("customcanvas").appendChild(renderer.domElement);
 
@@ -145,9 +183,15 @@ Lighter();
 //gun props
 Props();
 
+<<<<<<< HEAD
 //planes 
 var planeroad = new Plane(5500,5500);
 scene.add(planeroad);  
+=======
+//planes
+var planeroad = new Plane(5500,5500);
+scene.add(planeroad);
+>>>>>>> ricardo
 
 //skybox
 var skyBox = new Skybox();
@@ -159,25 +203,43 @@ var wireMaterial = new THREE.MeshBasicMaterial( { color: 0xff0000, wireframe:tru
 MovingCube = new THREE.Mesh( cubeGeometry, wireMaterial );
 MovingCube.position.set(camera.position.x, camera.position.y, camera.position.z);
 scene.add( MovingCube );
+<<<<<<< HEAD
         
+=======
+
+>>>>>>> ricardo
 //Camera Controls
 var controls = new THREE.FirstPersonControls( camera );
 //controls.movementSpeed = 80;
 controls.lookSpeed = 0.05;
 controls.lookVertical = false; //if true vertical look on mousemovement
 updateFcts.push(function(delta, now){
+<<<<<<< HEAD
                 controls.update( delta );                
         })
 
 //city buildings
 BuildingMaker();
+=======
+                controls.update( delta );
+        })
+
+//city buildings
+//BuildingMaker();
+>>>>>>> ricardo
 
 // Enemies
 var enemyX = 0;
 var enemyY = 10;
 var enemyZ = 0;
 var aantalEnemies = 2;
+<<<<<<< HEAD
 var enemyList = [];
+=======
+var enemyCounter = 0;
+var enemyList = [];
+var maxEnemies = 24;
+>>>>>>> ricardo
 for (var i = 0; i < aantalEnemies; i++)
 {
     // Spawn Enemy
@@ -187,6 +249,11 @@ for (var i = 0; i < aantalEnemies; i++)
     scene.add(enemy);
     enemy.position.x += 2 * Math.floor(Math.random() * 50) + 1;
     enemy.position.z += 2 * Math.floor(Math.random() * 50) + 1;
+<<<<<<< HEAD
+=======
+    // Berekend aantal enemies in de map
+    console.log('Aantal enemies:' + enemyList.length);
+>>>>>>> ricardo
 }
 
 //Locking the pointer to the game
@@ -195,7 +262,11 @@ document.getElementById("parent").addEventListener( 'click', function ( event ) 
 }, false );
 function lock(rawr) {
         document.getElementById("parent").requestPointerLock();
+<<<<<<< HEAD
 } 
+=======
+}
+>>>>>>> ricardo
 
 //initial economy variables
 var leftOverAmmo = 23;
@@ -204,12 +275,20 @@ var eWeapon ="Pistol";
 var totalscore = 0;
 
 //show HUD economy functions
+<<<<<<< HEAD
 function appendAmmo(){ 
+=======
+function appendAmmo(){
+>>>>>>> ricardo
         var eAmmo = leftOverAmmo+"/"+totalAmmo;
         document.getElementById('ammo').innerHTML = eAmmo;}
 function appendWeapon(){
         document.getElementById('weapon').innerHTML = eWeapon;}
+<<<<<<< HEAD
 function appendScore(){ 
+=======
+function appendScore(){
+>>>>>>> ricardo
         var eScore ="Score: "+totalscore;
         document.getElementById('score').innerHTML = eScore;}
 
@@ -241,7 +320,34 @@ appendScore();
 
                 MovingCube.position.x = camera.position.x;
                 MovingCube.position.y = camera.position.y;
+<<<<<<< HEAD
                 MovingCube.position.z = camera.position.z;                
+=======
+                MovingCube.position.z = camera.position.z;
+
+                // Spawn Enemies
+                if (enemyList.length < aantalEnemies)
+                {
+                    if (aantalEnemies < maxEnemies)
+                    {
+                        // Spawn Enemy
+                        var enemy = new Enemy(enemyX, enemyY, enemyZ);
+                        enemyList.push(enemy);
+                        //enemyCubeList.push(nenemyCube);
+                        scene.add(enemy);
+                        enemy.position.x += 2 * Math.floor(Math.random() * 50) + 1;
+                        enemy.position.z += 2 * Math.floor(Math.random() * 50) + 1;
+                        // Berekend aantal enemies in de map
+                        console.log('Aantal enemies:' + enemyList.length);
+                    }
+                }
+                // Spawn more enemies for each 5 kills
+                if (enemyCounter == 5)
+                {
+                    aantalEnemies += 1;
+                    enemyCounter = 0;
+                }
+>>>>>>> ricardo
 
                 //collision detection
                 Collide();
@@ -256,7 +362,11 @@ appendScore();
                 BulletTravel();
                 //BulletMeshTravel();
         })
+<<<<<<< HEAD
         
+=======
+
+>>>>>>> ricardo
         //loop runner
         var lastTimeMsec= null
         requestAnimationFrame(function animate(nowMsec){
@@ -280,6 +390,11 @@ appendScore();
 <p class="ce">&copy; All objects are by Google Poly. &copy; Three.JS library by Mr.Doob. &copy; Collision library by Stemkoski.</p>
 <!--external sounds-->
 <audio autoplay loop><source src="sound/gangsters2.mp3" type="audio/mp3"></audio>
+<<<<<<< HEAD
 <audio id="soundpar"><source src="sound/Paper_Tear.mp3" id="soundscape" type="audio/mp3"></audio>
 </body>
 </html>
+=======
+</body>
+</html>
+>>>>>>> ricardo
