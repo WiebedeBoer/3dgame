@@ -16,6 +16,9 @@ function Scoring(){
             if ( collisionResults.length > 0 && collisionResults[0].distance < directionVector.length() ){
                 clearText();
                 appendText(" kill ");
+                //play sound
+                var aud = document.getElementById("soundpar"); 
+                aud.play(); 
                 //increase score    
                 totalscore = totalscore + 1;
                 //update score
