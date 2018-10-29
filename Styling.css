@@ -7,6 +7,8 @@ div.ng-binding {font-weight: bold;}
 
 div.ng-menu {position: absolute;left:0px;top:0px;z-index:5;}
 
+#menu {width:800px;height:400px;background-color: #000000;}
+
 #canvas-align {
                 position: relative;
                 width: 800px;
