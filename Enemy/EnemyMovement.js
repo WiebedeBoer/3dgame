@@ -16,6 +16,7 @@ function EnemyMovement() {
           var gameover = document.getElementById("deadmenu");
           if (gameover.style.display === "none") {
             gameover.style.display = "block";} 
+          checkPause =true;
       }
       //Relocate the cube to the enemy at all times.
       
