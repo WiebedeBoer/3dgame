@@ -256,16 +256,12 @@ for (var i = 0; i < aantalEnemies; i++)
     // Spawn Enemy
     var enemy = new Enemy(enemyX, enemyY, enemyZ);
     enemyList.push(enemy);
-    //enemyCubeList.push(nenemyCube);
     scene.add(enemy);
-    enemy.position.x += 2 * Math.floor(Math.random() * 50) + 1;
-    enemy.position.z += 2 * Math.floor(Math.random() * 50) + 1;
+
     var spawnNode = MyNodes[Math.floor(Math.random()*MyNodes.length)];
-        console.log(spawnNode);
-        //console.log(spawnNode['object']['positionX']);
-        //console.log(spawnNode['object']['positionZ']);
-        //enemy.position.x = (1800 - 3600) + (spawnNode['object']['positionX'] * 90) - 75;
-        //enemy.position.z = (1800 - 3600) + (spawnNode['object']['positionX'] * 90) - 75;
+
+        enemy.position.x = (1800 - 3600) + (spawnNode['positionX'] * 90) - 75;
+        enemy.position.z = (1800 - 3600) + (spawnNode['positionZ'] * 90) - 75;
 
 }
 
