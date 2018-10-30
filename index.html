@@ -201,6 +201,48 @@ updateFcts.push(function(delta, now){
 //city buildings
 BuildingMaker();
 
+//nodes
+// Nodes
+var nodeName, rowX, colZ;
+//var nodeX = (1800 - 3600) + (rowX * 90) - 75;
+var nodeY = 10;
+//var nodeZ = (1800 - 3600) + (colZ * 90) - 75;
+var MyNodes = new Array(nodeName, nodeX, nodeY, nodeZ);
+
+// Node 1 t/m 5
+MyNodes.push(new Graph(18,10,18,"a"));
+MyNodes.push(new Graph(19,10,18,"b"));
+MyNodes.push(new Graph(19,10,18,"c"));
+MyNodes.push("d", 20 , 1 , 1);
+MyNodes.push("e", 1 , 1 , 20);
+
+// Node 6 t/m 10
+MyNodes.push("f", 30 , 1 , 1);
+MyNodes.push("g", 1 , 1 , 30);
+MyNodes.push("h", 40 , 1 , 1);
+MyNodes.push("i", 1 , 1 , 40);
+MyNodes.push("j", 50 , 1 , 1);
+
+// Node 11 t/m 15
+MyNodes.push("k", 1 , 1 , 50);
+MyNodes.push("l", 60 , 1 , 1);
+MyNodes.push("m", 1 , 1 , 60);
+MyNodes.push("n", 70 , 1 , 1);
+MyNodes.push("o", 1 , 1 , 70);
+
+// Node 16 t/m 20
+MyNodes.push("p", 80 , 1 , 1);
+MyNodes.push("q", 1 , 1 , 80);
+MyNodes.push("r", 90 , 1 , 1);
+MyNodes.push("s", 1 , 1 , 90);
+MyNodes.push("t", 100 , 1 , 1);
+
+// Node 20 t/m 24
+MyNodes.push("u", 1 , 1 , 100);
+MyNodes.push("v", 110 , 1 , 1);
+MyNodes.push("w", 1 , 1 , 110);
+MyNodes.push("x", 120 , 1 , 1);
+
 // Enemies
 var enemyX = 0;
 var enemyY = 10;
