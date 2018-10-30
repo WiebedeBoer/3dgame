@@ -262,8 +262,11 @@ for (var i = 0; i < aantalEnemies; i++)
     enemy.position.z += 2 * Math.floor(Math.random() * 50) + 1;
     var spawnNode = MyNodes[Math.floor(Math.random()*MyNodes.length)];
         console.log(spawnNode);
-     var spawnPosition = MyNodes[spawnNode]; 
-     console.log(spawnPosition); 
+        //console.log(spawnNode['object']['positionX']);
+        //console.log(spawnNode['object']['positionZ']);
+        //enemy.position.x = (1800 - 3600) + (spawnNode['object']['positionX'] * 90) - 75;
+        //enemy.position.z = (1800 - 3600) + (spawnNode['object']['positionX'] * 90) - 75;
+
 }
 
 
