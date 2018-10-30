@@ -267,12 +267,15 @@ for (var i = 0; i < aantalEnemies; i++)
 
 
 //Locking the pointer to the game
-document.getElementById("parent").addEventListener( 'click', function ( event ) {
-        lock();
-}, false );
-function lock(rawr) {
-        document.getElementById("parent").requestPointerLock();
-} 
+if (checkPause ==false){
+        document.getElementById("parent").addEventListener( 'click', function ( event ) {
+                lock();
+        }, false );
+        function lock(rawr) {
+                document.getElementById("parent").requestPointerLock();
+        }  
+}
+
 
 
 //initial economy variables
@@ -349,8 +352,10 @@ appendScore();
                                 enemyList.push(enemy);
                                 //enemyCubeList.push(nenemyCube);
                                 scene.add(enemy);
-                                enemy.position.x += 2 * Math.floor(Math.random() * 50) + 1;
-                                enemy.position.z += 2 * Math.floor(Math.random() * 50) + 1;
+                                var spawnNode = MyNodes[Math.floor(Math.random()*MyNodes.length)];
+
+                                enemy.position.x = (1800 - 3600) + (spawnNode['positionX'] * 90) - 75;
+                                enemy.position.z = (1800 - 3600) + (spawnNode['positionZ'] * 90) - 75;
 
                         }
                         // Spawn more enemies for each 5 kills
