@@ -47,7 +47,8 @@ function Shot(){
                 let indexBullet = bullets.map(e => e.uuid).indexOf(ammoCube.uuid);                
                 if(indexBullet !== -1){
                     bullets.splice(indexBullet,1);
-                    scene.remove(ammoCube);                    
+                    scene.remove(ammoCube);               
+                    collidableBulletMeshList.splice(indexBullet,1);     
                 }
                 let indexBulletmesh = bulletmeshes.map(m => m.uuid).indexOf(bulletmesh.uuid);
                 if(indexBulletmesh !== -1){
