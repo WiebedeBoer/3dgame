@@ -31,8 +31,7 @@ function Scoring(){
                     appendScore();
                     //Remove enemy and bullet from their respective arrays
                     let indexBullet = bullets.map(e => e.uuid).indexOf(collisionResults[0]['object']['uuid']);
-                    if (indexBullet != -1){
-                        console.log(bullets);
+                    if (indexBullet != -1){                        
                         scene.remove(bullets[indexBullet]);
                         bullets.splice(indexBullet,1);
                         collidableBulletMeshList.splice(indexBullet,1); 

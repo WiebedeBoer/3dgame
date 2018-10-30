@@ -207,41 +207,42 @@ var nodeName, rowX, colZ;
 //var nodeX = (1800 - 3600) + (rowX * 90) - 75;
 var nodeY = 10;
 //var nodeZ = (1800 - 3600) + (colZ * 90) - 75;
-var MyNodes = new Array(nodeName, nodeX, nodeY, nodeZ);
+//var MyNodes = new Array(nodeName, nodeX, nodeY, nodeZ);
+var MyNodes = [];
 
 // Node 1 t/m 5
-MyNodes.push(new Graph(18,10,18,"a"));
-MyNodes.push(new Graph(19,10,18,"b"));
-MyNodes.push(new Graph(20,10,18,"c"));
-MyNodes.push(new Graph(21,10,18,"d"));
-MyNodes.push(new Graph(22,10,18,"e"));
+MyNodes.push(new Graph(18,nodeY,18,"a"));
+MyNodes.push(new Graph(19,nodeY,18,"b"));
+MyNodes.push(new Graph(20,nodeY,18,"c"));
+MyNodes.push(new Graph(21,nodeY,18,"d"));
+MyNodes.push(new Graph(22,nodeY,18,"e"));
 
 // Node 6 t/m 10
-MyNodes.push(new Graph(23,10,18,"f"));
-MyNodes.push(new Graph(24,10,18,"g"));
-MyNodes.push(new Graph(18,10,19,"h"));
-MyNodes.push(new Graph(18,10,20,"i"));
-MyNodes.push(new Graph(18,10,21,"j"));
+MyNodes.push(new Graph(23,nodeY,18,"f"));
+MyNodes.push(new Graph(24,nodeY,18,"g"));
+MyNodes.push(new Graph(18,nodeY,19,"h"));
+MyNodes.push(new Graph(18,nodeY,20,"i"));
+MyNodes.push(new Graph(18,nodeY,21,"j"));
 
 // Node 11 t/m 15
-MyNodes.push(new Graph(18,10,22,"k"));
-MyNodes.push(new Graph(18,10,23,"l"));
-MyNodes.push(new Graph(24,10,19,"m"));
-MyNodes.push(new Graph(24,10,20,"n"));
-MyNodes.push(new Graph(24,10,21,"o"));
+MyNodes.push(new Graph(18,nodeY,22,"k"));
+MyNodes.push(new Graph(18,nodeY,23,"l"));
+MyNodes.push(new Graph(24,nodeY,19,"m"));
+MyNodes.push(new Graph(24,nodeY,20,"n"));
+MyNodes.push(new Graph(24,nodeY,21,"o"));
 
 // Node 16 t/m 20
-MyNodes.push(new Graph(24,10,22,"p"));
-MyNodes.push(new Graph(24,10,23,"q"));
-MyNodes.push(new Graph(18,10,24,"r"));
-MyNodes.push(new Graph(19,10,24,"s"));
-MyNodes.push(new Graph(20,10,24,"t"));
+MyNodes.push(new Graph(24,nodeY,22,"p"));
+MyNodes.push(new Graph(24,nodeY,23,"q"));
+MyNodes.push(new Graph(18,nodeY,24,"r"));
+MyNodes.push(new Graph(19,nodeY,24,"s"));
+MyNodes.push(new Graph(20,nodeY,24,"t"));
 
 // Node 20 t/m 24
-MyNodes.push(new Graph(21,10,24,"u"));
-MyNodes.push(new Graph(22,10,24,"v"));
-MyNodes.push(new Graph(23,10,24,"w"));
-MyNodes.push(new Graph(24,10,24,"x"));
+MyNodes.push(new Graph(21,nodeY,24,"u"));
+MyNodes.push(new Graph(22,nodeY,24,"v"));
+MyNodes.push(new Graph(23,nodeY,24,"w"));
+MyNodes.push(new Graph(24,nodeY,24,"x"));
 
 // Enemies
 var enemyX = 0;
@@ -259,6 +260,10 @@ for (var i = 0; i < aantalEnemies; i++)
     scene.add(enemy);
     enemy.position.x += 2 * Math.floor(Math.random() * 50) + 1;
     enemy.position.z += 2 * Math.floor(Math.random() * 50) + 1;
+    var spawnNode = MyNodes[Math.floor(Math.random()*MyNodes.length)];
+        console.log(spawnNode);
+     var spawnPosition = MyNodes[spawnNode]; 
+     console.log(spawnPosition); 
 }
 
 
