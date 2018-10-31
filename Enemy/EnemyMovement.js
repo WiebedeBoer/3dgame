@@ -2,7 +2,6 @@ function EnemyMovement() {
 
   var cameraPosition = new THREE.Vector3(camera.position.x, camera.position.y, camera.position.z);
   var nodeClosestToPlayer = GetClosestNodeToPlayer();
-  
   enemyList.forEach(function(enemy) {
       
       var enemyPosition = new THREE.Vector3(enemy.position.x, enemy.position.y, enemy.position.z);
@@ -12,6 +11,12 @@ function EnemyMovement() {
         enemy.lookAt(cameraPosition);
         enemy.translateZ(0.3);
       }else if (distance >= 50){
+        if (enemy.pathNodes != null){
+          enemy.lookAt(nodeClosestToPlayer);
+          enemy.translateZ(0.3);
+        }else {
+
+        }
         //Player to far away, Now follow the player using the created nodes.
         //First we have to know our closest node, and make sure the player isent super far away.
         
@@ -53,7 +58,10 @@ function GetClosestNodeToPlayer(){
               closestNode = element;
           }
   });
-  return closestNode;
+  //console.log(closestNode);
+  return new THREE.Vector3 (closestNode.positionX, closestNode.positionY, closestNode.positionZ);
+ 
+  //return closestNode;
 }
 
 //Returns a Graph node found in the Mynodes array, the one closest to the current enemy
@@ -73,5 +81,6 @@ function GetClosestNodeToEnemy(enemyPosition){
               closestNode = element;
           }
   });
-  return closestNode
+  return new THREE.Vector3(closestNode.positionX, closestNode.positionY, closestNode.positionZ);
+  //return closestNode
 }
