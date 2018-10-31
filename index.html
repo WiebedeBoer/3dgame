@@ -259,28 +259,6 @@ for (var i = 0; i < aantalEnemies; i++)
 
 }
 
-//Returns the Graph node in the MyNodes array, closest to the player.
-function GetClosestNodeToPlayer(){
-        let currentPos = new THREE.Vector3( camera.position.x, camera.position.y, camera.position.z );
-        let closestNode;
-        let shortestDistance;
-        
-        MyNodes.forEach(element => {
-                let currentNodePos = new THREE.Vector3 ( element.positionX, element.positionY, element.positionZ );
-                let distance = currentPos.distanceTo(currentNodePos);
-
-                if (shortestDistance == undefined){
-                    shortestDistance = distance; 
-                    closestNode = element;
-                }else if (distance < shortestDistance) {
-                    shortestDistance = distance;
-                    closestNode = element;
-                }
-        });
-        return closestNode;
-}
-GetClosestNodeToPlayer();
-
 //Locking the pointer to the game
 if (checkPause ==false){
         document.getElementById("parent").addEventListener( 'click', function ( event ) {
