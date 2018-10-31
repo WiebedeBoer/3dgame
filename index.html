@@ -60,8 +60,8 @@
 </head>
 <body class="ng-scope" style="margin: 0px; background-color: #d8e7ff; overflow: hidden;">
 
-<div class="parent" id="parent">
-   <!--customcanvas-->
+<div class="parent" id="parent">  
+   <!--customcanvas-->       
 <div height="400" width="800" class="customcanvas" id="customcanvas"></div>
         <!--hud-->
                 <div id="content-frame" ng-controller="HudState" class="ng-scope">
@@ -70,32 +70,45 @@
                                         <canvas id="webgl-canvas" width="800" height="400"></canvas>
                                         <div id="hud" ng-class="{visible: style.visible, transparent: style.transparent, perspective: style.perspective, animated: style.animated}" class="visible">
                                             <div id="weapon" class="ng-binding">
-
+                                                
                                             </div>
                                             <div id="ammo" class="ng-binding">
-
+                                                
                                             </div>
                                             <div id="score" class="ng-binding">
-
+                                                
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                         </div>
-                        <!--menu-->
+                        <!--pause menu-->
                         <div id="menu" class="ng-menu">
                                 <div id="content-frame" class="ng-scope">
                                         <div id="canvas-container">
                                                 <div id="quit">
-                                                        <button id="quitbutton">Quit</button>
+                                                        <button id="quitbutton" onclick="Quit()">Quit</button>                                                        
                                                 </div>
                                                 <div id="resume">
-                                                        <button id="resumebutton">Resume</button>
+                                                        <button id="resumebutton" onclick="Resume()">Resume</button>
                                                 </div>
                                         </div>
-
+                                        
                                 </div>
+                                        
+                        </div>
+                        <!--dead menu-->
+                        <div id="deadmenu" class="de-menu">
+                                <div id="content-frame" class="ng-scope">
+                                        <div id="canvas-container">
+                                                <div id="newgame">
+                                                         <a href="index.html">new game</a>                                                       
+                                                </div>
 
+                                        </div>
+                                                                
+                                </div>
+                                                                
                         </div>
 </div>
 <script>
@@ -105,18 +118,34 @@ var clock = new THREE.Clock();
 
 //collision vars
 var MovingCube;
-var collidableMeshList = [];
-var collidablePropMeshList = [];
+var collidableMeshList = []; 
+var collidablePropMeshList = []; 
 var collidableBulletMeshList = [];
 
+//quit
+function Quit() {
+  if (confirm("Close Window?")) {
+    close();
+  }
+}
 //no show menu
 var gamestart = document.getElementById("menu");
 gamestart.style.display = "none";
+var deadstart = document.getElementById("deadmenu");
+deadstart.style.display = "none";
+//pause
+var pausemenu = document.getElementById("menu");
+var checkPause = false;
+
+function Resume(){
+        checkPause = false;
+        pausemenu.style.display = "none";
+}
 
 // Bullets array
 var bullets = [];
 var bulletmeshes = [];
-
+       
 //updater
 var updateFcts = [];
 //scene
@@ -129,7 +158,7 @@ var renderer = new THREE.WebGLRenderer( { antialias: false } );
 canvasWidth = 800;
 canvasHeight = 400;
 renderer.setSize( canvasWidth, canvasHeight );
-
+        
 //append object to it
 document.getElementById("customcanvas").appendChild(renderer.domElement);
 
@@ -145,9 +174,9 @@ Lighter();
 //gun props
 Props();
 
-//planes
+//planes 
 var planeroad = new Plane(5500,5500);
-scene.add(planeroad);
+scene.add(planeroad);  
 
 //skybox
 var skyBox = new Skybox();
@@ -159,59 +188,56 @@ var wireMaterial = new THREE.MeshBasicMaterial( { color: 0xff0000, wireframe:tru
 MovingCube = new THREE.Mesh( cubeGeometry, wireMaterial );
 MovingCube.position.set(camera.position.x, camera.position.y, camera.position.z);
 scene.add( MovingCube );
-
+        
 //Camera Controls
 var controls = new THREE.FirstPersonControls( camera );
 //controls.movementSpeed = 80;
 controls.lookSpeed = 0.05;
 controls.lookVertical = false; //if true vertical look on mousemovement
 updateFcts.push(function(delta, now){
-                controls.update( delta );
+                controls.update( delta );                
         })
 
 //city buildings
-//BuildingMaker();
+BuildingMaker();
 
-// Nodes
-var nodeName, rowX, colZ;
-var nodeX = (1800 - 3600) + (rowX * 90) - 75;
+//nodes
 var nodeY = 10;
-var nodeZ = (1800 - 3600) + (colZ * 90) - 75;
-var MyNodes = new Array(nodeName, nodeX, nodeY, nodeZ);
+var MyNodes = [];
 
 // Node 1 t/m 5
-MyNodes.push("a", 1 , 1 , 1);
-MyNodes.push("b", 10 , 1 , 1);
-MyNodes.push("c", 1 , 1 , 10);
-MyNodes.push("d", 20 , 1 , 1);
-MyNodes.push("e", 1 , 1 , 20);
+MyNodes.push(new Graph(18,nodeY,18,"a"));
+MyNodes.push(new Graph(19,nodeY,18,"b"));
+MyNodes.push(new Graph(20,nodeY,18,"c"));
+MyNodes.push(new Graph(21,nodeY,18,"d"));
+MyNodes.push(new Graph(22,nodeY,18,"e"));
 
 // Node 6 t/m 10
-MyNodes.push("f", 30 , 1 , 1);
-MyNodes.push("g", 1 , 1 , 30);
-MyNodes.push("h", 40 , 1 , 1);
-MyNodes.push("i", 1 , 1 , 40);
-MyNodes.push("j", 50 , 1 , 1);
+MyNodes.push(new Graph(23,nodeY,18,"f"));
+MyNodes.push(new Graph(24,nodeY,18,"g"));
+MyNodes.push(new Graph(18,nodeY,19,"h"));
+MyNodes.push(new Graph(18,nodeY,20,"i"));
+MyNodes.push(new Graph(18,nodeY,21,"j"));
 
 // Node 11 t/m 15
-MyNodes.push("k", 1 , 1 , 50);
-MyNodes.push("l", 60 , 1 , 1);
-MyNodes.push("m", 1 , 1 , 60);
-MyNodes.push("n", 70 , 1 , 1);
-MyNodes.push("o", 1 , 1 , 70);
+MyNodes.push(new Graph(18,nodeY,22,"k"));
+MyNodes.push(new Graph(18,nodeY,23,"l"));
+MyNodes.push(new Graph(24,nodeY,19,"m"));
+MyNodes.push(new Graph(24,nodeY,20,"n"));
+MyNodes.push(new Graph(24,nodeY,21,"o"));
 
 // Node 16 t/m 20
-MyNodes.push("p", 80 , 1 , 1);
-MyNodes.push("q", 1 , 1 , 80);
-MyNodes.push("r", 90 , 1 , 1);
-MyNodes.push("s", 1 , 1 , 90);
-MyNodes.push("t", 100 , 1 , 1);
+MyNodes.push(new Graph(24,nodeY,22,"p"));
+MyNodes.push(new Graph(24,nodeY,23,"q"));
+MyNodes.push(new Graph(18,nodeY,24,"r"));
+MyNodes.push(new Graph(19,nodeY,24,"s"));
+MyNodes.push(new Graph(20,nodeY,24,"t"));
 
 // Node 20 t/m 24
-MyNodes.push("u", 1 , 1 , 100);
-MyNodes.push("v", 110 , 1 , 1);
-MyNodes.push("w", 1 , 1 , 110);
-MyNodes.push("x", 120 , 1 , 1);
+MyNodes.push(new Graph(21,nodeY,24,"u"));
+MyNodes.push(new Graph(22,nodeY,24,"v"));
+MyNodes.push(new Graph(23,nodeY,24,"w"));
+MyNodes.push(new Graph(24,nodeY,24,"x"));
 
 // Enemies
 var enemyX = 0;
@@ -225,21 +251,26 @@ for (var i = 0; i < aantalEnemies; i++)
     // Spawn Enemy
     var enemy = new Enemy(enemyX, enemyY, enemyZ);
     enemyList.push(enemy);
-    //enemyCubeList.push(nenemyCube);
     scene.add(enemy);
-    enemy.position.x += 2 * Math.floor(Math.random() * 50) + 1;
-    enemy.position.z += 2 * Math.floor(Math.random() * 50) + 1;
-    // Berekend aantal enemies in de map
-    console.log('Aantal enemies:' + enemyList.length);
+
+    var spawnNode = MyNodes[Math.floor(Math.random()*MyNodes.length)];
+    enemy.position.x = (1800 - 3600) + (spawnNode['positionX'] * 90) - 75;
+    enemy.position.z = (1800 - 3600) + (spawnNode['positionZ'] * 90) - 75;
+
 }
 
+
 //Locking the pointer to the game
-document.getElementById("parent").addEventListener( 'click', function ( event ) {
-        lock();
-}, false );
-function lock(rawr) {
-        document.getElementById("parent").requestPointerLock();
+if (checkPause ==false){
+        document.getElementById("parent").addEventListener( 'click', function ( event ) {
+                lock();
+        }, false );
+        function lock(rawr) {
+                document.getElementById("parent").requestPointerLock();
+        }  
 }
+
+
 
 //initial economy variables
 var leftOverAmmo = 23;
@@ -248,12 +279,12 @@ var eWeapon ="Pistol";
 var totalscore = 0;
 
 //show HUD economy functions
-function appendAmmo(){
+function appendAmmo(){ 
         var eAmmo = leftOverAmmo+"/"+totalAmmo;
         document.getElementById('ammo').innerHTML = eAmmo;}
 function appendWeapon(){
         document.getElementById('weapon').innerHTML = eWeapon;}
-function appendScore(){
+function appendScore(){ 
         var eScore ="Score: "+totalscore;
         document.getElementById('score').innerHTML = eScore;}
 
@@ -269,59 +300,81 @@ appendAmmo();
 appendWeapon();
 appendScore();
 
+
+
+
+
         //update function
         updateFcts.push(function(){
-                //render the scene
-                renderer.render( scene, camera );
 
-                //moving cube position and rotation
-                var mcdelta = clock.getDelta(); // seconds.
-                var mcrotateAngle = Math.PI / 2 * mcdelta;   // pi/2 radians (90 degrees) per second
 
-                if ( keyboard.pressed("q") )
-                MovingCube.rotation.y += mcrotateAngle; //rotate left
-                if ( keyboard.pressed("e") )
-                MovingCube.rotation.y -= mcrotateAngle; //rotate right
-
-                MovingCube.position.x = camera.position.x;
-                MovingCube.position.y = camera.position.y;
-                MovingCube.position.z = camera.position.z;
-
-                // Spawn Enemies
-                if (enemyList.length < aantalEnemies && aantalEnemies < 25)
-                {
-                        // Spawn Enemy
-                        var enemy = new Enemy(enemyX, enemyY, enemyZ);
-                        enemyList.push(enemy);
-                        //enemyCubeList.push(nenemyCube);
-                        scene.add(enemy);
-                        enemy.position.x += 2 * Math.floor(Math.random() * 50) + 1;
-                        enemy.position.z += 2 * Math.floor(Math.random() * 50) + 1;
-                        // Berekend aantal enemies in de map
-                        console.log('Aantal enemies:' + enemyList.length);
+                //hit pause
+                if ( keyboard.pressed("M")){
+                        console.log("press m");
+                        
+                        if (pausemenu.style.display === "none") {
+                                pausemenu.style.display = "block";
+                        } 
+                        checkPause =true;
                 }
 
-                // Spawn more enemies for each 5 kills
-                if (enemyCounter == 5)
-                {
-                    aantalEnemies += 1;
-                    enemyCounter = 0;
-                }
+                //check pause
+                if (checkPause ==false){
 
-                //collision detection
-                Collide();
-                //gathering props
-                propGathering();
-                //scoring
-                Scoring();
-                particleHit = false;
-                //enemy movement
-                EnemyMovement();
-                //bullets
-                BulletTravel();
-                //BulletMeshTravel();
+
+                        //render the scene
+                        renderer.render( scene, camera );
+
+                        //moving cube position and rotation
+                        var mcdelta = clock.getDelta(); // seconds.
+                        var mcrotateAngle = Math.PI / 2 * mcdelta;   // pi/2 radians (90 degrees) per second
+
+                        if ( keyboard.pressed("q") )
+                                MovingCube.rotation.y += mcrotateAngle; //rotate left
+                        if ( keyboard.pressed("e") )
+                                MovingCube.rotation.y -= mcrotateAngle; //rotate right
+
+                        MovingCube.position.x = camera.position.x;
+                        MovingCube.position.y = camera.position.y;
+                        MovingCube.position.z = camera.position.z;  
+                
+                        // Spawn Enemies
+                        if (enemyList.length < aantalEnemies && aantalEnemies < 25)
+                        {
+                                // Spawn Enemy
+                                var enemy = new Enemy(enemyX, enemyY, enemyZ);
+                                enemyList.push(enemy);
+                                //enemyCubeList.push(nenemyCube);
+                                scene.add(enemy);
+                                var spawnNode = MyNodes[Math.floor(Math.random()*MyNodes.length)];
+
+                                enemy.position.x = (1800 - 3600) + (spawnNode['positionX'] * 90) - 75;
+                                enemy.position.z = (1800 - 3600) + (spawnNode['positionZ'] * 90) - 75;
+
+                        }
+                        // Spawn more enemies for each 5 kills
+                        if (enemyCounter == 5)
+                        {
+                                aantalEnemies += 1;
+                                enemyCounter = 0;
+                        }
+
+                        //collision detection
+                        Collide();
+                        //gathering props
+                        propGathering();
+                        //scoring
+                        Scoring();
+                        particleHit = false;
+                        //enemy movement
+                        EnemyMovement();
+                        //bullets
+                        BulletTravel();
+                        //BulletMeshTravel();
+                
+                } 
         })
-
+        
         //loop runner
         var lastTimeMsec= null
         requestAnimationFrame(function animate(nowMsec){
@@ -336,11 +389,12 @@ appendScore();
                         updateFn(deltaMsec/1000, nowMsec/1000)
                 })
         })
+     
 </script>
 </div>
 <div id="message" class="ce"></div>
 <p class="ce">Use Q, E keys to rotate the camera. Use the W, A, S, D keys to move around. </p>
-<p class="ce">Use the X key to shoot. Click on screen to attach mouse pointer. Escape to deattach mouse pointer.</p>
+<p class="ce">Use the X key to shoot. Click on screen to attach mouse pointer. Escape to deattach mouse pointer. Press m for menu.</p>
 <p class="ce">WebGL renderer is supported in Firefox 4+, Chrome 9+, and Safari 6+</p>
 <p class="ce">&copy; All objects are by Google Poly. &copy; Three.JS library by Mr.Doob. &copy; Collision library by Stemkoski.</p>
 <!--external sounds-->

@@ -13,9 +13,10 @@ function EnemyMovement() {
       }else if (distance < 10){
           clearText();
           appendText("you died");
-          var gameover = document.getElementById("menu");
+          var gameover = document.getElementById("deadmenu");
           if (gameover.style.display === "none") {
             gameover.style.display = "block";} 
+          checkPause =true;
       }
       //Relocate the cube to the enemy at all times.
       
