@@ -259,17 +259,38 @@ for (var i = 0; i < aantalEnemies; i++)
 
 }
 
+//Returned de Graph uit array MyNodes die het dichste bij de Speler is.
+function GetClosestNodeToPlayer(){
+        let currentPos = new THREE.Vector3( camera.position.x, camera.position.y, camera.position.z );
+        let closestNode;
+        let shortestDistance;
+        
+        MyNodes.forEach(element => {
+                let currentNodePos = new THREE.Vector3 ( element.positionX, element.positionY, element.positionZ );
+                let distance = currentPos.distanceTo(currentNodePos);
 
+                if (shortestDistance == undefined){
+                    shortestDistance = distance; 
+                    closestNode = element;
+                }else if (distance < shortestDistance) {
+                    shortestDistance = distance;
+                    closestNode = element;
+                }
+        });
+        console.log(closestNode);
+        //console.log(shortestDistance);
+        return closestNode;
+}
+GetClosestNodeToPlayer();
 //Locking the pointer to the game
 if (checkPause ==false){
         document.getElementById("parent").addEventListener( 'click', function ( event ) {
                 lock();
         }, false );
-        function lock(rawr) {
+        function lock() {
                 document.getElementById("parent").requestPointerLock();
         }  
 }
-
 
 
 //initial economy variables
@@ -299,10 +320,6 @@ function appendText(txt)
 appendAmmo();
 appendWeapon();
 appendScore();
-
-
-
-
 
         //update function
         updateFcts.push(function(){
@@ -370,8 +387,6 @@ appendScore();
                         EnemyMovement();
                         //bullets
                         BulletTravel();
-                        //BulletMeshTravel();
-                
                 } 
         })
         
