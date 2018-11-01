@@ -273,7 +273,7 @@ for (var i = 0; i < aantalEnemies; i++)
 
 
 //Locking the pointer to the game
-if (checkPause ==false){
+function PointLock(){
         document.getElementById("parent").addEventListener( 'click', function ( event ) {
                 lock();
         }, false );
@@ -282,7 +282,9 @@ if (checkPause ==false){
         }  
 }
 
-
+function DeLock(){
+        document.exitPointerLock(); 
+}
 
 //initial economy variables
 var leftOverAmmo = 23;
@@ -328,11 +330,14 @@ appendScore();
                                 pausemenu.style.display = "block";
                         } 
                         checkPause =true;
+                        DeLock();
                 }
 
                 //check pause
                 if (checkPause ==false){
 
+                        //pointer locker
+                        PointLock();
 
                         //render the scene
                         renderer.render( scene, camera );
