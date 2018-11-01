@@ -12,8 +12,6 @@ init(){
     //refGraph.add(position); 
 }
 
-//graph coords
-
 
     constructor(pX,pY,pZ,name){    
         this.positionX = pX;

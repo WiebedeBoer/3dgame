@@ -208,12 +208,7 @@ updateFcts.push(function(delta, now){
 BuildingMaker();
 
 //nodes
-// Nodes
-var nodeName, rowX, colZ;
-//var nodeX = (1800 - 3600) + (rowX * 90) - 75;
 var nodeY = 10;
-//var nodeZ = (1800 - 3600) + (colZ * 90) - 75;
-//var MyNodes = new Array(nodeName, nodeX, nodeY, nodeZ);
 var MyNodes = [];
 
 // Node 1 t/m 5
@@ -265,19 +260,17 @@ for (var i = 0; i < aantalEnemies; i++)
     scene.add(enemy);
 
     var spawnNode = MyNodes[Math.floor(Math.random()*MyNodes.length)];
-
-        enemy.position.x = (1800 - 3600) + (spawnNode['positionX'] * 90) - 75;
-        enemy.position.z = (1800 - 3600) + (spawnNode['positionZ'] * 90) - 75;
+    enemy.position.x = (1800 - 3600) + (spawnNode['positionX'] * 90) - 75;
+    enemy.position.z = (1800 - 3600) + (spawnNode['positionZ'] * 90) - 75;
 
 }
-
 
 //Locking the pointer to the game
 function PointLock(){
         document.getElementById("parent").addEventListener( 'click', function ( event ) {
                 lock();
         }, false );
-        function lock(rawr) {
+        function lock() {
                 document.getElementById("parent").requestPointerLock();
         }  
 }
@@ -313,10 +306,6 @@ function appendText(txt)
 appendAmmo();
 appendWeapon();
 appendScore();
-
-
-
-
 
         //update function
         updateFcts.push(function(){
@@ -387,8 +376,6 @@ appendScore();
                         EnemyMovement();
                         //bullets
                         BulletTravel();
-                        //BulletMeshTravel();
-                
                 } 
         })
         

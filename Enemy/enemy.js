@@ -21,6 +21,10 @@ class Enemy extends THREE.Group {
         this.position.x = pX;
         this.position.y = pY;
         this.position.z = pZ;
+
+        //The current path to reach the player
+        //Will be empty upon creation.
+        this.pathNodes = [];
         this.init();
         //Creating and locating the HitboxCube of the enemy.        
         scene.add(this.enemyCube);
