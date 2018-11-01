@@ -35,6 +35,9 @@ class Cityhall extends THREE.Group {
     meshCityhall.scale.y = this.bHeight;
     meshCityhall.scale.z = 60;
 
+    //cast shadow
+    meshCityhall.traverse(function (child) { child.receiveShadow = true; child.castShadow = true; });
+
     // merge it with cityGeometry - very important for performance
     var hallGeometry = meshCityhall.hallGeometry;
     cityGeometry.mergeMesh(meshCityhall);

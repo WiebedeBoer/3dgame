@@ -50,6 +50,8 @@ class Commercial extends THREE.Group {
       buildingMesh.scale.x = 60;
       buildingMesh.scale.y = this.height;
       buildingMesh.scale.z = buildingMesh.scale.x;
+      //cast shadow
+      buildingMesh.traverse(function (child) { child.receiveShadow = true; child.castShadow = true; });
       // merge it with cityGeometry - very important for performance
       var geometry = buildingMesh.geometry;
       //merge
@@ -67,6 +69,7 @@ class Commercial extends THREE.Group {
   mCity.add(mesh8);  
   //add to collision
   collidableMeshList.push(mesh8);
+  
 
 }
 
