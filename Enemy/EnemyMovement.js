@@ -7,28 +7,38 @@ function EnemyMovement() {
       var enemyPosition = new THREE.Vector3(enemy.position.x, enemy.position.y, enemy.position.z);
       var distance = cameraPosition.distanceTo(enemyPosition);
 
-      if(distance >= 200){
+      if(distance >= 100){
         //travel over nodes
         //No current path? or current end destination not closest to the Player anymore? change path!
+        
         if(enemy.pathNodes.length === 0 || enemy.pathNodes == undefined || enemy.pathNodes[enemy.pathNodes.length-1].name !== nodeClosestToPlayer.name){
           
-          enemy.pathNodes = [];
-          //No current path? create one
           let closeEnemyNode = GetClosestNodeToEnemy(enemyPosition);
-          //Path of closest node to enemy to the closes node to the player. path will be an array of chars of the respective nodes
-          var path = g.shortestPath(closeEnemyNode.name, nodeClosestToPlayer.name).concat([closeEnemyNode.name]).reverse();
-          //which char belongs to what coordinates?
+          let vectorEnemyNode = new THREE.Vector3(closeEnemyNode.positionX, closeEnemyNode.positionY, closeEnemyNode.positionZ);
           
-          path.forEach(element => {
-            let indexNode = MyNodes.map(e => e.name).indexOf(element);
-            //add node to the path of the enemy
-            enemy.pathNodes.push(new Graph(MyNodes[indexNode].positionX,MyNodes[indexNode].positionY,MyNodes[indexNode].positionZ,MyNodes[indexNode].name));
-          });
+            enemy.pathNodes = [];
+            //No current path? create one
+            
+            //Path of closest node to enemy to the closes node to the player. path will be an array of chars of the respective nodes
+            var path = g.shortestPath(closeEnemyNode.name, nodeClosestToPlayer.name).concat([closeEnemyNode.name]).reverse();
+            
+            //If You already are at the node nearest to the player, then dont add the path.
+            //closeEnemyNode is a substitue for the first path entry.
+            //because if the path length is only 1, the closest node to the enemy is also the closest one to the player
+            if(path.length === 1 && vectorEnemyNode.distanceTo(enemyPosition) < 1){}else{
 
+            //which char belongs to which coordinates?
+            path.forEach(element => {
+              let indexNode = MyNodes.map(e => e.name).indexOf(element);
+              //add node to the path of the enemy
+              enemy.pathNodes.push(new Graph(MyNodes[indexNode].positionX,MyNodes[indexNode].positionY,MyNodes[indexNode].positionZ,MyNodes[indexNode].name));
+            });
+          }
         }
         //If the current enemy is closer to the player than the closest node is closer to the player, then go straight for the player.
-        if(cameraPosition.distanceTo(enemyPosition) < cameraPosition.distanceTo(new THREE.Vector3( enemy.pathNodes[enemy.pathNodes.length-1].positionX, enemy.pathNodes[enemy.pathNodes.length-1].positionY, enemy.pathNodes[enemy.pathNodes.length-1].positionZ ))){
-          enemy.lookAt(new THREE.Vector3(cameraPosition));
+        if(cameraPosition.distanceTo(enemyPosition)-5 < cameraPosition.distanceTo(new THREE.Vector3( enemy.pathNodes[enemy.pathNodes.length-1].positionX, enemy.pathNodes[enemy.pathNodes.length-1].positionY, enemy.pathNodes[enemy.pathNodes.length-1].positionZ ))){
+          console.log(cameraPosition)
+          enemy.lookAt(cameraPosition);
           enemy.translateZ(0.3);
         }else {
           //if not, lets go get the player via the path
@@ -42,7 +52,7 @@ function EnemyMovement() {
           
         
         
-      }else if(distance > 10 && distance < 200){
+      }else if(distance > 10 && distance < 100){
         enemy.lookAt(cameraPosition);
         enemy.translateZ(0.3);
       }else if (distance < 10){
