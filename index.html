@@ -205,13 +205,43 @@ updateFcts.push(function(delta, now){
         })
 
 //city buildings
-//BuildingMaker();
+BuildingMaker();
 
 //nodes
 var nodeName, rowX, colZ;
 var nodeY = 10;
 var MyNodes = [];
 
+MyNodes.push(new Graph(18,nodeY,18,"a"));
+MyNodes.push(new Graph(19,nodeY,18,"b"));
+MyNodes.push(new Graph(20,nodeY,18,"c"));
+MyNodes.push(new Graph(21,nodeY,18,"d"));
+MyNodes.push(new Graph(22,nodeY,18,"e"));
+
+MyNodes.push(new Graph(23,nodeY,18,"f"));
+MyNodes.push(new Graph(24,nodeY,18,"g"));
+MyNodes.push(new Graph(18,nodeY,19,"h"));
+MyNodes.push(new Graph(18,nodeY,20,"i"));
+MyNodes.push(new Graph(18,nodeY,21,"j"));
+
+MyNodes.push(new Graph(18,nodeY,22,"k"));
+MyNodes.push(new Graph(18,nodeY,23,"l"));
+MyNodes.push(new Graph(24,nodeY,19,"m"));
+MyNodes.push(new Graph(24,nodeY,20,"n"));
+MyNodes.push(new Graph(24,nodeY,21,"o"));
+
+MyNodes.push(new Graph(24,nodeY,22,"p"));
+MyNodes.push(new Graph(24,nodeY,23,"q"));
+MyNodes.push(new Graph(18,nodeY,24,"r"));
+MyNodes.push(new Graph(19,nodeY,24,"s"));
+MyNodes.push(new Graph(20,nodeY,24,"t"));
+
+MyNodes.push(new Graph(21,nodeY,24,"u"));
+MyNodes.push(new Graph(22,nodeY,24,"v"));
+MyNodes.push(new Graph(23,nodeY,24,"w"));
+MyNodes.push(new Graph(24,nodeY,24,"x"));
+
+/*
 // Node 1 t/m 5
 MyNodes.push(new Graph((1800 - 3600) + (18 * 90) - 75,nodeY,(1800 - 3600) + (18 * 90) - 75,"a"));
 MyNodes.push(new Graph((1800 - 3600) + (19 * 90) - 75,nodeY,(1800 - 3600) + (18 * 90) - 75,"b"));
@@ -241,6 +271,7 @@ MyNodes.push(new Graph((1800 - 3600) + (21 * 90) - 75,nodeY,(1800 - 3600) + (24 
 MyNodes.push(new Graph((1800 - 3600) + (22 * 90) - 75,nodeY,(1800 - 3600) + (24 * 90) - 75,"v"));
 MyNodes.push(new Graph((1800 - 3600) + (23 * 90) - 75,nodeY,(1800 - 3600) + (24 * 90) - 75,"w"));
 MyNodes.push(new Graph((1800 - 3600) + (24 * 90) - 75,nodeY,(1800 - 3600) + (24 * 90) - 75,"x"));
+*/
 
 // Enemies
 var enemyX = 0;
