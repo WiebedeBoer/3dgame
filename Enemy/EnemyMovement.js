@@ -6,7 +6,7 @@ function EnemyMovement() {
       
       var enemyPosition = new THREE.Vector3(enemy.position.x, enemy.position.y, enemy.position.z);
       var distance = cameraPosition.distanceTo(enemyPosition);
-
+      
       if(distance >= 100){
         //travel over nodes
         //No current path? or current end destination not closest to the Player anymore? change path!
@@ -37,7 +37,7 @@ function EnemyMovement() {
         }
         //If the current enemy is closer to the player than the closest node is closer to the player, then go straight for the player.
         if(cameraPosition.distanceTo(enemyPosition)-5 < cameraPosition.distanceTo(new THREE.Vector3( enemy.pathNodes[enemy.pathNodes.length-1].positionX, enemy.pathNodes[enemy.pathNodes.length-1].positionY, enemy.pathNodes[enemy.pathNodes.length-1].positionZ ))){
-          console.log(cameraPosition)
+          
           enemy.lookAt(cameraPosition);
           enemy.translateZ(0.3);
         }else {
@@ -49,8 +49,6 @@ function EnemyMovement() {
         if(enemyPosition.distanceTo(new THREE.Vector3( enemy.pathNodes[0].positionX, enemy.pathNodes[0].positionY, enemy.pathNodes[0].positionZ )) < 1){
           enemy.pathNodes.shift();
         }
-          
-        
         
       }else if(distance > 10 && distance < 100){
         enemy.lookAt(cameraPosition);

@@ -212,6 +212,8 @@ var nodeName, rowX, colZ;
 var nodeY = 10;
 var MyNodes = [];
 
+//20,0,20 represents the middle and start of the map. X and Z coordinates are multiplied in the Graph class to obtain the desired position.
+//Namely, right between buildings, right on the crossroad.
 MyNodes.push(new Graph(18,nodeY,18,"a"));
 MyNodes.push(new Graph(19,nodeY,18,"b"));
 MyNodes.push(new Graph(20,nodeY,18,"c"));
@@ -241,38 +243,6 @@ MyNodes.push(new Graph(22,nodeY,24,"v"));
 MyNodes.push(new Graph(23,nodeY,24,"w"));
 MyNodes.push(new Graph(24,nodeY,24,"x"));
 
-/*
-// Node 1 t/m 5
-MyNodes.push(new Graph((1800 - 3600) + (18 * 90) - 75,nodeY,(1800 - 3600) + (18 * 90) - 75,"a"));
-MyNodes.push(new Graph((1800 - 3600) + (19 * 90) - 75,nodeY,(1800 - 3600) + (18 * 90) - 75,"b"));
-MyNodes.push(new Graph((1800 - 3600) + (20 * 90) - 75,nodeY,(1800 - 3600) + (18 * 90) - 75,"c"));
-MyNodes.push(new Graph((1800 - 3600) + (21 * 90) - 75,nodeY,(1800 - 3600) + (18 * 90) - 75,"d"));
-MyNodes.push(new Graph((1800 - 3600) + (22 * 90) - 75,nodeY,(1800 - 3600) + (18 * 90) - 75,"e"));
-// Node 6 t/m 10
-MyNodes.push(new Graph((1800 - 3600) + (23 * 90) - 75,nodeY,(1800 - 3600) + (18 * 90) - 75,"f"));
-MyNodes.push(new Graph((1800 - 3600) + (24 * 90) - 75,nodeY,(1800 - 3600) + (18 * 90) - 75,"g"));
-MyNodes.push(new Graph((1800 - 3600) + (18 * 90) - 75,nodeY,(1800 - 3600) + (19 * 90) - 75,"h"));
-MyNodes.push(new Graph((1800 - 3600) + (18 * 90) - 75,nodeY,(1800 - 3600) + (20 * 90) - 75,"i"));
-MyNodes.push(new Graph((1800 - 3600) + (18 * 90) - 75,nodeY,(1800 - 3600) + (21 * 90) - 75,"j"));
-// Node 11 t/m 15
-MyNodes.push(new Graph((1800 - 3600) + (18 * 90) - 75,nodeY,(1800 - 3600) + (22 * 90) - 75,"k"));
-MyNodes.push(new Graph((1800 - 3600) + (18 * 90) - 75,nodeY,(1800 - 3600) + (23 * 90) - 75,"l"));
-MyNodes.push(new Graph((1800 - 3600) + (24 * 90) - 75,nodeY,(1800 - 3600) + (19 * 90) - 75,"m"));
-MyNodes.push(new Graph((1800 - 3600) + (24 * 90) - 75,nodeY,(1800 - 3600) + (20 * 90) - 75,"n"));
-MyNodes.push(new Graph((1800 - 3600) + (24 * 90) - 75,nodeY,(1800 - 3600) + (21 * 90) - 75,"o"));
-// Node 16 t/m 20
-MyNodes.push(new Graph((1800 - 3600) + (24 * 90) - 75,nodeY,(1800 - 3600) + (22 * 90) - 75,"p"));
-MyNodes.push(new Graph((1800 - 3600) + (24 * 90) - 75,nodeY,(1800 - 3600) + (23 * 90) - 75,"q"));
-MyNodes.push(new Graph((1800 - 3600) + (18 * 90) - 75,nodeY,(1800 - 3600) + (24 * 90) - 75,"r"));
-MyNodes.push(new Graph((1800 - 3600) + (19 * 90) - 75,nodeY,(1800 - 3600) + (24 * 90) - 75,"s"));
-MyNodes.push(new Graph((1800 - 3600) + (20 * 90) - 75,nodeY,(1800 - 3600) + (24 * 90) - 75,"t"));
-// Node 20 t/m 24
-MyNodes.push(new Graph((1800 - 3600) + (21 * 90) - 75,nodeY,(1800 - 3600) + (24 * 90) - 75,"u"));
-MyNodes.push(new Graph((1800 - 3600) + (22 * 90) - 75,nodeY,(1800 - 3600) + (24 * 90) - 75,"v"));
-MyNodes.push(new Graph((1800 - 3600) + (23 * 90) - 75,nodeY,(1800 - 3600) + (24 * 90) - 75,"w"));
-MyNodes.push(new Graph((1800 - 3600) + (24 * 90) - 75,nodeY,(1800 - 3600) + (24 * 90) - 75,"x"));
-*/
-
 // Enemies
 var enemyX = 0;
 var enemyY = 10;
@@ -289,8 +259,8 @@ for (var i = 0; i < aantalEnemies; i++)
 
     var spawnNode = MyNodes[Math.floor(Math.random()*MyNodes.length)];
 
-        enemy.position.x = (1800 - 3600) + (spawnNode['positionX'] * 90) - 75;
-        enemy.position.z = (1800 - 3600) + (spawnNode['positionZ'] * 90) - 75;
+        enemy.position.x = spawnNode['positionX'];
+        enemy.position.z = spawnNode['positionZ'];
 
 }
 
@@ -383,8 +353,8 @@ appendScore();
                                 scene.add(enemy);
                                 var spawnNode = MyNodes[Math.floor(Math.random()*MyNodes.length)];
 
-                                enemy.position.x = (1800 - 3600) + (spawnNode['positionX'] * 90) - 75;
-                                enemy.position.z = (1800 - 3600) + (spawnNode['positionZ'] * 90) - 75;
+                                enemy.position.x = spawnNode['positionX'];
+                                enemy.position.z = spawnNode['positionZ'];
 
                         }
                         // Spawn more enemies for each 5 kills
