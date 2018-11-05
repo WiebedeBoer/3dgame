@@ -4,17 +4,12 @@ class Graph{
 
 
 init(){  
-    //var refGraph, position;
-    //refGraph = this;
-    this.positionX = (1800 - 3600) + (this.positionX * 90) - 30;
+
+    this.positionX = (1800 - 3600) + (this.positionX * 90) - 75;
     this.positionY = this.positionY;
     this.positionZ = (1800 - 3600) + (this.positionZ * 90) - 75;
-    //this.position(nodeX,nodeY,nodeZ);
-    //refGraph.add(position); 
+
 }
-
-
-//graph coords
 
 
     constructor(pX,pY,pZ,name){    
