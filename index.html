@@ -196,11 +196,11 @@ var controls = new THREE.FirstPersonControls( camera );
 controls.lookSpeed = 0.05;
 controls.lookVertical = false; //if true vertical look on mousemovement
 updateFcts.push(function(delta, now){
-                controls.update( delta );                
+                controls.update( delta );           
         })
 
 //city buildings
-//BuildingMaker();
+BuildingMaker();
 
 //nodes
 var nodeName, rowX, colZ;
@@ -242,7 +242,7 @@ MyNodes.push(new Graph(24,nodeY,24,"x"));
 var enemyX = 0;
 var enemyY = 10;
 var enemyZ = 0;
-var aantalEnemies = 2;
+var aantalEnemies = 10;
 var enemyCounter = 0;
 var enemyList = [];
 for (var i = 0; i < aantalEnemies; i++)
@@ -304,8 +304,7 @@ appendWeapon();
 appendScore();
 
         //update function
-        updateFcts.push(function(){
-
+        updateFcts.push(function(delta, now){
 
                 //hit pause
                 if ( keyboard.pressed("M")){
@@ -369,9 +368,9 @@ appendScore();
                         Scoring();
                         particleHit = false;
                         //enemy movement
-                        EnemyMovement();
+                        EnemyMovement(delta);
                         //bullets
-                        BulletTravel();                       
+                        BulletTravel(delta);                       
                 
                 } 
         })
