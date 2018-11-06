@@ -96,7 +96,8 @@
                                 <div id="content-frame" class="ng-scope">
                                         <div id="canvas-container">
                                                 <div id="newgame">
-                                                                <a href="index.html"><button id="newgamebutton">New Game</button></a>                                                      
+                                                        <p id="gameovertitle">GAME OVER</p>
+                                                        <a href="index.html"><button id="newgamebutton">New Game</button></a>                                                      
                                                 </div>
 
                                         </div>
@@ -289,7 +290,7 @@ function appendScore(){
 
 //hit registration collision
 function clearText()
-{   document.getElementById('message').innerHTML = '....,.';}
+{   document.getElementById('message').innerHTML = ' ';}
 
 function appendText(txt)
 {   document.getElementById('message').innerHTML += txt;}
