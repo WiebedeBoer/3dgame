@@ -86,10 +86,10 @@ THREE.FirstPersonControls = function ( object, domElement ) {
                         case 102: /*right*/
                         case 68: /*D*/ this.moveRight = true; break;
 
-                        case 81: this.mouseX = 1500 - 3000; break; /*q rotate left*/
-                        case 103: this.mouseX = 1500 - 3000; break;
-                        case 69: this.mouseX = 1500; break;  /*e rotate right*/
-                        case 105: this.mouseX = 1500; break;
+                        case 81: this.mouseX = 1200 - 2400; break; /*q rotate left*/
+                        case 103: this.mouseX = 1200 - 2400; break;
+                        case 69: this.mouseX = 1200; break;  /*e rotate right*/
+                        case 105: this.mouseX = 1200; break;
                 }
 
         };
