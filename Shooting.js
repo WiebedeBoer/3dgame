@@ -65,15 +65,16 @@ function Shot(){
         appendAmmo();
     
 } 
+
 //move bullet cube
 function BulletTravel(){
     bullets.forEach(element => {
-        element.translateZ(-10);
-        //element.translateY(10);
+        element.translateZ( -10);
+
     });
     bulletmeshes.forEach(element => {
-        //element.translateZ(-10); 
-        element.translateY(10);
+        
+        element.translateY( 10);
     });
 }
 

@@ -1,6 +1,7 @@
 function Lighter(){
 //lighting
 
+
 var light = new THREE.HemisphereLight( 0xfffff0, 0x101020, 0.25 );
 light.position.set( 0.5, 1, 0.25 );
 scene.add( light );
@@ -18,6 +19,7 @@ directionalLight.shadowCameraRight = 10;
 directionalLight.shadowCameraTop = 30;
 directionalLight.shadowCameraBottom = -10;
 scene.add(directionalLight);
+
 
 //lantern props
 var lantern = new Lantern(138,1,105); //court 1
@@ -58,5 +60,6 @@ var lantern15 = new Lantern(1615,1,-800); //school 38,11
 scene.add(lantern15);
 var lantern16 = new Lantern(-905,1,1720); //school 10,39 
 scene.add(lantern16);
+
 
 }
