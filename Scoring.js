@@ -20,8 +20,7 @@ function Scoring(){
                     scene.remove(enemyResult.enemyCube);
                     scene.remove(enemyResult);
                     enemyCounter++;
-                    clearText();
-                    appendText("kill");
+                    
                     //play sound
                     var aud = document.getElementById("soundpar"); 
                     aud.play();

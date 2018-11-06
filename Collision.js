@@ -4,8 +4,6 @@ function Collide (){
 var originPoint = MovingCube.position.clone();
 var collisionCheck = false;
 
-clearText();
-
 //collision
 for (var vertexIndex = 0; vertexIndex < MovingCube.geometry.vertices.length; vertexIndex++)
 {
@@ -26,13 +24,9 @@ if (!collisionCheck){
         controls.movementSpeed = 80;}
         else if ( keyboard.pressed("a") || keyboard.pressed("w") ){
         controls.movementSpeed = 80;}
-        clearText();
-        appendText(camera.position.x +","+camera.position.z+";");
 }
 else {
-        controls.movementSpeed -= controls.movementSpeed + controls.movementSpeed;  
-        clearText();     
-        appendText(" boing, ");
+        controls.movementSpeed -= controls.movementSpeed + controls.movementSpeed;
 }
 
 }

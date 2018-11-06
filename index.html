@@ -200,7 +200,7 @@ updateFcts.push(function(delta, now){
         })
 
 //city buildings
-BuildingMaker();
+//BuildingMaker();
 
 //nodes
 var nodeName, rowX, colZ;
@@ -264,7 +264,7 @@ function PointLock(){
         document.getElementById("parent").addEventListener( 'click', function ( event ) {
                 lock();
         }, false );
-        function lock(rawr) {
+        function lock() {
                 document.getElementById("parent").requestPointerLock();
         }  
 }
@@ -291,10 +291,12 @@ function appendScore(){
 
 //hit registration collision
 function clearText()
-{   document.getElementById('message').innerHTML = '....,.';}
+{   document.getElementById('message').innerHTML = '';}
 
 function appendText(txt)
-{   document.getElementById('message').innerHTML += txt;}
+{   
+        document.getElementById('message').innerHTML += txt;
+}
 
 //economy HUD
 appendAmmo();

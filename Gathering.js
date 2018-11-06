@@ -20,7 +20,6 @@ var propHit =0;
         //check collision props
         if ( collisionResults.length > 0 && collisionResults[0].distance < directionVector.length() ){
             clearText();
-            appendText(" Grab ");
             propHit = 1;
         }
     }

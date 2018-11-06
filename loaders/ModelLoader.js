@@ -9,6 +9,7 @@
                             .setMaterials(materials)
                             .load(modelName, function (object) {
                                 onload(object);
-                            }, function () { }, function (e) { console.log("Error loading"); });
+                            }, function () { }, function (e) { //console.log("Error loading"); 
+                                });
                     });
             }
