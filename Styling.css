@@ -10,6 +10,10 @@ div.de-menu {position: absolute;left:0px;top:0px;z-index:7;}
 
 #menu,#deadmenu {width:800px;height:400px;background-color: #000000;}
 
+#quit,#resume,#newgame {margin-left:350px;margin-top:10px;width: 100px;height:50px;}
+#quitbutton,#resumebutton {width: 100px;height:50px;}
+.ngl {text-decoration:none;}
+
 
 #canvas-align {
                 position: relative;
