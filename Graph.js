@@ -5,11 +5,14 @@ class Graph{
 
 init(){  
 
-    this.positionX = (1800 - 3600) + (this.positionX * 90) - 75;
+    this.positionX =  (1800 - 3600) + (this.positionX * 90) - 30; 
     this.positionY = this.positionY;
-    this.positionZ = (1800 - 3600) + (this.positionZ * 90) - 75;
+    this.positionZ =  (1800 - 3600) + (this.positionZ * 90) - 75; 
 
 }
+
+
+//graph coords
 
 
     constructor(pX,pY,pZ,name){    
