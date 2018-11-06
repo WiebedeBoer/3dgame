@@ -34,7 +34,11 @@ function EnemyMovement() {
               //add node to the path of the enemy
               enemy.pathNodes.push(MyNodes[indexNode]);
             });
-            
+            //If the first coordinate is further away from from the Player then the current position of the enemy -> skip the first coordinate
+            if (cameraPosition.distanceTo(enemyPosition)
+            <= cameraPosition.distanceTo(new THREE.Vector3( enemy.pathNodes[0].positionX, enemy.pathNodes[0].positionY, enemy.pathNodes[0].positionZ))){
+              enemy.pathNodes.shift();
+            }
           }
         }
         //If the current enemy is closer to the player than the closest node is closer to the player, then go straight for the player.
