@@ -98,6 +98,7 @@
                                 <div id="content-frame" class="ng-scope">
                                         <div id="canvas-container">
                                                 <div id="newgame">
+                                                         <p id="gameovertitle">GAME OVER</p>
                                                          <a href="index.html"><button id="newgamebutton">New Game</button></a>
                                                 </div>
 
@@ -196,7 +197,7 @@ var controls = new THREE.FirstPersonControls( camera );
 controls.lookSpeed = 0.05;
 controls.lookVertical = false; //if true vertical look on mousemovement
 updateFcts.push(function(delta, now){
-                controls.update( delta );           
+                controls.update( delta );
         })
 
 //city buildings
@@ -370,9 +371,9 @@ appendScore();
                         //enemy movement
                         EnemyMovement(delta);
                         //bullets
-                        BulletTravel(delta);                       
-                
-                } 
+                        BulletTravel(delta);
+
+                }
         })
 
         //loop runner

@@ -13,8 +13,9 @@ div.de-menu {position: absolute;left:0px;top:0px;z-index:7;}
 #quit,#resume,#newgame {margin-left:350px;margin-top:10px;width: 100px;height:50px;}
 #quitbutton,#resumebutton {width: 100px;height:50px;}
 .ngl {text-decoration:none;}
-#newgamebutton {width: 100px;height:50px;text-decoration: none; margin-top: 150px;}
+#newgamebutton {width: 100px;height:50px;text-decoration: none; margin-top: 0px;}
 #newgamebutton:hover {text-decoration: none;}
+#gameovertitle {font-size: 30px; color:#ffffff; margin-left: -40px; margin-top:120px; width:300px;}
 
 #canvas-align {;
                 position: relative;
