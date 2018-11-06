@@ -14,8 +14,6 @@
 <script src="Buildings/commercials.js"></script>
 <!--single buildings-->
 <script src="Buildings/cityhall.js"></script>
-<!--single buildings-->
-<script src="Buildings/church.js"></script>
 <!--plane-->
 <script src="Plane.js"></script>
 <!--skybox-->
@@ -28,7 +26,6 @@
 <script src="props/Props.js"></script>
 <script src="props/GunCollect.js"></script>
 <script src="props/Gun.js"></script>
-<script src="props/Ambulance.js"></script>
 <!--loaders-->
 <script src="loaders/OBJLoader.js"></script>
 <script src="loaders/MTLLoader.js"></script>
@@ -56,8 +53,8 @@
 </head>
 <body class="ng-scope" style="margin: 0px; background-color: #d8e7ff; overflow: hidden;">
 
-<div class="parent" id="parent">
-   <!--customcanvas-->
+<div class="parent" id="parent">  
+   <!--customcanvas-->       
 <div height="400" width="800" class="customcanvas" id="customcanvas"></div>
         <!--hud-->
                 <div id="content-frame" ng-controller="HudState" class="ng-scope">
@@ -66,13 +63,13 @@
                                         <canvas id="webgl-canvas" width="800" height="400"></canvas>
                                         <div id="hud" ng-class="{visible: style.visible, transparent: style.transparent, perspective: style.perspective, animated: style.animated}" class="visible">
                                             <div id="weapon" class="ng-binding">
-
+                                                
                                             </div>
                                             <div id="ammo" class="ng-binding">
-
+                                                
                                             </div>
                                             <div id="score" class="ng-binding">
-
+                                                
                                             </div>
                                         </div>
                                     </div>
@@ -82,30 +79,30 @@
                         <div id="menu" class="ng-menu">
                                 <div id="content-frame" class="ng-scope">
                                         <div id="canvas-container">
+                                                
                                                 <div id="quit">
-                                                        <button id="quitbutton" onclick="Quit()">Quit</button>
+                                                        <button id="quitbutton" onclick="Quit()">Quit</button>                                                        
                                                 </div>
                                                 <div id="resume">
                                                         <button id="resumebutton" onclick="Resume()">Resume</button>
                                                 </div>
                                         </div>
-
+                                        
                                 </div>
-
+                                        
                         </div>
                         <!--dead menu-->
                         <div id="deadmenu" class="de-menu">
                                 <div id="content-frame" class="ng-scope">
                                         <div id="canvas-container">
                                                 <div id="newgame">
-                                                         <p id="gameovertitle">GAME OVER</p>
-                                                         <a href="index.html"><button id="newgamebutton">New Game</button></a>
+                                                                <a href="index.html"><button id="newgamebutton">New Game</button></a>                                                      
                                                 </div>
 
                                         </div>
-
+                                                                
                                 </div>
-
+                                                                
                         </div>
 </div>
 <script>
@@ -115,8 +112,8 @@ var clock = new THREE.Clock();
 
 //collision vars
 var MovingCube;
-var collidableMeshList = [];
-var collidablePropMeshList = [];
+var collidableMeshList = []; 
+var collidablePropMeshList = []; 
 var collidableBulletMeshList = [];
 
 //quit
@@ -142,7 +139,7 @@ function Resume(){
 // Bullets array
 var bullets = [];
 var bulletmeshes = [];
-
+       
 //updater
 var updateFcts = [];
 //scene
@@ -156,7 +153,7 @@ renderer.setPixelRatio(window.devicePixelRatio);
 canvasWidth = 800;
 canvasHeight = 400;
 renderer.setSize( canvasWidth, canvasHeight );
-
+        
 //append object to it
 document.getElementById("customcanvas").appendChild(renderer.domElement);
 
@@ -176,9 +173,9 @@ Lighter();
 //gun props
 Props();
 
-//planes
+//planes 
 var planeroad = new Plane(5500,5500);
-scene.add(planeroad);
+scene.add(planeroad);  
 
 //skybox
 var skyBox = new Skybox();
@@ -190,14 +187,14 @@ var wireMaterial = new THREE.MeshBasicMaterial( { color: 0xff0000, wireframe:tru
 MovingCube = new THREE.Mesh( cubeGeometry, wireMaterial );
 MovingCube.position.set(camera.position.x, camera.position.y, camera.position.z);
 scene.add( MovingCube );
-
+        
 //Camera Controls
 var controls = new THREE.FirstPersonControls( camera );
 //controls.movementSpeed = 80;
 controls.lookSpeed = 0.05;
 controls.lookVertical = false; //if true vertical look on mousemovement
 updateFcts.push(function(delta, now){
-                controls.update( delta );
+                controls.update( delta );                
         })
 
 //city buildings
@@ -243,7 +240,7 @@ MyNodes.push(new Graph(24,nodeY,24,"x"));
 var enemyX = 0;
 var enemyY = 10;
 var enemyZ = 0;
-var aantalEnemies = 10;
+var aantalEnemies = 4;
 var enemyCounter = 0;
 var enemyList = [];
 for (var i = 0; i < aantalEnemies; i++)
@@ -255,8 +252,8 @@ for (var i = 0; i < aantalEnemies; i++)
 
     var spawnNode = MyNodes[Math.floor(Math.random()*MyNodes.length)];
 
-        enemy.position.x = spawnNode['positionX'];
-        enemy.position.z = spawnNode['positionZ'];
+        enemy.position.x = spawnNode['positionX']; 
+        enemy.position.z = spawnNode['positionZ']; 
 
 }
 
@@ -265,13 +262,13 @@ function PointLock(){
         document.getElementById("parent").addEventListener( 'click', function ( event ) {
                 lock();
         }, false );
-        function lock() {
+        function lock(rawr) {
                 document.getElementById("parent").requestPointerLock();
-        }
+        }  
 }
 
 function DeLock(){
-        document.exitPointerLock();
+        document.exitPointerLock(); 
 }
 
 //initial economy variables
@@ -281,23 +278,21 @@ var eWeapon ="Pistol";
 var totalscore = 0;
 
 //show HUD economy functions
-function appendAmmo(){
+function appendAmmo(){ 
         var eAmmo = leftOverAmmo+"/"+totalAmmo;
         document.getElementById('ammo').innerHTML = eAmmo;}
 function appendWeapon(){
         document.getElementById('weapon').innerHTML = eWeapon;}
-function appendScore(){
+function appendScore(){ 
         var eScore ="Score: "+totalscore;
         document.getElementById('score').innerHTML = eScore;}
 
 //hit registration collision
 function clearText()
-{   document.getElementById('message').innerHTML = '';}
+{   document.getElementById('message').innerHTML = '....,.';}
 
 function appendText(txt)
-{
-        document.getElementById('message').innerHTML += txt;
-}
+{   document.getElementById('message').innerHTML += txt;}
 
 //economy HUD
 appendAmmo();
@@ -307,13 +302,14 @@ appendScore();
         //update function
         updateFcts.push(function(delta, now){
 
+
                 //hit pause
                 if ( keyboard.pressed("M")){
-
-
+                       
+                        
                         if (pausemenu.style.display === "none") {
                                 pausemenu.style.display = "block";
-                        }
+                        } 
                         checkPause =true;
                         DeLock();
                 }
@@ -338,8 +334,8 @@ appendScore();
 
                         MovingCube.position.x = camera.position.x;
                         MovingCube.position.y = camera.position.y;
-                        MovingCube.position.z = camera.position.z;
-
+                        MovingCube.position.z = camera.position.z;  
+                
                         // Spawn Enemies
                         if (enemyList.length < aantalEnemies && aantalEnemies < 25)
                         {
@@ -350,8 +346,8 @@ appendScore();
                                 scene.add(enemy);
                                 var spawnNode = MyNodes[Math.floor(Math.random()*MyNodes.length)];
 
-                                enemy.position.x = spawnNode['positionX'];
-                                enemy.position.z = spawnNode['positionZ'];
+                                enemy.position.x = spawnNode['positionX']; 
+                                enemy.position.z = spawnNode['positionZ']; 
 
                         }
                         // Spawn more enemies for each 5 kills
@@ -371,11 +367,10 @@ appendScore();
                         //enemy movement
                         EnemyMovement(delta);
                         //bullets
-                        BulletTravel(delta);
-
-                }
+                        BulletTravel(delta);                       
+                } 
         })
-
+        
         //loop runner
         var lastTimeMsec= null
         requestAnimationFrame(function animate(nowMsec){
@@ -390,7 +385,7 @@ appendScore();
                         updateFn(deltaMsec/1000, nowMsec/1000)
                 })
         })
-
+     
 </script>
 </div>
 <div id="message" class="ce"></div>
