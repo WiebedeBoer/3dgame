@@ -7,7 +7,7 @@ function EnemyMovement(delta) {
       var enemyPosition = new THREE.Vector3(enemy.position.x, enemy.position.y, enemy.position.z);
       var distance = cameraPosition.distanceTo(enemyPosition);
       
-      if(distance >= 100){
+      if(distance >= 90){
         //travel over nodes
         //No current path? or current end destination not closest to the Player anymore? change path!
         
@@ -122,4 +122,4 @@ function GetClosestNodeToEnemy(enemyPosition){
   });
   //return new THREE.Vector3(closestNode.positionX, closestNode.positionY, closestNode.positionZ);
   return closestNode
-}
+}      
