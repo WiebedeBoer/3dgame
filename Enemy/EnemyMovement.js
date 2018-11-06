@@ -26,13 +26,15 @@ function EnemyMovement() {
             //closeEnemyNode is a substitue for the first path entry.
             //because if the path length is only 1, the closest node to the enemy is also the closest one to the player
             if(path.length === 1 && vectorEnemyNode.distanceTo(enemyPosition) < 1){}else{
-
+              
             //which char belongs to which coordinates?
             path.forEach(element => {
               let indexNode = MyNodes.map(e => e.name).indexOf(element);
+              
               //add node to the path of the enemy
-              enemy.pathNodes.push(new Graph(MyNodes[indexNode].positionX,MyNodes[indexNode].positionY,MyNodes[indexNode].positionZ,MyNodes[indexNode].name));
+              enemy.pathNodes.push(MyNodes[indexNode]);
             });
+            
           }
         }
         //If the current enemy is closer to the player than the closest node is closer to the player, then go straight for the player.
