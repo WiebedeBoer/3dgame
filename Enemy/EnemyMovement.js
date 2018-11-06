@@ -1,4 +1,4 @@
-function EnemyMovement() {
+function EnemyMovement(delta) {
 
   var cameraPosition = new THREE.Vector3(camera.position.x, camera.position.y, camera.position.z);
   var nodeClosestToPlayer = GetClosestNodeToPlayer();
@@ -35,30 +35,31 @@ function EnemyMovement() {
               enemy.pathNodes.push(MyNodes[indexNode]);
             });
             //If the first coordinate is further away from from the Player then the current position of the enemy -> skip the first coordinate
-            if (cameraPosition.distanceTo(enemyPosition)
+            if (enemy.pathNodes.length >=2 && cameraPosition.distanceTo(enemyPosition)
             <= cameraPosition.distanceTo(new THREE.Vector3( enemy.pathNodes[0].positionX, enemy.pathNodes[0].positionY, enemy.pathNodes[0].positionZ))){
               enemy.pathNodes.shift();
             }
           }
         }
         //If the current enemy is closer to the player than the closest node is closer to the player, then go straight for the player.
-        if(cameraPosition.distanceTo(enemyPosition)-5 < cameraPosition.distanceTo(new THREE.Vector3( enemy.pathNodes[enemy.pathNodes.length-1].positionX, enemy.pathNodes[enemy.pathNodes.length-1].positionY, enemy.pathNodes[enemy.pathNodes.length-1].positionZ ))){
+        if( enemy.pathNodes.length === 0){}else if(cameraPosition.distanceTo(enemyPosition)-5 < cameraPosition.distanceTo(new THREE.Vector3( enemy.pathNodes[enemy.pathNodes.length-1].positionX, enemy.pathNodes[enemy.pathNodes.length-1].positionY, enemy.pathNodes[enemy.pathNodes.length-1].positionZ ))){
           
           enemy.lookAt(cameraPosition);
-          enemy.translateZ(0.3);
+          enemy.translateZ(10*delta);
+        
         }else {
           //if not, lets go get the player via the path
           enemy.lookAt(new THREE.Vector3( enemy.pathNodes[0].positionX, enemy.pathNodes[0].positionY, enemy.pathNodes[0].positionZ ));
-          enemy.translateZ(0.3);
-        }
+          enemy.translateZ(10*delta);
+        
         //If the distance between the enemy and the next node is less then 1? Then delete that node in our path!
         if(enemyPosition.distanceTo(new THREE.Vector3( enemy.pathNodes[0].positionX, enemy.pathNodes[0].positionY, enemy.pathNodes[0].positionZ )) < 1){
           enemy.pathNodes.shift();
         }
-        
+      }
       }else if(distance > 10 && distance < 100){
         enemy.lookAt(cameraPosition);
-        enemy.translateZ(0.3);
+        enemy.translateZ(10*delta);
       }else if (distance < 10){
           clearText();
           appendText("you died");

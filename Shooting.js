@@ -67,14 +67,14 @@ function Shot(){
 } 
 
 //move bullet cube
-function BulletTravel(){
+function BulletTravel(delta){
     bullets.forEach(element => {
-        element.translateZ( -10);
+        element.translateZ(-100*delta);
 
     });
     bulletmeshes.forEach(element => {
         
-        element.translateY( 10);
+        element.translateY(100*delta);
     });
 }
 
