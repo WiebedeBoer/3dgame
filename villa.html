@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+<title>Rome - villa</title>
+<!--library: three.js-->
+<script src="library/three.js"></script>
+<!--camera controls-->
+<script src="controls/FPControls.js"></script>
+<!--buildings and fields-->
+<script src="buildings/ville_temple1.js"></script>
+<script src="buildings/plaza.js"></script>
+<script src="buildings/villa.js"></script>
+<script src="buildings/barn.js"></script>
+<script src="buildings/smithy.js"></script>
+<script src="buildings/farm_maker.js"></script>
+<script src="buildings/house_maker.js"></script>
+<script src="buildings/field_maker.js"></script>
+<script src="buildings/field_wheat.js"></script>
+<script src="buildings/olive_tree.js"></script>
+<script src="buildings/grapevine.js"></script>
+<script src="buildings/forest.js"></script>
+<script src="props/fence.js"></script>
+<!--environment: plane en skybox-->
+<script src="environment/villePlane.js"></script>
+<script src="environment/Skybox.js"></script>
+<!--lighting-->
+<script src="lighting/BarracksLight.js"></script>
+<script src="lighting/Pointlight.js"></script>
+<script src="lighting/Lantern.js"></script>
+<!--props-->
+<script src="props/quiver.js"></script>
+<script src="props/propCollect.js"></script>
+<script src="props/bread.js"></script>
+<script src="props/cabbage.js"></script>
+<script src="props/fish.js"></script>
+<script src="props/arrow.js"></script>
+<script src="props/stool.js"></script>
+<script src="props/table.js"></script>
+<script src="props/amphora.js"></script>
+<script src="props/jug.js"></script>
+<!--animals-->
+<script src="props/donkey.js"></script>
+<script src="props/cow.js"></script>
+<script src="props/goat.js"></script>
+<script src="props/pig.js"></script>
+<script src="props/sheep.js"></script>
+<script src="props/horse.js"></script>
+<!--collision detection-->
+<script src="collision/barracksCollision.js"></script>
+<!--people-->
+<script src="people/person.js"></script>
+<!--economy-->
+<script src="economy/Shooting.js"></script>
+<script src="economy/Gathering.js"></script>
+<!--styling-->
+<link rel="stylesheet" type="text/css" href="Styling.css">
+</head>
+<body class="ng-scope" style="margin: 0px; background-color: #d8e7ff; overflow: hidden;" onload="loadImperium(),GameLoop()">
+<div class="parent" id="parent">  
+   <!--customcanvas-->       
+<div height="400" width="800" class="customcanvas" id="customcanvas"></div>
+        <!--hud-->
+                <div id="content-frame" ng-controller="HudState" class="ng-scope">
+                                <div id="canvas-container">
+                                    <div id="canvas-align">
+                                        <canvas id="webgl-canvas" width="800" height="400"></canvas>
+                                        <div id="hud" ng-class="{visible: style.visible, transparent: style.transparent, perspective: style.perspective, animated: style.animated}" class="visible">
+                                            <div id="weapon" class="ng-binding">
+                                                
+                                            </div>
+                                            <div id="ammo" class="ng-binding">
+                                                
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                        </div>
+                        <!--menu-->
+                        <div id="menu" class="ng-menu">
+                                <div id="content-frame" class="ng-scope">
+                                        <div id="canvas-container">
+                                                <div id="quit">
+                                                        <button id="quitbutton">Quit</button>                                                        
+                                                </div>
+                                                <div id="resume">
+                                                        <button id="resumebutton">Resume</button>
+                                                </div>
+                                        </div>
+                                        
+                                </div>
+                                        
+                        </div>
+</div>
+<!--loaders-->
+<script src="loaders/OBJLoader.js"></script>
+<script src="loaders/MTLLoader.js"></script>
+<script src="loaders/ModelLoader.js"></script>
+<script>
+//collision vars
+var MovingCube;
+var collidableMeshList = [];
+var collidableBulletMeshList = [];
+//collidable props
+var collidablePropMeshList = []; 
+var propTypes = [];
+//no show menu
+var gamestart = document.getElementById("menu");
+gamestart.style.display = "none";
+// Bullets array
+var bullets = [];
+var bulletmeshes = [];      
+//updater
+var updateFcts = [];
+//scene
+var scene = new THREE.Scene();
+//fog
+scene.fog = new THREE.FogExp2( 0xd0e0f0, 0.0002 );
+//renderer
+var renderer = new THREE.WebGLRenderer( { antialias: false } );
+//window
+canvasWidth = window.innerWidth * 0.98; //screen.width; //800;
+canvasHeight = window.innerHeight - 100; //400;
+renderer.setSize( canvasWidth, canvasHeight );      
+//append object to it
+document.getElementById("customcanvas").appendChild(renderer.domElement);
+//camera
+var camera = new THREE.PerspectiveCamera(45, canvasWidth / canvasHeight, 0.01, 4000);
+camera.position.y = 12;
+camera.position.z = 15;
+camera.position.x = -21;
+//environment
+var environmentsize = 2800;
+//plane
+var planeroad = new Plane(environmentsize,environmentsize,"ground5");
+scene.add(planeroad);  
+//skybox
+var skyBox = new Skybox(environmentsize,environmentsize,environmentsize);
+scene.add( skyBox );
+//lighting 
+barracksLighter();
+//fields and buildings and props and people, x5, z5
+FarmMaker("forest",-840,-840);
+FarmMaker("forest",-840,-390);
+FarmMaker("forest",-840,-30);
+FarmMaker("forest",-840,420);
+FarmMaker("forest",-840,870);
+
+FarmMaker("forest",-390,-840);
+FarmMaker("villa_rustica",-390,-480);
+FarmMaker("villa_rustica",-390,-30);
+FarmMaker("villa_rustica",-390,420);
+FarmMaker("forest",-390,870);
+
+FarmMaker("forest",60,-840);
+FarmMaker("villa_rustica",60,-480);
+FarmMaker("civitas",60,-30);
+FarmMaker("villa_rustica",60,420);
+FarmMaker("forest",60,870);
+
+FarmMaker("forest",510,-840);
+FarmMaker("villa_rustica",510,-390);
+FarmMaker("villa_rustica",510,-30);
+FarmMaker("villa_rustica",510,420);
+FarmMaker("forest",510,870);
+
+FarmMaker("forest",960,-840);
+FarmMaker("forest",960,-390);
+FarmMaker("forest",960,-30);
+FarmMaker("forest",960,420);
+FarmMaker("forest",960,870);
+
+//moving cube
+var cubeGeometry = new THREE.CylinderGeometry(5,5,20,4);
+var wireMaterial = new THREE.MeshBasicMaterial( { color: 0xff0000, wireframe:true, visible:false } );
+MovingCube = new THREE.Mesh( cubeGeometry, wireMaterial );
+MovingCube.position.set(camera.position.x, camera.position.y, camera.position.z);
+scene.add( MovingCube );  
+//Camera Controls
+var controls = new THREE.FirstPersonControls( camera );
+controls.lookSpeed = 0.05;
+controls.lookVertical = false; //if true vertical look on mousemovement
+//Locking the pointer to the game
+document.getElementById("parent").addEventListener( 'click', function ( event ) {
+        lock();
+}, false );
+function lock(rawr) {
+        document.getElementById("parent").requestPointerLock();
+} 
+//initial economy variables
+var totalItem;
+var totalCoin = 12;
+var totalBread = 3;
+var totalArrow = 23;
+var totalSauce = 2;
+var totalOil = 2;
+var totalWine = 5;
+var totalPottery = 1;
+var totalCheese = 1;
+var eItem ="Purse";
+//initial item
+totalItem = totalCoin;
+//show HUD economy functions
+function appendCoin(){        
+        document.getElementById('ammo').innerHTML = totalItem;}
+function appendItem(){
+        document.getElementById('weapon').innerHTML = eItem;}
+//hit registration collision
+function clearText()
+{   document.getElementById('message').innerHTML = '....';}
+function appendText(txt)
+{   document.getElementById('message').innerHTML += txt;}
+//collision vars
+var collisionX;
+var collisionZ;
+//economy HUD
+appendCoin();
+appendItem();
+//onload loop
+function GameLoop(){
+        //update function
+        updateFcts.push(function(delta,now){
+                //controls update
+                controls.update( delta ); 
+                //render the scene
+                renderer.render( scene, camera );
+                //moving cube position and rotation
+                MovingCube.position.x = camera.position.x;
+                MovingCube.position.y = camera.position.y;
+                MovingCube.position.z = camera.position.z;
+                MovingCube.rotation.y = camera.rotation.y;                             
+                //bullets
+                BulletTravel(delta);
+                //ambient
+                soundGathering();
+        })
+        
+        //loop runner
+        var lastTimeMsec= null
+        requestAnimationFrame(function animate(nowMsec){
+                // keep looping
+                requestAnimationFrame( animate );
+                // measure time
+                lastTimeMsec = lastTimeMsec || nowMsec-1000/60
+                var deltaMsec = Math.min(200, nowMsec - lastTimeMsec)
+                lastTimeMsec = nowMsec
+                // call each update function
+                updateFcts.forEach(function(updateFn){
+                        updateFn(deltaMsec/1000, nowMsec/1000)
+                })
+        })
+
+}
+
+function newDoc() {
+    window.location.assign("index.html")
+}
+</script>
+</div>
+<div id="game" class="game">
+        <!--message-->
+        <div id="message" class="ce"></div>
+        <!--minimap-->
+        <div id="minimap" class="ce">
+                <canvas id="myCanvas" width="40" height="40" style="border:1px solid #d3d3d3;">Your browser does not support the HTML5 canvas tag.</canvas>
+        </div>
+        <!--music-->
+        <div id="sound" class="ce">                
+                <audio id="imperia" loop><source id="parade" src="music/Rome_4.mp3" type="audio/mp3"></audio>   
+                <audio id="soundpar" autoplay><source id="soundscape" src="sfx/atmosphere/birds.mp3" type="audio/mp3"></audio> 
+                <button onclick="changeImperium()" type="button">Change Music</button>
+                <button onclick="pauseImperium()" type="button">Pause Music</button>
+                <button onclick="playImperium()" type="button">Play Music</button>
+                <input type="hidden" id="number" value="2"/>
+                <!--sound scripts-->
+                <script src="sound/musicplayer.js"></script>
+                <script src="sound/soundplayer.js"></script>
+                <script src="sound/ambient_ville.js"></script>
+
+        </div>
+</div>
+<!--description
+<div id="desribe" class="describe">
+<p class="ce">Use Q, E keys to rotate the camera. Use the arrow keys to move around. Click to attach mouse pointer. Escape to deattach mouse pointer.</p>
+</div>-->
+</body>
+</html>
